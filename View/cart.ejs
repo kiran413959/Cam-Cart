@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart - Cam Cart</title>
+    <!--===== Designed & Built by : Kiran Kumar =====-->
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/img/icons/fav-icon.png" type="image/x-icon">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+
+    <!-- Swiper Slider -->
+    <link rel="stylesheet" href="assets/swiper/swiper-bundle.min.css">
+
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <!-- Main Stylesheets  -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+</head>
+
+<body>
+
+    <!--============== Preloader ==============-->
+    <div id="preloader">
+        <div class="loader"></div>
+        <span class="loader_text">Loading...</span>
+    </div>
+    <!-- /Preloader -->
+
+    <!--============== Header Section ==============-->
+    <header id="header" class="fixed-top">
+        <div class="container-fluid container-lg px-xl-0 px-lg-3 px-md-5 px-sm-4">
+            <nav class="navbar p-0">
+
+                <div class="nav_item_left d-flex align-items-center">
+
+                    <!-- Sidebar-toggler -->
+                    <div class="sidebar_toggler sticked_item" title="Open Sidemenu">
+                        <span class="line line_top"></span>
+                        <span class="line line_middle"></span>
+                        <span class="line line_bottom"></span>
+                    </div>
+
+                    <!-- Logo -->
+                    <a class='nav_logo sticked_item' href='/Home'>
+                        <img  class="camlog" src="images/cam logo.png"" alt="logo"> 
+                    </a>
+                </div>
+
+                <div class="me-xl-4 d-flex align-items-center nav_item_right">
+
+                    <!-- Search-field -->
+                    <input type="search" class="search_field me-2" placeholder="Search...">
+
+                    <!-- Search-icon -->
+                    <div class="nav_icon d-none d-md-block">
+                        <svg class="search-icon sticked_item" aria-hidden="true" focusable="false" role="presentation"
+                            xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
+                            <path d="M19.5 21.5L13.6155 15.1628" stroke="currentColor" stroke-width="1.75">
+                            </path>
+                            <circle cx="9.5" cy="9.5" r="7" stroke="currentColor" stroke-width="1.75">
+                            </circle>
+                        </svg>
+                        <span class="tool_tip">Search</span>
+                    </div>
+
+                    <!-- Mobile Search-icon -->
+                    <div class="nav_icon d-block d-md-none">
+                        <svg class="mob-search sticked_item" aria-hidden="true" focusable="false" role="presentation"
+                            xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
+                            <path d="M19.5 21.5L13.6155 15.1628" stroke="currentColor" stroke-width="1.75">
+                            </path>
+                            <circle cx="9.5" cy="9.5" r="7" stroke="currentColor" stroke-width="1.75">
+                            </circle>
+                        </svg>
+                        <span class="tool_tip">Search</span>
+                    </div>
+
+                    <!-- Cart-icon -->
+                    <div class="nav_icon mx-sm-4 mx-2">
+                        <a href="javascript:void(0);">
+                            <svg class="cart-icon sticked_item" aria-hidden="true" focusable="false" role="presentation"
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                            </svg>
+                        </a>
+                        <div class="badge rounded-pill cart_badge">3</div>
+                        <span class="tool_tip">Cart</span>
+                    </div>
+
+                    <!-- User-icon -->
+                    <div class="nav_icon">
+                        <a href="profile"> <svg class="user-icon sticked_item" aria-hidden="true" focusable="false" role="presentation"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M20.5 19.5V21.525C20.5 21.5802 20.4552 21.625 20.4 21.625H3.6C3.54477 21.625 3.5 21.5802 3.5 21.525V19.5C3.5 18.3728 3.94777 17.2918 4.7448 16.4948C5.54183 15.6978 6.62283 15.25 7.75 15.25H16.25C17.3772 15.25 18.4582 15.6978 19.2552 16.4948C20.0522 17.2918 20.5 18.3728 20.5 19.5Z"
+                                stroke="currentColor" stroke-width="1.75"></path>
+                            <path
+                                d="M12 11C14.3472 11 16.25 9.09721 16.25 6.75C16.25 4.40279 14.3472 2.5 12 2.5C9.65279 2.5 7.75 4.40279 7.75 6.75C7.75 9.09721 9.65279 11 12 11Z"
+                                stroke="currentColor" stroke-width="1.75" stroke-linejoin="round">
+                            </path>
+                        </svg>
+                    </a>
+                    </div>
+
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- /Header Section -->
+
+    <!--============== Mobile Search-field ==============-->
+    <div class="mobile_search">
+        <div class="d-flex justify-content-between align-items-center mob_search_wrapper">
+            <i class="bi bi-arrow-left mob_search_close"></i>
+            <input type="search" placeholder="Search...">
+            <i class="bi bi-search"></i>
+        </div>
+    </div>
+    <!-- /Mobile Search-field -->
+
+    <!--============== Side-bar Section ==============-->
+    <aside id="sidebar">
+        <div class="sidebar_head">
+            <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i> Hello, <%= user.name%></h5>
+            <div class="close_btn sidebar_close" title="Close">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="sidebar_body">
+            <div class="drop_down">
+                <div class="d-flex justify-content-between align-items-center drop_down_head">
+                    <span><i class="bi bi-camera me-2"></i> All Products</span>
+                    <i class="bi bi-plus"></i>
+                </div>
+                <ul class="mt-2 drop_down_body">
+                    <li><a href="/product/?category=DSLR_Cameras">DSLR Cameras</a></li>
+                    <li><a href="/product/?category=Mirrorless_Cameras">Mirrorless Cameras</a></li>
+                    <li><a href="/product/?category=Action_Cameras">Action Cameras</a></li>
+                    <li><a href="/product/?category=Compact_Cameras">Compact Cameras</a></li>
+                    <li><a href="/product/?category=Camcorders">Camcorders</a></li>
+                    <li><a href="/product/?category=Lenses">Lenses</a></li>
+                    <li><a href="/product/?category=Accessories">Accessories</a></li>
+                </ul>
+            </div>
+
+            <ul class="mb-0 ps-0 sidebar_list">
+                <li><i class="bi bi-bag-check me-2"></i> <a href="javascript:void(0);">My Orders</a></li>
+                <li><i class="bi bi-heart me-2"></i> <a href="javascript:void(0);">My Wishlist</a></li>
+                <li><i class="bi bi-person me-2"></i> <a href="/profile">My Account</a></li>
+                <li><i class="bi bi-geo-alt me-2"></i> <a href="javascript:void(0);">Order Tracking</a></li>
+                <li><i class="bi bi-headset me-2"></i> <a href="javascript:void(0);">Help & Support</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar_foot">
+            <h6>Follow us on -</h6>
+            <div class="side_social_links social_links">
+                <a href="javascript:void(0);">
+                    <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                        <path
+                            d="M25,3C12.85,3,3,12.85,3,25c0,11.03,8.125,20.137,18.712,21.728V30.831h-5.443v-5.783h5.443v-3.848c0-6.371,3.104-9.168,8.399-9.168c2.536,0,3.877,0.188,4.512,0.274v5.048h-3.612c-2.248,0-3.033,2.131-3.033,4.533v3.161h6.588l-0.894,5.783h-5.694v15.944C38.716,45.318,47,36.137,47,25C47,12.85,37.15,3,25,3z" />
+                    </svg>
+                </a>
+                <a href="javascript:void(0);" class="mx-4">
+                    <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+                        <path
+                            d="M15,12.124c-1.589,0-2.876,1.288-2.876,2.876s1.288,2.876,2.876,2.876s2.876-1.288,2.876-2.876S16.589,12.124,15,12.124z" />
+                        <circle cx="15" cy="15" r="3" />
+                        <path
+                            d="M15,2C7.832,2,2,7.832,2,15s5.832,13,13,13s13-5.832,13-13S22.168,2,15,2z M24,18.333C24,21.458,21.458,24,18.334,24h-6.667	C8.542,24,6,21.458,6,18.334v-6.667C6,8.542,8.542,6,11.666,6h6.667C21.458,6,24,8.542,24,11.666V18.333z" />
+                        <path
+                            d="M18.333,8h-6.667C9.645,8,8,9.645,8,11.667v6.667C8,20.355,9.645,22,11.667,22h6.667C20.355,22,22,20.355,22,18.333v-6.667	C22,9.645,20.355,8,18.333,8z M15,20c-2.757,0-5-2.243-5-5s2.243-5,5-5s5,2.243,5,5S17.757,20,15,20z M19.667,11	C19.299,11,19,10.701,19,10.333s0.299-0.667,0.667-0.667c0.368,0,0.667,0.299,0.667,0.667S20.035,11,19.667,11z" />
+                    </svg>
+                </a>
+                <a href="javascript:void(0);">
+                    <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                        <path
+                            d="M25,2C12.317,2,2,12.317,2,25s10.317,23,23,23s23-10.317,23-23S37.683,2,25,2z M36.237,20.524c0.01,0.236,0.016,0.476,0.016,0.717C36.253,28.559,30.68,37,20.491,37c-3.128,0-6.041-0.917-8.491-2.489c0.433,0.052,0.872,0.077,1.321,0.077c2.596,0,4.985-0.884,6.879-2.37c-2.424-0.044-4.468-1.649-5.175-3.847c0.339,0.065,0.686,0.1,1.044,0.1c0.505,0,0.995-0.067,1.458-0.195c-2.532-0.511-4.441-2.747-4.441-5.432c0-0.024,0-0.047,0-0.07c0.747,0.415,1.6,0.665,2.509,0.694c-1.488-0.995-2.464-2.689-2.464-4.611c0-1.015,0.272-1.966,0.749-2.786c2.733,3.351,6.815,5.556,11.418,5.788c-0.095-0.406-0.145-0.828-0.145-1.262c0-3.059,2.48-5.539,5.54-5.539c1.593,0,3.032,0.672,4.042,1.749c1.261-0.248,2.448-0.709,3.518-1.343c-0.413,1.292-1.292,2.378-2.437,3.064c1.122-0.136,2.188-0.432,3.183-0.873C38.257,18.766,37.318,19.743,36.237,20.524z" />
+                    </svg>
+                </a>
+            </div>
+            <p class="mb-0">
+                &#169;
+                <script>
+                    document.write(new Date().getFullYear() + ' ');
+                </script>
+                CameraX. All Rights Reserved.
+            </p>
+        </div>
+    </aside>
+    <!-- /Side-bar Section -->
+
+    <main>
+        <!--============== Cart Section ==============-->
+        <section id="cart">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-12 title">
+                        <h4 class="mb-0">My Cart &#160; <small class="fs-6">( 3 items )</small></h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid container-xl">
+
+                <div class="row justify-content-center cart_wrapper">
+
+                    <!-- Cart-content Top -->
+                    <div
+                        class="col-12 d-flex justify-content-between align-items-center flex-sm-row flex-column px-md-5 px-sm-4 cart_content_top">
+                        <a href='/Home'><i class="bi bi-chevron-left"></i> Go Back</a>
+                        <h6 class="mb-0 mt-4 mt-sm-0">Subtotal - <b>₹ 2,03,980</b></h6>
+                    </div>
+
+                    <!-- Cart-content Left -->
+                    <div class="col-lg-9 col-md-11 cart_content_left">
+
+                        <div
+                            class="row justify-content-sm-evenly justify-content-around align-items-center gx-0 mx-xl-4 mx-lg-2 py-4 cart_item">
+                            <div class="col-3 px-md-4 px-sm-0">
+                                <img src="assets/img/popular/2.png" alt="">
+                            </div>
+                            <div class="col-md-8 col-7 ms-md-4">
+                                <div class="d-flex justify-content-between cart_title">
+                                    <h5 class="me-md-5 me-2">Canon EOS 1500D 24.1 MP DSLR Camera with EF S18-55 mm IS II
+                                        Lens (Black)</h5>
+                                    <h6><i class="bi bi-x-lg" title="Remove item"></i></h6>
+                                </div>
+                                <span class="text-secondary">Product Id - 5544663</span>
+                                <div class="cart_price">
+                                    <b>₹ 31,000<small>.00</small></b>
+                                    <small><del class="ms-2 text-muted">MRP: 34,995<small>.00</small></del></small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="row justify-content-sm-evenly justify-content-around align-items-center gx-0 mx-xl-4 mx-lg-2 py-4 cart_item">
+                            <div class="col-3 px-md-4 px-sm-0">
+                                <img src="assets/img/products/pro6.png" alt="">
+                            </div>
+                            <div class="col-md-8 col-7 ms-md-4">
+                                <div class="d-flex justify-content-between cart_title">
+                                    <h5 class="me-md-5 me-2">Canon Speedlite 470EX-AI Flash (Black)</h5>
+                                    <h6><i class="bi bi-x-lg" title="Remove item"></i></h6>
+                                </div>
+                                <span class="text-secondary">Product Id - 5544663</span>
+                                <div class="cart_price">
+                                    <b>₹ 24,990<small>.00</small></b>
+                                    <small><del class="ms-2 text-muted">MRP: 28,995<small>.00</small></del></small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="row justify-content-sm-evenly justify-content-around align-items-center gx-0 mx-xl-4 mx-lg-2 py-4 cart_item">
+                            <div class="col-3 px-md-4 px-sm-0">
+                                <img src="assets/img/popular/5.png" alt="">
+                            </div>
+                            <div class="col-md-8 col-7 ms-md-4">
+                                <div class="d-flex justify-content-between cart_title">
+                                    <h5 class="me-md-5 me-2">Sony FE 14mm f/1.8 G Master Series ultra-wide-angle prime
+                                        lens
+                                    </h5>
+                                    <h6><i class="bi bi-x-lg" title="Remove item"></i></h6>
+                                </div>
+                                <span class="text-secondary">Product Id - 5544663</span>
+                                <div class="cart_price">
+                                    <b>₹ 1,47,990 <small>.00</small></b>
+                                    <small><del class="ms-2 text-muted">MRP: 1,62,990<small>.00</small></del></small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Cart-content Right -->
+                    <div class="col-lg-3 col-md-9 col-sm-10 cart_content_right">
+
+                        <div class="cart_info_block py-4 mt-xxl-5 mt-lg-4 mt-5">
+                            <h6> <i class="bi bi-shield-check me-1"></i> 100% Purchase Protection</h6>
+                            <p class="px-xl-4 px-2 mb-0">Original Products | Safe & Secure Payments | Easy Returns</p>
+                        </div>
+
+                        <div class="cart_pincode_block mt-4">
+                            <label class="field_label"> <i class="bi bi-geo-alt"></i> Check Delivery time &
+                                services</label>
+                            <div class="cart_field">
+                                <input type="text" placeholder="Enter Pincode" required>
+                                <button type="button">Check</button>
+                            </div>
+                        </div>
+
+                        <div class="cart_offer_block">
+                            <label class="field_label"> <i class="bi bi-tag"></i> Apply Coupons</label>
+                            <div class="cart_field">
+                                <input type="text" placeholder="Enter Coupon Code" required>
+                                <button type="button">Apply</button>
+                            </div>
+                        </div>
+
+                        <div class="cart_payment_block">
+                            <h5>Payment Details</h5>
+                            <div class="d-flex justify-content-between mt-4">
+                                <span>Total MRP</span>
+                                <span>₹ 2,26,980</span>
+                            </div>
+                            <div class="d-flex justify-content-between my-2">
+                                <span>Discount</span>
+                                <span class="text-success">-₹ 99,000</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Delivery Fee</span>
+                                <span class="text-danger">Free</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-5 pt-3 total_price">
+                                <strong>Total Amount</strong>
+                                <strong>₹ 2,03,980</strong>
+                            </div>
+                            <button type="button" class="checkout_btn p-2"> <i
+                                    class="bi bi-credit-card-2-back me-1"></i>
+                                Proceed to Checkout</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- /Cart Section -->
+    </main>
+
+    <!--============== Footer Section ==============-->
+    <footer id="footer">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12 title">
+                    <h3>Cam Cart</h3>
+                </div>
+            </div>
+
+            <div class="row justify-content-center text-center gap-5">
+                <div class="col-lg-3 foot_info_links">
+                    <h5>Useful Links</h5>
+                    <ul class="p-0 mt-4">
+                        <li><a href="javascript:void(0);">FAQs</a></li>
+                        <li><a href="javascript:void(0);">Help & Support</a></li>
+                        <li><a href="javascript:void(0);">Terms of Service</a></li>
+                        <li><a href="javascript:void(0);">Cancellation & Refunds</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="foot_social_links social_links">
+                        <a href="javascript:void(0);">
+                            <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                <path
+                                    d="M25,3C12.85,3,3,12.85,3,25c0,11.03,8.125,20.137,18.712,21.728V30.831h-5.443v-5.783h5.443v-3.848c0-6.371,3.104-9.168,8.399-9.168c2.536,0,3.877,0.188,4.512,0.274v5.048h-3.612c-2.248,0-3.033,2.131-3.033,4.533v3.161h6.588l-0.894,5.783h-5.694v15.944C38.716,45.318,47,36.137,47,25C47,12.85,37.15,3,25,3z" />
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0);" class="mx-5">
+                            <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+                                <path
+                                    d="M15,12.124c-1.589,0-2.876,1.288-2.876,2.876s1.288,2.876,2.876,2.876s2.876-1.288,2.876-2.876S16.589,12.124,15,12.124z" />
+                                <circle cx="15" cy="15" r="3" />
+                                <path
+                                    d="M15,2C7.832,2,2,7.832,2,15s5.832,13,13,13s13-5.832,13-13S22.168,2,15,2z M24,18.333C24,21.458,21.458,24,18.334,24h-6.667	C8.542,24,6,21.458,6,18.334v-6.667C6,8.542,8.542,6,11.666,6h6.667C21.458,6,24,8.542,24,11.666V18.333z" />
+                                <path
+                                    d="M18.333,8h-6.667C9.645,8,8,9.645,8,11.667v6.667C8,20.355,9.645,22,11.667,22h6.667C20.355,22,22,20.355,22,18.333v-6.667	C22,9.645,20.355,8,18.333,8z M15,20c-2.757,0-5-2.243-5-5s2.243-5,5-5s5,2.243,5,5S17.757,20,15,20z M19.667,11	C19.299,11,19,10.701,19,10.333s0.299-0.667,0.667-0.667c0.368,0,0.667,0.299,0.667,0.667S20.035,11,19.667,11z" />
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0);">
+                            <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                <path
+                                    d="M25,2C12.317,2,2,12.317,2,25s10.317,23,23,23s23-10.317,23-23S37.683,2,25,2z M36.237,20.524c0.01,0.236,0.016,0.476,0.016,0.717C36.253,28.559,30.68,37,20.491,37c-3.128,0-6.041-0.917-8.491-2.489c0.433,0.052,0.872,0.077,1.321,0.077c2.596,0,4.985-0.884,6.879-2.37c-2.424-0.044-4.468-1.649-5.175-3.847c0.339,0.065,0.686,0.1,1.044,0.1c0.505,0,0.995-0.067,1.458-0.195c-2.532-0.511-4.441-2.747-4.441-5.432c0-0.024,0-0.047,0-0.07c0.747,0.415,1.6,0.665,2.509,0.694c-1.488-0.995-2.464-2.689-2.464-4.611c0-1.015,0.272-1.966,0.749-2.786c2.733,3.351,6.815,5.556,11.418,5.788c-0.095-0.406-0.145-0.828-0.145-1.262c0-3.059,2.48-5.539,5.54-5.539c1.593,0,3.032,0.672,4.042,1.749c1.261-0.248,2.448-0.709,3.518-1.343c-0.413,1.292-1.292,2.378-2.437,3.064c1.122-0.136,2.188-0.432,3.183-0.873C38.257,18.766,37.318,19.743,36.237,20.524z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="foot_vr_line"></div>
+                    <div class="foot_subscribe">
+                        <h6>Connect with us</h6>
+                        <form>
+                            <input type="email" class="subs_field" placeholder="Your Email*" required> <br>
+                            <button type="submit" class="subs_btn">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 foot_info_links">
+                    <h5>Quick Links</h5>
+                    <ul class="p-0 mt-4">
+                        <li><a href="javascript:void(0);">Track Order</a></li>
+                        <li><a href="javascript:void(0);">Privacy Policy</a></li>
+                        <li><a href="javascript:void(0);">Shipping Rates</a></li>
+                        <li><a href="javascript:void(0);">Locate Service Centres</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="foot_credit">
+                <p>
+                    &#169;
+                    <script>
+                        document.write(new Date().getFullYear() + ' ');
+                    </script>
+                    Cam Cart. All Rights Reserved.
+                    <span>Designed & Built by | <a href="" target="_blank">Kiran
+                            Kumar</a> </span>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- /Footer Section -->
+
+    <!--========= Go-to-top btn =========-->
+    <div class="goTop" title="Go to Top">
+        <i class="bi bi-chevron-up"></i>
+    </div>
+    <!-- /Go-to-top btn -->
+
+   
+
+    <!--============== Javascript Files ==============-->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

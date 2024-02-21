@@ -1,0 +1,356 @@
+/* 
+    Project Name : CameraX - Ecommerce Website
+    Designed & Coded by : Kiran Kumar
+*/
+
+
+@font-face {
+    font-family: Rubik;
+    src: url(../fonts/Rubik-Regular.ttf)
+}
+
+@font-face {
+    font-family: Gotham;
+    src: url(../fonts/GothamMedium.ttf)
+}
+
+:root {
+    --hero-color: #13131f;
+    --bg-color: #111319;
+    --bg-color2: #191c26;
+    --bg-color3: rgba(33, 37, 48, 0.95);
+    --main-color: #d6002f;
+    --border-color: #444;
+    --text-color: #a9afc3;
+    --text-color2: #ccc;
+    --prime-text-color: #ddd;
+    --bright-text-color: #eee;
+    --dim-text-color: #999;
+    --muted-text-color: #555;
+    --font1: "Rubik", sans-serif;
+    --font2: "Gotham", sans-serif;
+    --box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.9), inset 10px 10px 60px rgba(0, 0, 0, 0.3), inset -10px -10px 60px rgba(0, 0, 0, 0.3);
+    --box-shadow2: inset 8px 8px 10px rgba(255, 255, 255, 0.2), inset -10px -10px 15px rgba(0, 0, 0, 0.9);
+    --btnTransition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --popTransition: all 0.3s ease
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+::after,
+::before {
+    box-sizing: border-box
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    overflow-x: hidden
+}
+
+::-webkit-scrollbar {
+    width: auto
+}
+
+::-webkit-scrollbar-track {
+    background-color: #202324
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #454a4d
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #60696e
+}
+
+::selection {
+    background-color: #333;
+    color: var(--bright-text-color)
+}
+
+body {
+    font-family: var(--font1);
+    background-color: var(--bg-color);
+    color: var(--prime-text-color);
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+section {
+    position: relative
+}
+
+ul {
+    list-style-type: none
+}
+
+a,
+a:focus,
+a:hover {
+    text-decoration: none;
+    color: var(--prime-text-color)
+}
+
+button,
+input {
+    outline: 0;
+    border: none;
+    background: 0 0;
+    font-family: var(--font1)
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    user-select: none
+}
+
+
+
+ .swiper-slide {
+    min-height: 80vh;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+    position: relative
+}
+ .swiper-slide {
+    background-color: rgba(0, 0, 0, .3);
+    box-shadow: 0 10px 12px rgba(0, 0, 0, .4);
+    position: relative
+}
+ .swiper-slide {
+    opacity: .4;
+    cursor: pointer;
+    background-color: var(--bg-color)
+}
+
+
+
+ .swiper-slide>img,
+ .swiper-slide>img {
+    display: block;
+    object-fit: cover;
+    margin: 0 auto
+}
+
+ .swiper-slide>img {
+    width: 400px;
+    height: 100%
+}
+
+ .swiper-slide>img {
+    width: 100px;
+    height: 100%
+}
+.modal_head {
+    padding: 1.2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.close_btn {
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    overflow: hidden
+}
+
+.close_btn>span {
+    width: 80%;
+    height: 2px;
+    position: absolute;
+    background-color: var(--text-color2);
+    opacity: .5;
+    transition: opacity .4s ease
+}
+
+.close_btn>span:first-child {
+    transform: rotate(45deg)
+}
+
+.close_btn>span:last-child {
+    transform: rotate(-45deg)
+}
+
+.close_btn:hover>span:first-child,
+.close_btn:hover>span:last-child {
+    opacity: 1;
+    animation: rotate .4s cubic-bezier(.175, .885, .32, 1.275)
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0)
+    }
+}
+.account_close {
+    width: 1.8rem;
+    height: 1.8rem;
+    position: relative
+}
+.modal_body {
+    padding: 15px 0 45px;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color)
+}
+.input_box {
+    margin: 30px 0;
+    position: relative;
+    overflow: hidden
+}
+
+.input_box>input {
+    display: block;
+    width: 100%;
+    background: 0 0;
+    color: var(--prime-text-color);
+    padding: 20px 2px 3px;
+    border: none;
+    outline: 0;
+    border-bottom: 2px solid var(--muted-text-color)
+}
+
+.input_box>input:focus {
+    border-bottom-color: var(--dim-text-color)
+}
+
+.input_box>label {
+    position: absolute;
+    top: 16px;
+    left: 2px;
+    z-index: -1;
+    font-size: .875rem;
+    color: var(--dim-text-color);
+    transform-origin: 0 0;
+    transition: var(--popTransition)
+}
+
+.input_box>input:focus~label,
+.input_box>input:valid~label {
+    top: 0;
+    left: 0;
+    transform: scale(.85)
+}
+
+.input_box>span {
+    display: inline-block;
+    font-size: .85rem;
+    margin-top: 10px;
+    color: #666
+}
+
+.input_box>span.forgot_pass {
+    cursor: pointer
+}
+
+.input_box>span.forgot_pass:hover {
+    color: var(--dim-text-color)
+}
+input {
+    outline: 0;
+    border: none;
+    background: 0 0;
+    font-family: var(--font1)
+}
+.modal_btn {
+    display: block;
+    width: 100%;
+    padding: 7px 10px;
+    background-color: var(--bg-color2);
+    color: var(--prime-text-color);
+    box-shadow: 0 10px 14px rgba(0, 0, 0, .4);
+    transition: var(--popTransition)
+}
+
+.modal_btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 20px rgba(0, 0, 0, .4)
+}
+
+.modal_btn:active {
+    transform: scale(.9)
+}
+
+.modal_foot {
+    padding: 1.8rem 0
+}
+#account_modal {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9997;
+    user-select: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none
+}
+
+#account_modal::-webkit-scrollbar {
+    width: 0
+}
+.account_swiper .swiper-button-next::after,
+.account_swiper .swiper-button-prev::after {
+    content: "";
+    font-size: unset
+}
+
+.account_swiper .swiper-button-next,
+#account_modal .swiper-button-prev {
+    display: unset;
+    position: unset;
+    width: 0;
+    height: 0;
+    margin-top: 0
+}
+
+.account_swiper .swiper-button-next:hover {
+    color: var(--text-color)
+}
+.modal_centered {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    min-height: calc(100% - 2rem);
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.account_swiper {
+    width: 100%;
+    /* height: 100%; */
+    position: relative;
+
+    max-width: 450px;
+    padding: 1rem 3rem;
+    background-color: var(--bg-color);
+    color: var(--text-color2);
+    box-shadow: var(--box-shadow2);
+    border-radius: 5px
+}
+.l-main{
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+   
+   
+}

@@ -1,0 +1,289 @@
+/* 
+    Project Name : CameraX - Ecommerce Website
+    Designed & Coded by : Kiran Kumar
+*/
+
+
+@font-face {
+    font-family: Rubik;
+    src: url(../fonts/Rubik-Regular.ttf)
+}
+
+@font-face {
+    font-family: Gotham;
+    src: url(../fonts/GothamMedium.ttf)
+}
+
+:root {
+    --hero-color: #13131f;
+    --bg-color: #111319;
+    --bg-color2: #191c26;
+    --bg-color3: rgba(33, 37, 48, 0.95);
+    --main-color: #d6002f;
+    --border-color: #444;
+    --text-color: #a9afc3;
+    --text-color2: #ccc;
+    --prime-text-color: #ddd;
+    --bright-text-color: #eee;
+    --dim-text-color: #999;
+    --muted-text-color: #555;
+    --font1: "Rubik", sans-serif;
+    --font2: "Gotham", sans-serif;
+    --box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.9), inset 10px 10px 60px rgba(0, 0, 0, 0.3), inset -10px -10px 60px rgba(0, 0, 0, 0.3);
+    --box-shadow2: inset 8px 8px 10px rgba(255, 255, 255, 0.2), inset -10px -10px 15px rgba(0, 0, 0, 0.9);
+    --btnTransition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --popTransition: all 0.3s ease
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+::after,
+::before {
+    box-sizing: border-box
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    overflow-x: hidden
+}
+
+::-webkit-scrollbar {
+    width: auto
+}
+
+::-webkit-scrollbar-track {
+    background-color: #202324
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #454a4d
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #60696e
+}
+
+::selection {
+    background-color: #333;
+    color: var(--bright-text-color)
+}
+
+body {
+    font-family: var(--font1);
+    background-color: var(--bg-color);
+    color: var(--prime-text-color);
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+section {
+    position: relative
+}
+
+ul {
+    list-style-type: none
+}
+
+a,
+a:focus,
+a:hover {
+    text-decoration: none;
+    color: var(--prime-text-color)
+}
+
+button,
+input {
+    outline: 0;
+    border: none;
+    background: 0 0;
+    font-family: var(--font1)
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    user-select: none
+}
+
+/* .main {
+    content: "";
+    font-size: unset
+} */
+
+/* .main  {
+    display: unset;
+    position: unset;
+    width: 700px;
+    height: 600px;
+    margin-top: 0
+} */
+
+.main:hover {
+    color: var(--text-color)
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    max-width: 450px;
+    padding: 1rem 3rem;
+    background-color: var(--bg-color);
+    color: var(--text-color2);
+    box-shadow: var(--box-shadow2);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    align-items: center;
+
+}
+.container{
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.details{
+    /* background: #b38686; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+   
+}
+input{
+    /* background: #dbc3c3; */
+    color: var(--text-color2);
+    
+}
+form{
+    width: 100%;
+    max-width: 400px;
+    /* background-color: #13131f; */
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    text-align: left;
+    position: relative;
+    top: 100px;
+    gap: 25px;
+    /* z-index: 9; */
+}
+label{
+    position: relative;
+    left: -25px;
+}
+.age{
+    position: relative;
+    left: -17px;
+}
+.address{
+    position: relative;
+    left: -32px;
+}
+p{
+    position: relative;
+    left: 45px;
+    top: 100px;
+}
+
+.photo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    /* border: none; */
+    position: relative;
+    top: 50px;
+    border: dashed 2px green;
+}
+.img{
+    background: none;
+    border: none;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+#btn{
+    width: 100px;
+    height: 25px;
+    background: #ffffff;
+    border-radius: 25px;
+    position: relative;
+    /* top: 60px; */
+}
+#btn:hover{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    background: rgb(67, 199, 105);
+    transition: all .4s ease-in-out;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 25px;
+    border-radius: 25px;
+    background: white;
+    position: relative;
+    text-align: center;
+    /* bottom: 30px; */
+    
+}
+.btn:hover{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    background:#d6002f ;
+    transition: all .4s ease-in-out;
+}
+
+.btns{
+    width: 100%;
+    height: 30px;
+    position: relative;
+    top: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #111319;
+}
+a{
+    color: #111319;
+}
+a:hover{
+    color: white;
+    transition: all .4s ease-in-out;
+
+}
+
+.logout{
+    width: 100px;
+    height: 30px;
+    background-color: var(--main-color);
+    position: absolute;
+    right:-70px;
+    top:  25px;
+    border-radius: 8px;
+    box-shadow: none;
+}

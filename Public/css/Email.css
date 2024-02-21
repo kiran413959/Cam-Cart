@@ -1,0 +1,192 @@
+/* 
+    Project Name : CameraX - Ecommerce Website
+    Designed & Coded by : Kiran Kumar */
+
+
+    @font-face {
+        font-family: Rubik;
+        src: url(../fonts/Rubik-Regular.ttf)
+    }
+    
+    @font-face {
+        font-family: Gotham;
+        src: url(../fonts/GothamMedium.ttf)
+    }
+    
+    :root {
+        --hero-color: #13131f;
+        --bg-color: #111319;
+        --bg-color2: #191c26;
+        --bg-color3: rgba(33, 37, 48, 0.95);
+        --main-color: #d6002f;
+        --border-color: #444;
+        --text-color: #a9afc3;
+        --text-color2: #ccc;
+        --prime-text-color: #ddd;
+        --bright-text-color: #eee;
+        --dim-text-color: #999;
+        --muted-text-color: #555;
+        --font1: "Rubik", sans-serif;
+        --font2: "Gotham", sans-serif;
+        --box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.9), inset 10px 10px 60px rgba(0, 0, 0, 0.3), inset -10px -10px 60px rgba(0, 0, 0, 0.3);
+        --box-shadow2: inset 8px 8px 10px rgba(255, 255, 255, 0.2), inset -10px -10px 15px rgba(0, 0, 0, 0.9);
+        --btnTransition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        --popTransition: all 0.3s ease
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+    }
+    
+    ::after,
+    ::before {
+        box-sizing: border-box
+    }
+    
+    html {
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        scroll-behavior: smooth;
+        overflow-x: hidden
+    }
+    
+    ::-webkit-scrollbar {
+        width: auto
+    }
+    
+    ::-webkit-scrollbar-track {
+        background-color: #202324
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background-color: #454a4d
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #60696e
+    }
+    
+    ::selection {
+        background-color: #333;
+        color: var(--bright-text-color)
+    }
+    
+    body {
+        font-family: var(--font1);
+        background-color: var(--bg-color);
+        color: var(--prime-text-color);
+        overflow-x: hidden
+    }
+    
+    
+    
+    
+    
+  
+    
+    /* button {
+        outline: 0;
+        border: none;
+        background: 0 0;
+        font-family: var(--font1)
+    } */
+    
+    
+    
+    #preloader {
+        width: 100%;
+        min-height: 100vh;
+        background-color: var(--hero-color);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+    
+    .loader {
+        width: 12.5rem;
+        height: 12.5rem;
+        border-radius: 50%;
+        box-shadow: 1px 8px 8px var(--main-color);
+        animation: spin 1.4s linear infinite
+    }
+    
+    /* @keyframes spin {
+        0% {
+            transform: rotate(0)
+        }
+    
+        100% {
+            transform: rotate(360deg)
+        }
+    }
+    
+    .loader_text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: var(--font2);
+        color: var(--text-color);
+        animation: text 1s linear infinite alternate
+    }
+    
+    @keyframes text {
+        0% {
+            opacity: .4
+        }
+    
+        100% {
+            opacity: 1
+        }
+    } */
+    .container{
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 70px);
+    }
+
+    .main{
+        width: 80%;
+        /* max-width: 900px; */
+        height: 300px;
+        display: flex;
+        /* flex-direction: column; */
+        justify-content: center;
+        /* margin: auto; */
+        background-color: var(--bg-color) ;
+        border-radius: 10px;
+        box-shadow: rgba(255, 255, 255, 0.1) -2px 10px 30px -1px;
+        /* overflow: hidden; */
+        border: rgb(68, 64, 64);
+    }
+    svg{
+        width: 100px;
+        height: 100px;
+        position: relative;
+        top: 100px;
+        left: 50px;
+    }
+    h1{
+        position: absolute;
+        top: 180px;
+    }
+
+    button{
+        background-color: #111319;
+        width: 100px;
+        height: 30px;
+        position: relative;
+        top: 230px;
+        right:50px ;
+        color:  white;
+        border-radius: 12px;
+    }

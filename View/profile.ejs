@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+  <!--===== Designed & Built by : Kiran Kumar =====-->
+
+
+  <link rel="shortcut icon" href="assets/img/icons/fav-icon.png" type="image/x-icon">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+
+  <!-- Swiper Slider -->
+  <link rel="stylesheet" href="assets/swiper/swiper-bundle.min.css">
+
+  <!-- Bootstrap CSS-->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- Main Stylesheets  -->
+  <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+
+
+</head>
+<body>
+<div class="container">
+    <div class="main">
+        <h1>PROFILE</h1>
+        <div class="photo">
+            <input type="file" accept="image/*" class="img" placeholder=""  capture  >
+        </div>
+        <div class="details">
+        <p>name: <%= user.name %>
+        </p>
+        <p>email: <%= user.email %>
+        </p>
+        
+        <form action="/profile" method="post">
+
+            <label for="phone" class="phone">phone:
+                <input type="number" id="phone" name="phone" value="<%= user2 ? user2.phone : null %>"> </label>
+
+
+            <label for="age" class="age">age:
+                <input type="number" id="age" name="age" value="<%= user2 ? user2.age : null %>"> </label>
+
+            <label for="Address" class="address">Address:
+                <input name="address" id="Address" value="<%=  user2 ? user2.address : null %>">
+            </label>
+
+<div class="btns">
+
+
+    <button type="submit" id="btn"> update </button>
+    <button class="btn"> <a href="/Home">Home</a></button>
+</div>
+        </form>
+    </div>
+
+    </div>
+
+    <button class="logout"><a class="log" href="/logout">Log Out</a></button>
+
+</div>    
+</body>
+</html>
