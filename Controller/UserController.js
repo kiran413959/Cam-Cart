@@ -1,13 +1,20 @@
 const express = require('express')
-const { User, Profile, Token,Whishlist } = require('../Model/UserData')
-const {Products,Category}=require('../Model/ProductDatas')
+const { User, Profile, Token, Whishlist } = require('../Model/UserData')
+const { Products, Category } = require('../Model/ProductDatas')
 const { default: mongoose } = require('mongoose')
 const { ObjectId } = require('mongoose').Types;
 const jwt = require("jsonwebtoken")
 const nodemailer = require('nodemailer')
+const {Cart}=require('../Model/CartData')
 
 
-const sendVarificationEmail=require('../utils/sendEmail')
+const sendVarificationEmail = require('../utils/sendEmail')
+
+
+
+
+
+
 
 module.exports = {
 
@@ -32,7 +39,7 @@ module.exports = {
         const token = req.params.token;
         try {
             const dToken = jwt.verify(token, process.env.JWT_SECRET);
-            console.log("token",dToken)
+            console.log("token", dToken)
             const updatedUser = await User.findOneAndUpdate({
                 // isVerified:true,
                 email: dToken.email
@@ -85,29 +92,29 @@ module.exports = {
         }
     },
     resendEmailget: async (req, res) => {
-     
+
     },
     resendEmailpost: async (req, res) => {
         const email = req.body.email;
-        
+
         try {
             // Generate a new JWT token for email verification
             const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-            
+
             // Find the user by email
             const user = await User.findOne({ email });
-    
+
             if (!user) {
                 // If user not found, return an error response
                 return res.status(404).json({ resend: false, error: 'User not found' });
             }
 
-    
+
             const name = user.name;
-    
+
             // Send verification email
             await sendVarificationEmail(email, name, token);
-    
+
             // Send success response
             return res.status(200).json({ resend: true, msg: 'Verification Email has been Sent!' });
         } catch (error) {
@@ -116,8 +123,8 @@ module.exports = {
             return res.status(500).json({ resend: false, error: "Failed to send verification email" });
         }
     },
-    
-   
+
+
     loginget: (req, res) => {
         if (req.session.email) {
             console.log('email found')
@@ -161,35 +168,37 @@ module.exports = {
 
     },
     Homeget: async (req, res) => {
-        const user= await  User.findById(req.session.userId)
+        const user = await User.findById(req.session.userId)
         console.log(user)
 
-       
 
-        res.render('userHome',{user});
+        // console.log(id);
+
+        res.render('userHome', { user });
 
     },
     Homepost: (req, res) => {
 
+
     },
     categoryget: async (req, res) => {
-         
+
         try {
             const catName = req.query.category;
-            
+
             // Query the database for products in the specified category
-            const category = await Products.find({category:catName});
-            console.log('category:',category);
-    
+            const category = await Products.find({ category: catName });
+            console.log('category:', category);
+
             // console.log(category);
             if (!category) {
                 // Handle case where no products are found for the specified category
                 return res.status(404).json({ error: "No products found for the specified category" });
             }
-            const wishlist =await  Whishlist.findOne({ userId : req.session.userId})
-            console.log('wishlist:',wishlist);
+            const wishlist = await Whishlist.findOne({ userId: req.session.userId })
+            // console.log('wishlist:', wishlist);
             // Render the 'allProducts' template with the retrieved products
-            res.render('allProducts', { category ,wishlist: wishlist }) ;
+            res.render('allProducts', { category, wishlist: wishlist });
         } catch (error) {
             // Handle any errors that occur during database query or rendering
             console.error("Error retrieving products:", error);
@@ -244,67 +253,98 @@ module.exports = {
     },
     Profilepost: (req, res) => {
 
+
     },
-    Whishlistget: async(req, res) => {
+    Whishlistget: async (req, res) => {
+        try {
+            if (req.session.email) {
+                let wishLists = await Whishlist.find({ userId: req.session.userId });
+                console.log(wishLists);
+                const userEmail = req.session.email;
+                console.log(userEmail);
+                const user = await User.findOne({ email: userEmail });
 
-        const userWhishlist= await  Whishlist.find()
 
-        res.render('whishlist' ,{userWhishlist})
+                const products = [];
+
+                // Iterate over each wishlist
+                for (const wishList of wishLists) {
+                    // Iterate over each product ID in the wishlist
+                    for (const productId of wishList.products) {
+                        // Find the product by its ID and push it to the products array
+                        const product = await Products.findById(productId);
+                        products.push(product);
+                    }
+                }
+
+                console.log(products);
+
+                //console.log(whishList);
+
+                res.render('whishlist', { wishLists, user, products: products });
+            }
+            else {
+                res.redirect("/Home")
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        // , {user , wishlistProducts }
     },
 
-    Wishlistdataget:async (req,res)=>{
-        Wishlist= await  Whishlist.findOne({userId:req.session.userId})
+    // 
+    // Wishlistdataget: async (req, res) => {
+    //     // Wishlist = await Whishlist.findOne({ userId: req.session.userId })
 
-            res.json({products:Wishlist.products})
-    },
+    //     // res.json({ products: Wishlist.products })
+    // },
 
-    toggleWhishlistpost: async(req, res) => {
-     
-        if(req.session.email){
-            console.log(req.session.userId);
-            try{
-                const productId=req.params.productId;
-                const userId=req.session.userId;
 
-                let wishlist  =await Whishlist.findOne({ userId : userId});
-                console.log(wishlist);
-                if(!wishlist){
-                 wishlist = new Whishlist ({
-                       products:[],
-                       userId: userId
-                   })
+    toggleWhishlistpost: async (req, res) => {
+
+        if (req.session.email) {
+            // console.log(req.session.userId);
+            try {
+                const productId = req.params.productId;
+                const userId = req.session.userId;
+
+                let wishlist = await Whishlist.findOne({ userId: userId });
+                // console.log(wishlist);
+                if (!wishlist) {
+                    wishlist = new Whishlist({
+                        products: [],
+                        userId: userId
+                    })
                 }
                 console.log(req.body)
 
-                   const {active}=req.body
-                   const removeWishlist= active
-                   console.log(`heyyyyyyyyy${removeWishlist}`);
+                const { active } = req.body
+                // console.log(active);
+                removeWishlist = active === "false" ? true : false;
+                //    console.log(`heyyyyyyyyy${removeWishlist}`);
 
 
-                   if(removeWishlist){
+                if (removeWishlist) {
 
                     wishlist.products.push(productId)
-                    await wishlist.save();
+                    res.status(200).json({ success: true, update: true, message: "Added to Wishlist" });
 
-                    res.status(200).json({ success: true, removeWishlist:false }); 
-                    
                 }
-                else
-                {
-                       wishlist.products.pull(productId)
-                       await wishlist.save();
-       
-                       res.status(200).json({ success: true, removeWishlist:true }); 
-                   
+                else {
+                    wishlist.products.pull(productId)
+                    res.status(200).json({ success: true, update: false, message: "Removed from WishList" });
+
 
                 }
 
-                   console.log(wishlist);
+                await wishlist.save();
+                // res.status(200).json({ success: true ,update:true }); 
+                //    console.log(wishlist);
 
-                   console.log('wishlist:',wishlist);
-            
-           
-        }catch(err){
+                console.log('wishlist:', wishlist.products);
+
+
+            } catch (err) {
                 console.log(err)
             }
         }
@@ -312,6 +352,58 @@ module.exports = {
 
 
     },
+
+
+    addToCartPost: async (req, res) => {
+        if (req.session.email) {
+            // console.log(req.session.userId);
+            try {
+                const productId = req.params.productId;
+                const userId = req.session.userId;
+                let cart = await Cart.findOne({ userId: userId })
+                if (!cart) {
+                    cart = new Cart({ 
+                        products:[],
+                        userId: userId })
+                }
+                const productExist = cart.products.some((item) => item.id == productId)
+                if (!productExist) {
+                    const product = await Products.findById(productId)
+    
+                    cart.products.push(product)
+                    res.status(200).json({ success:true, update:true, message: "Product added to the cart" })
+                } else {
+                    for (let i = 0; i < cart.products.length; i++) {
+                        if (cart.products[i].id == productId) {
+                            cart.products[i].quantity += parseInt(req.body.qty) || 1;
+                            break;
+                        }
+                    }
+                }
+                await cart.save();
+                res.redirect('/');
+
+
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+    },
+    removeFromcartPost: async (req, res) => {
+
+
+    },
+    cartCountGet: async (req, res) => {
+
+
+    },
+
+
+
+
+
+
     myOrdersget: async (req, res) => {
 
         res.render('myOrders');
@@ -332,3 +424,5 @@ module.exports = {
     },
 
 }
+
+

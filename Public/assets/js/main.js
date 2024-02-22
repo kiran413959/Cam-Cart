@@ -14,9 +14,9 @@
 */
 
 
-$(window).on("load", function() {
+$(window).on("load", function () {
     $("#preloader").fadeOut(1e3)
-}), $(document).ready(function() {
+}), $(document).ready(function () {
     "use strict";
     const e = $(window).scrollTop(),
         s = $("html, body"),
@@ -28,29 +28,29 @@ $(window).on("load", function() {
         a = $(".product_modal"),
         c = $(".product_swiper"),
         n = $(".thumb_swiper");
-    $(window).on("scroll", function() {
+    $(window).on("scroll", function () {
         const e = $(this).scrollTop();
         e > 100 ? o.addClass("sticky") : o.removeClass("sticky"), e > 800 ? t.addClass("popped") : t.removeClass("popped")
-    }), e > 100 ? o.addClass("sticky") : o.removeClass("sticky"), e > 800 ? t.addClass("popped") : t.removeClass("popped"), t.click(function() {
+    }), e > 100 ? o.addClass("sticky") : o.removeClass("sticky"), e > 800 ? t.addClass("popped") : t.removeClass("popped"), t.click(function () {
         return s.animate({
             scrollTop: 0
         }, "fast"), !1
-    }), $(".sidebar_toggler").click(function() {
+    }), $(".sidebar_toggler").click(function () {
         i.addClass("show")
-    }), $(".drop_down_head").click(function() {
+    }), $(".drop_down_head").click(function () {
         let e = $(this).children("i");
         $(".drop_down_body").slideToggle(300), e.hasClass("bi-plus") ? e.attr("class", "bi-dash") : e.attr("class", "bi-plus")
-    }), $(".sidebar_close").click(function() {
+    }), $(".sidebar_close").click(function () {
         i.removeClass("show")
-    }), $(document).mouseup(function(e) {
+    }), $(document).mouseup(function (e) {
         0 === $(e.target).closest(i).length && i.removeClass("show")
-    }), $(".search-icon").click(function() {
+    }), $(".search-icon").click(function () {
         $(".search_field").toggle(400)
-    }), $(".mob-search").click(function() {
+    }), $(".mob-search").click(function () {
         l.addClass("visible")
-    }), $(".mob_search_close").click(function() {
+    }), $(".mob_search_close").click(function () {
         l.removeClass("visible")
-    }), $(".user-icon, .checkout_btn").click(function() {
+    }), $(".user-icon, .checkout_btn").click(function () {
         s.addClass("overflow_hide"), r.fadeIn(), $(".account_swiper").slideDown()
     });
     new Swiper(".account_swiper", {
@@ -63,11 +63,11 @@ $(window).on("load", function() {
             prevEl: ".account_swiper .swiper-button-prev"
         }
     });
-    $(".account_close").click(function() {
+    $(".account_close").click(function () {
         s.removeClass("overflow_hide"), r.fadeOut(), $(".account_swiper").slideUp()
-    }), $(window).on("keydown", function(e) {
+    }), $(window).on("keydown", function (e) {
         "Escape" === e.key && (s.removeClass("overflow_hide"), r.fadeOut(), $(".account_swiper").slideUp())
-    }), $(".foot_subscribe form").on("submit", function() {
+    }), $(".foot_subscribe form").on("submit", function () {
         alert("You are subscribed to receive our Daily Newsletter."), location.reload()
     });
     new Swiper(".hero_swiper", {
@@ -97,68 +97,130 @@ $(window).on("load", function() {
 
     function p(e) {
         let s = $(".toast_msg");
-        $(".toast_msg span").text(e), s.addClass("pop"), setTimeout(function() {
+        $(".toast_msg span").text(e), s.addClass("pop"), setTimeout(function () {
             s.removeClass("pop")
         }, 3e3)
     }
-    $(".hero_btn").click(function() {
+    $(".hero_btn").click(function () {
         return d("#popular"), !1
-    }), $(".scroll_down_btn").click(function() {
+    }), $(".scroll_down_btn").click(function () {
         return d("#products"), !1
-    }), $(".cart_btn").click(function() {
-        p("Added to Cart")
-    }), $(".buy_btn, .compare_btn").click(function() {
-        p("Login First")
-    }), 
-    
 
 
 
-    $(document).ready(function() {
-        $('.wishlist-button').on('click', function(event) {
-            event.preventDefault();
-            
-            
-            var productId = $(this).attr('data-product-id');
-            
-            console.log(productId);
-            let e = $(this);
 
-            var active = e.hasClass("bi-heart-fill"); 
-            console.log(active);
-            
-            if (productId) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/Whishlist/add/'+productId,
-                    data: {
-                        productId: productId,
-                        active: active,
-                    },
+    }),
 
-                    success: function(response) {
-                        console.log(response);
-                        if (response.ok) {
-                            if(response.removeWishlist){
-                                console.log('hello')
-                                e.attr("class", "bi-heart")
-                            }else {
-                                e.attr("class", "bi-heart-fill")
- 
+        $(document).ready(function () {
+            $('.cart_btn').on('click', function (event) {
+                event.preventDefault();
+
+
+                var productId = $(this).attr('data-product-id');
+
+                console.log(productId);
+                let e = $(this);
+
+
+                if (productId) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/cart/add/' + productId,
+                        data: {
+                            productId: productId,
+                        },
+
+
+                        success: function (response) {
+                            console.log(response);
+                            if (response.success) {
+
+                                // console.log(removeWishlist);
+
+                                if (response.update) {
+                                    console.log('hello')
+                                } else {
+
+                                }
+
+                                // updateWishlistCount();
+                            } else {
+                                console.log(`Error toggling wishlist: ${response.success}`);
                             }
-                        
-                            // updateWishlistCount();
-                        } else {
-                            console.log(`Error toggling wishlist: ${response.statusText}`);
+                        },
+                        error: function (error) {
+                            console.error('Error toggling wishlist:', error);
                         }
-                    },
-                    error: function(error) {
-                        console.error('Error toggling wishlist:', error);
-                    }
-                });
-            }
+                    });
+                }
+            });
         });
-    });
+
+
+
+
+
+
+
+     $(".cart_btn").click(function () {
+        p("Added to Cart")
+    }), $(".buy_btn, .compare_btn").click(function () {
+        p("Login First")
+    }),
+
+
+
+
+        $(document).ready(function () {
+            $('.wishlist-button').on('click', function (event) {
+                event.preventDefault();
+
+
+                var productId = $(this).attr('data-product-id');
+
+                console.log(productId);
+                let e = $(this);
+
+                var active = e.hasClass("bi-heart");
+                console.log(active);
+
+                if (productId) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Whishlist/add/' + productId,
+                        data: {
+                            productId: productId,
+                            active: active,
+                        },
+
+
+                        success: function (response) {
+                            console.log(response);
+                            if (response.success) {
+
+                                // console.log(removeWishlist);
+
+                                if (response.update) {
+                                    console.log('hello')
+                                    e.attr("class", "bi-heart-fill")
+                                } else {
+
+                                    console.log('hiiiiiiiiiiii');
+                                    e.attr("class", "bi-heart")
+                                }
+
+                                // updateWishlistCount();
+                            } else {
+                                console.log(`Error toggling wishlist: ${response.success}`);
+                            }
+                        },
+                        error: function (error) {
+                            console.error('Error toggling wishlist:', error);
+                        }
+                    });
+                }
+            });
+        });
 
 
 
@@ -169,15 +231,15 @@ $(window).on("load", function() {
 
 
 
-    
-    $(".bi-heart").click(function(){
+
+    $(".wishlist-button").click(function () {
         let e = $(this);
         e.hasClass("bi-heart") ? (e.attr("class", "bi-heart-fill"), p("Added to wishlist")) : (e.attr("class", "bi-heart"), p("Removed from wishlist"))
     }),
-    
-    $(".bi-share").click(function() {
-        prompt("Press Ctrl + C, then Enter to copy link to clipboard", $(location).attr("href")) && p("Link Copied")
-    });
+
+        $(".bi-share").click(function () {
+            prompt("Press Ctrl + C, then Enter to copy link to clipboard", $(location).attr("href")) && p("Link Copied")
+        });
     new Swiper(".reviews_swiper", {
         speed: 400,
         loop: !0,
@@ -210,7 +272,7 @@ $(window).on("load", function() {
             }
         }
     });
-    $(".popular_quick_btn").click(function() {
+    $(".popular_quick_btn").click(function () {
         let e = $(this).attr("data-filter");
         s.addClass("overflow_hide"), a.filter("." + e).addClass("view")
     });
@@ -239,9 +301,9 @@ $(window).on("load", function() {
             }
         })
     }
-    $(".product_close").click(function() {
+    $(".product_close").click(function () {
         s.removeClass("overflow_hide"), a.removeClass("view")
-    }), $(window).on("click keydown", function(e) {
+    }), $(window).on("click keydown", function (e) {
         ($(e.target).is(".product_modal .modal_centered") || "Escape" === e.key) && (s.removeClass("overflow_hide"), a.removeClass("view"))
     })
 });

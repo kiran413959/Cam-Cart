@@ -136,7 +136,12 @@
     <!--============== Side-bar Section ==============-->
     <aside id="sidebar" i >
         <div class="sidebar_head">
-            <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i> Hello, <%= user.name%></h5>
+            <% if (user && user.name) { %>
+                <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i> Hello, <%= user.name %></h5>
+            <% } else { %>
+                <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i> Hello, Guest</h5>
+            <% } %>
+            
             <div class="close_btn sidebar_close" title="Close">
                 <span></span>
                 <span></span>
@@ -164,7 +169,7 @@
 
             <ul class="mb-0 ps-0 sidebar_list">
                 <li><i class="bi bi-bag-check me-2"></i> <a href='/oderlist'>My Orders</a></li>
-                <li><i class="bi bi-heart me-2"></i> <a href="/whishlist">My Wishlist</a></li>
+                <li><i class="bi bi-heart me-2"></i> <a href="Whishlist">My Wishlist</a></li>
                 <li><i class="bi bi-person me-2"></i> <a href="/profile">My Account</a></li>
                 <li><i class="bi bi-geo-alt me-2"></i> <a href="/oderstatus">Order Tracking</a></li>
                 <li><i class="bi bi-headset me-2"></i> <a href="javascript:void(0);">Help & Support</a></li>
@@ -395,7 +400,7 @@
 
                 <div class="popular_card">
                     <span class="badge badge1">New</span>
-                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId=""></i>
+                    <i class="bi bi-heart" ></i>
                     <figure class="popular_img">
                         <img src="assets/img/popular/1.png" alt="popular-img">
                     </figure>
@@ -411,7 +416,7 @@
                                 class="bi bi-eye"></i>
                             &#160; Quick
                             Look</button>
-                        <button type="button" class="popular_cart_btn cart_btn"> <i class="bi bi-cart3"></i> &#160; Add
+                        <button type="button" class="popular_cart_btn cart_btn"  data-product-id="" > <i class="bi bi-cart3"></i> &#160; Add
                             to
                             Cart</button>
                     </div>
@@ -419,7 +424,7 @@
 
                 <div class="popular_card">
                     <span class="badge badge2">#1 Seller</span>
-                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId=""></i>
+                    <i class="bi bi-heart" ></i>
                     <figure class="popular_img">
                         <img src="assets/img/popular/2.png" alt="popular-img">
                     </figure>
@@ -436,14 +441,14 @@
                                 class="bi bi-eye"></i>
                             &#160; Quick
                             Look</button>
-                        <button type="button" class="popular_cart_btn cart_btn"> <i class="bi bi-cart3"></i> &#160; Add
+                        <button type="button" class="popular_cart_btn cart_btn"  data-product-id="" > <i class="bi bi-cart3"></i> &#160; Add
                             to
                             Cart</button>
                     </div>
                 </div>
 
                 <div class=" popular_card">
-                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId=""></i>
+                    <i class="bi bi-heart" ></i>
                     <figure class="popular_img">
                         <img src="assets/img/popular/3.png" alt="popular-img">
                     </figure>
@@ -460,14 +465,14 @@
                                 class="bi bi-eye"></i>
                             &#160; Quick
                             Look</button>
-                        <button type="button" class="popular_cart_btn cart_btn"> <i class="bi bi-cart3"></i> &#160; Add
+                        <button type="button" class="popular_cart_btn cart_btn"    data-product-id=""  > <i class="bi bi-cart3"></i> &#160; Add
                             to
                             Cart</button>
                     </div>
                 </div>
 
                 <div class=" popular_card">
-                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId=""></i>
+                    <i class="bi bi-heart" ></i>
                     <figure class="popular_img">
                         <img src="assets/img/popular/4.png" alt="popular-img">
                     </figure>
@@ -484,14 +489,14 @@
                                 class="bi bi-eye"></i>
                             &#160; Quick
                             Look</button>
-                        <button type="button" class="popular_cart_btn cart_btn"> <i class="bi bi-cart3"></i> &#160; Add
+                        <button type="button" class="popular_cart_btn cart_btn"  data-product-id="" > <i class="bi bi-cart3"></i> &#160; Add
                             to
                             Cart</button>
                     </div>
                 </div>
 
                 <div class=" popular_card">
-                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId=""></i>
+                    <i class="bi bi-heart" ></i>
                     <figure class="popular_img">
                         <img src="assets/img/popular/5.png" alt="popular-img">
                     </figure>
@@ -508,14 +513,14 @@
                                 class="bi bi-eye"></i>
                             &#160; Quick
                             Look</button>
-                        <button type="button" class="popular_cart_btn cart_btn"> <i class="bi bi-cart3"></i> &#160; Add
+                        <button type="button" class="popular_cart_btn cart_btn" data-product-id="" > <i class="bi bi-cart3"></i> &#160; Add
                             to
                             Cart</button>
                     </div>
                 </div>
 
                 <div class=" popular_card">
-                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId=""></i>
+                    <i class="bi bi-heart" ></i>
                     <figure class="popular_img">
                         <img src="assets/img/popular/6.png" alt="popular-img">
                     </figure>
@@ -532,14 +537,14 @@
                                 class="bi bi-eye"></i>
                             &#160; Quick
                             Look</button>
-                        <button type="button" class="popular_cart_btn cart_btn"> <i class="bi bi-cart3"></i> &#160; Add
+                        <button type="button" class="popular_cart_btn cart_btn"  data-product-id="" > <i class="bi bi-cart3"></i> &#160; Add
                             to
                             Cart</button>
                     </div>
                 </div>
 
                 <div class="popular_card d-md-none d-lg-block">
-                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId=""></i>
+                    <i class="bi bi-heart" ></i>
                     <figure class="popular_img">
                         <img src="assets/img/popular/7.png" alt="popular-img">
                     </figure>
@@ -556,7 +561,7 @@
                                 class="bi bi-eye"></i>
                             &#160; Quick
                             Look</button>
-                        <button type="button" class="popular_cart_btn cart_btn"> <i class="bi bi-cart3"></i> &#160; Add
+                        <button type="button" class="popular_cart_btn cart_btn" data-product-id="" > <i class="bi bi-cart3"></i> &#160; Add
                             to
                             Cart</button>
                     </div>
@@ -909,7 +914,7 @@
                                 </div>
 
                                 <div class="product_wishlist">
-                                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId=""></i>
+                                    <i class="bi bi-heart" ></i>
                                     <i class="bi bi-share ms-4"></i>
                                 </div>
 
@@ -1030,7 +1035,7 @@
                                 </div>
 
                                 <div class="product_wishlist">
-                                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId="" ></i>
+                                    <i class="bi bi-heart"  ></i>
                                     <i class="bi bi-share ms-4"></i>
                                 </div>
 
@@ -1152,7 +1157,7 @@
                                 </div>
 
                                 <div class="product_wishlist">
-                                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId=""></i>
+                                    <i class="bi bi-heart" ></i>
                                     <i class="bi bi-share ms-4"></i>
                                 </div>
 
@@ -1268,7 +1273,7 @@
                                 </div>
 
                                 <div class="product_wishlist">
-                                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId=""></i>
+                                    <i class="bi bi-heart" ></i>
                                     <i class="bi bi-share ms-4"></i>
                                 </div>
 
@@ -1348,7 +1353,7 @@
                                 </div>
 
                                 <div class="product_wishlist">
-                                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId=""></i>
+                                    <i class="bi bi-heart" ></i>
                                     <i class="bi bi-share ms-4"></i>
                                 </div>
 
@@ -1464,7 +1469,7 @@
                                 </div>
 
                                 <div class="product_wishlist">
-                                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-productiId=""></i>
+                                    <i class="bi bi-heart" ></i>
                                     <i class="bi bi-share ms-4"></i>
                                 </div>
 
@@ -1543,7 +1548,7 @@
                                 </div>
 
                                 <div class="product_wishlist">
-                                    <i class="bi bi-heart" onclick="ToggleWhishlist()" data-product-id="<%= %> "></i>
+                                    <i class="bi bi-heart"  data-product-id="<%= %> "></i>
                                     <i class="bi bi-share ms-4"></i>
                                 </div>
 

@@ -103,8 +103,11 @@ const profileSchema = new mongoose.Schema({
 
 
 const WhishlistSchema=new mongoose.Schema({
-    products:[        
-            mongoose.Types.ObjectId ,                                   
+    products:[  
+        { 
+          type:mongoose.Types.ObjectId
+       } 
+        
     ],
     userId:{
         type:mongoose.Types.ObjectId,

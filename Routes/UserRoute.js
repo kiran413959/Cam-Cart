@@ -1,106 +1,116 @@
 const express = require('express')
 const router = express.Router();
-const {loginValidation, signupValidation } = require('../Middleware/Validation')
+const { loginValidation, signupValidation } = require('../Middleware/Validation')
 // ,
 
 
-const{
-    signupget,
-    signuppost,
-    EmailVerificationget,
-    EmailVerificationpost,
-    resendEmailget,
-    resendEmailpost,
-    loginget,
-    loginpost,
-    OtpValidationget,
-    OtpValidationpost,
-    fotgetPasswordget,
-    fotgetPasswordpost,
-    Homeget,
-    Homepost,
-    categoryget,
-    categorypost,
-    Profileget,
-    Profilepost,
-    Whishlistget,
-    Wishlistdataget,
-    toggleWhishlistpost,
-    myOrdersget,
-    myOrderspost,
-    Errorget,
-    logoutget,
+const {
+  signupget,
+  signuppost,
+  EmailVerificationget,
+  EmailVerificationpost,
+  resendEmailget,
+  resendEmailpost,
+  loginget,
+  loginpost,
+  OtpValidationget,
+  OtpValidationpost,
+  fotgetPasswordget,
+  fotgetPasswordpost,
+  Homeget,
+  Homepost,
+  categoryget,
+  categorypost,
+  Profileget,
+  Profilepost,
+  Whishlistget,
+  // Wishlistdataget,
+  toggleWhishlistpost,
+  addToCartPost,
+  removeFromcartPost,
+  cartCountGet,
 
-}= require('../Controller/UserController')
+  myOrdersget,
+  myOrderspost,
+  Errorget,
+  logoutget,
 
-
-
-
-router.get('/signup',signupget)
-      .post('/signup',signupValidation,signuppost)
-
-      //For OTP Validation
-
-      .get('/OtpValidation',OtpValidationget)
-      .post('/OtpValidation',OtpValidationpost)
-
-      //Middleware for protect the route
-    //   
-
-      .get('/login',loginget)
-      .post('/login',loginValidation,loginpost)
-
-      // Route for sending email to user's registered email id
-
-      .get('/EmailVerification/:token',EmailVerificationget)
-      .post('/EmailVerification/:token',EmailVerificationpost)
-
-      //route for resend email
-      .get('/resendEmail',resendEmailget)
-      .post('/resendEmail',resendEmailpost)
-
-
-      //Route For Forgot Password
-
-      .get('/fotgetPassword',fotgetPasswordget)
-      .post('/fotgetPassword',fotgetPasswordpost)
-
-      //All Routes are protected from here
-
-      
-      .get('/Home',Homeget)
-      .post('/Home',Homepost)
-
-      // CRUD operation on Category
-      
-      .get('/product',categoryget)
-      .post('/product',categorypost)
-
-      //Profile related routes
-
-      .get('/Profile',Profileget)
-    
-      .post('/Profile',Profilepost)
-
-      //WishList Related Routs
-
-      .get('/Whishlist',Whishlistget)
-      .get('/wishlist/get',Wishlistdataget)
-      .post('/Whishlist/add/:productId',toggleWhishlistpost)
-
-
-      //my Oders related Route
-
-      .get('/myOrders',myOrdersget)
-      .post('/myOrders',myOrderspost)
-
-
-      //Error Handling 404 Page Not Found
-
-      .get('/Error',Errorget)
-
-      .get('/logout',logoutget)
+} = require('../Controller/UserController')
 
 
 
-module.exports=router
+
+router.get('/signup', signupget)
+  .post('/signup', signupValidation, signuppost)
+
+  //For OTP Validation
+
+  .get('/OtpValidation', OtpValidationget)
+  .post('/OtpValidation', OtpValidationpost)
+
+  //Middleware for protect the route
+  //   
+
+  .get('/login', loginget)
+  .post('/login', loginValidation, loginpost)
+
+  // Route for sending email to user's registered email id
+
+  .get('/EmailVerification/:token', EmailVerificationget)
+  .post('/EmailVerification/:token', EmailVerificationpost)
+
+  //route for resend email
+  .get('/resendEmail', resendEmailget)
+  .post('/resendEmail', resendEmailpost)
+
+
+  //Route For Forgot Password
+
+  .get('/fotgetPassword', fotgetPasswordget)
+  .post('/fotgetPassword', fotgetPasswordpost)
+
+  //All Routes are protected from here
+
+
+  .get('/Home', Homeget)
+  .post('/Home', Homepost)
+
+  // CRUD operation on Category
+
+  .get('/product', categoryget)
+  .post('/product', categorypost)
+
+  //Profile related routes
+
+  .get('/Profile', Profileget)
+
+  .post('/Profile', Profilepost)
+
+  //WishList Related Routs
+
+  .get('/Whishlist', Whishlistget)
+  // .get('/wishlist/get',Wishlistdataget)
+  .post('/Whishlist/add/:productId', toggleWhishlistpost)
+
+
+
+  .post('/cart/add/:productId', addToCartPost)
+  .post('/cart/remove/:productId', removeFromcartPost)
+  .get('/cart/count', cartCountGet)
+
+
+  //my Oders related Route
+
+  .get('/myOrders', myOrdersget)
+  .post('/myOrders', myOrderspost)
+
+
+  //Error Handling 404 Page Not Found
+
+  .get('/Error', Errorget)
+
+  .get('/logout', logoutget)
+
+
+
+module.exports = router

@@ -178,6 +178,7 @@ module.exports = {
         company = await Brand.find();
         res.render('products', { Items, Type, company })
 
+        
 
     },
     Product_listpost: (req, res) => {
