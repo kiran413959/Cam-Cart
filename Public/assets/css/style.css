@@ -1664,6 +1664,69 @@ a.feature_btn {
     font-size: 1.1rem
 }
 
+.adding{
+    
+    color: white;
+    width:  60px;
+    height: 20px;
+    font-size: 15pt;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.adding > p{
+    width:  40%;
+    height: 100%;
+    margin: auto;
+    color: #DDDDDD;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#plus,
+#minus{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 18pt;
+    color: #DDDDDD;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#plus:hover{
+    transform: scale(1.2);
+    border: #ffffff solid 1px;
+    background-color: #999;
+    border-radius: 8px;
+    color: #000;
+}
+#minus:hover{
+    transform: scale(1.2);
+    border: #ffffff solid 1px;
+    border-radius: 8px;
+    background-color: #999;
+    color: #000;
+
+}
+
+.text-secondary{
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 140px;
+    height: 40px;
+    color: #DDDDDD;
+    display: flex;
+
+
+}
+
 .total_price {
     border-top: 1px solid var(--border-color)
 }

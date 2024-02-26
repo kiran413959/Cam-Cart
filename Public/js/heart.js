@@ -79,13 +79,13 @@
 
 
 
-document.addEventListener("DOMContentLoaded", async() => {
-    try{
-        const response = await fetch ( "/wishlist/get" );
-        const data = await response.json ();
+// document.addEventListener("DOMContentLoaded", async() => {
+//     try{
+//         const response = await fetch ( "/wishlist/get" );
+//         const data = await response.json ();
 
-        const wishlist = data.products
+//         const wishlist = data.products
 
         
-    }
-})
+//     }
+// });

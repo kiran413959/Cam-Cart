@@ -8,8 +8,7 @@ const { string } = require('joi')
 
 const poductSchema = new mongoose.Schema({
     imageurl: {
-        type: String,
-        required: true
+        type: String
     },
     name: {
         type: String,
@@ -50,7 +49,7 @@ const brandSchema= new mongoose.Schema({
 })
 
 module.exports={ 
-    Products:mongoose.model('Products',poductSchema),
+    Products:mongoose.model('products',poductSchema),
     Category:mongoose.model('Category',categorySchema),
     Brand:mongoose.model('Brand',brandSchema)
 }

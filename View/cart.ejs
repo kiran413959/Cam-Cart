@@ -157,8 +157,8 @@
             </div>
 
             <ul class="mb-0 ps-0 sidebar_list">
-                <li><i class="bi bi-bag-check me-2"></i> <a href="javascript:void(0);">My Orders</a></li>
-                <li><i class="bi bi-heart me-2"></i> <a href="javascript:void(0);">My Wishlist</a></li>
+                <li><i class="bi bi-bag-check me-2"></i> <a href="/myOrders">My Orders</a></li>
+                <li><i class="bi bi-heart me-2"></i> <a href="/whishlist">My Wishlist</a></li>
                 <li><i class="bi bi-person me-2"></i> <a href="/profile">My Account</a></li>
                 <li><i class="bi bi-geo-alt me-2"></i> <a href="javascript:void(0);">Order Tracking</a></li>
                 <li><i class="bi bi-headset me-2"></i> <a href="javascript:void(0);">Help & Support</a></li>
@@ -222,31 +222,75 @@
                     <div
                         class="col-12 d-flex justify-content-between align-items-center flex-sm-row flex-column px-md-5 px-sm-4 cart_content_top">
                         <a href='/Home'><i class="bi bi-chevron-left"></i> Go Back</a>
-                        <h6 class="mb-0 mt-4 mt-sm-0">Subtotal - <b>₹ 2,03,980</b></h6>
+                        <h6 class="mb-0 mt-4 mt-sm-0">Subtotal - <b id="total">   <%= cart.TotalAmount %> </b></h6>
                     </div>
 
                     <!-- Cart-content Left -->
                     <div class="col-lg-9 col-md-11 cart_content_left">
 
+                        <% if (cart.products && cart.products.length > 0) { %>
+                            <% cart.products.forEach(product=> { %>
+
+
                         <div
                             class="row justify-content-sm-evenly justify-content-around align-items-center gx-0 mx-xl-4 mx-lg-2 py-4 cart_item">
                             <div class="col-3 px-md-4 px-sm-0">
-                                <img src="assets/img/popular/2.png" alt="">
+                               
+
+                                <img src="/images/<%= product.productId.imageurl %>" alt="product-img" />
+                                
+
+                               
                             </div>
                             <div class="col-md-8 col-7 ms-md-4">
                                 <div class="d-flex justify-content-between cart_title">
-                                    <h5 class="me-md-5 me-2">Canon EOS 1500D 24.1 MP DSLR Camera with EF S18-55 mm IS II
-                                        Lens (Black)</h5>
-                                    <h6><i class="bi bi-x-lg" title="Remove item"></i></h6>
+                                   
+
+                                    <h5 class="me-md-5 me-2"> <%= product.productId.name %></h5>
+
+                                   
+                                       
+
+                                    <h6><i class="bi bi-x-lg" id="cartDelete" title="Remove item"  data-product-id="<%= product.productId._id%>" ></i></h6>
                                 </div>
-                                <span class="text-secondary">Product Id - 5544663</span>
+                                <span class="text-secondary">
+                                    <div class="adding">
+                                        <button  id="minus" data-product-id="<%= product.productId._id%>">-</button>
+                                        <p id="<%= 'id' + product.productId._id %>">
+                                               
+                                                <%= product.quantity %>
+
+                                            </p>
+                                            <button id="plus" class="cart_btn"   data-product-id="<%= product.productId._id%>">+</button>
+                                    </div>
+                                </span>
                                 <div class="cart_price">
-                                    <b>₹ 31,000<small>.00</small></b>
-                                    <small><del class="ms-2 text-muted">MRP: 34,995<small>.00</small></del></small>
+
+
+                                    <b id="productPrice"> <%= product.price %> <small>.00</small></b>
+
+
+                                    <small><p class="ms-2 text-muted" id ="realPrice" data-product-id="<%= product.productId._id%>" > <%= product.productId.price %> <small>.00</small></p></small>
                                 </div>
                             </div>
                         </div>
 
+                        <% }) %>
+
+
+
+
+                        
+
+
+                        <% } else { %>
+                            <p>No Cart available.</p>
+                            <% } %>
+
+
+                            <p>
+                                
+                            </p>
                     
                     </div>
 

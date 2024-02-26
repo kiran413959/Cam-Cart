@@ -111,12 +111,16 @@ $(window).on("load", function () {
 
     }),
 
+
+    // cart add
+
         $(document).ready(function () {
             $('.cart_btn').on('click', function (event) {
                 event.preventDefault();
 
 
                 var productId = $(this).attr('data-product-id');
+
 
                 console.log(productId);
                 let e = $(this);
@@ -127,29 +131,39 @@ $(window).on("load", function () {
                         type: 'POST',
                         url: '/cart/add/' + productId,
                         data: {
-                            productId: productId,
+                            productId: productId
+
+
                         },
 
 
                         success: function (response) {
+                           
                             console.log(response);
-                            if (response.success) {
+                            console.log(response + "resond");
+                            if (response) {
+                                
+                                const cartId = `#id${productId}`;
+                                const cartQuantity = $(cartId);
+                                cartQuantity[0].innerText = `${1 + + cartQuantity[0]?.innerText}`;
+                                const quantity = parseInt(cartQuantity[0].innerText);
+                                console.log(quantity);
+                                const realPrice=  parseFloat($("#realPrice").text().replace('₹', '').trim());
+                                console.log(realPrice);
+                                const productPrice= $("#productPrice");
+                                console.log(productPrice);
+                                const newProductPrice = realPrice * quantity;
+                                productPrice.text(`₹ ${newProductPrice.toFixed(2)}`); 
+                                const totalAmount =$('#total') ;
+                                totalAmount.text(`₹ ${newProductPrice.toFixed(2)}`)
+                                console.log(newProductPrice);
 
-                                // console.log(removeWishlist);
-
-                                if (response.update) {
-                                    console.log('hello')
-                                } else {
-
-                                }
-
-                                // updateWishlistCount();
                             } else {
-                                console.log(`Error toggling wishlist: ${response.success}`);
+                                console.log(`Error: ${response.success}`);
                             }
                         },
                         error: function (error) {
-                            console.error('Error toggling wishlist:', error);
+                            console.error('Error :', error);
                         }
                     });
                 }
@@ -158,11 +172,95 @@ $(window).on("load", function () {
 
 
 
+        // cart remove
+
+        $(document).ready(function () {
+            $('#minus').on('click', function (event) { 
+                event.preventDefault();
+        
+                var productId = $(this).attr('data-product-id');
+        
+                if (productId) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/cart/remove/' + productId, 
+                        data: {
+                            productId: productId
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            if (response) {
+                                const cartId = `#id${productId}`;
+                                const cartQuantity = $(cartId);
+                                var quantity = parseInt(cartQuantity.text());
+                                if (quantity > 0) {
+                                    cartQuantity.text(quantity - 1); // Decrease quantity by 1
+
+                                }
+                            } else {
+                                console.log(`Error: ${response.success}`);
+                            }
+
+                            const realPrice=  parseFloat($("#realPrice").text().replace('₹', '').trim());
+                            console.log(realPrice);
+                            const productPrice= $("#productPrice");
+                            console.log(productPrice);
+                            const newProductPrice = realPrice * quantity;
+                            productPrice.text(`₹ ${newProductPrice.toFixed(2)}`); 
+                            const totalAmount =$('#total') ;
+                            totalAmount.text(`₹ ${newProductPrice.toFixed(2)}`)
+                            console.log(newProductPrice);
+
+                        },
+                        error: function (error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                }
+            });
+        });
+        
+
+
+        $(document).ready(function () {
+            $('#cartDelete').on('click', function (event) {
+                event.preventDefault();
+        
+                var productId = $(this).attr('data-product-id');
+        
+                if (productId) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/cart/delete/' + productId,
+                        data: {
+                            productId: productId
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            // Handle the success response here
+                            if (response.success) {
+                                console.log("Product successfully deleted from cart.");
+                                // Optionally, perform any additional actions after successful deletion
+                            } else {
+                                console.log("Error deleting product from cart:", response.error);
+                            }
+                        },
+                        error: function (error) {
+                            console.error('Error:', error);
+                            // Handle the error here
+                            console.log("An error occurred while deleting product from cart.");
+                        }
+                    });
+                }
+            });
+        });
+        
 
 
 
 
-     $(".cart_btn").click(function () {
+
+    $(".cart_btn").click(function () {
         p("Added to Cart")
     }), $(".buy_btn, .compare_btn").click(function () {
         p("Login First")

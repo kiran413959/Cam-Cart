@@ -26,10 +26,10 @@ const {
   Whishlistget,
   // Wishlistdataget,
   toggleWhishlistpost,
+  cartget,
   addToCartPost,
   removeFromcartPost,
-  cartCountGet,
-
+  deletefromcartPost,
   myOrdersget,
   myOrderspost,
   Errorget,
@@ -93,10 +93,10 @@ router.get('/signup', signupget)
   .post('/Whishlist/add/:productId', toggleWhishlistpost)
 
 
-
+  .get('/cart',cartget)
   .post('/cart/add/:productId', addToCartPost)
   .post('/cart/remove/:productId', removeFromcartPost)
-  .get('/cart/count', cartCountGet)
+  .post('/cart/delete/:productId', deletefromcartPost)
 
 
   //my Oders related Route

@@ -89,7 +89,7 @@
 
                     <!-- Cart-icon -->
                     <div class="nav_icon mx-sm-4 mx-2">
-                        <a href='cart'>
+                        <a href='/cart'>
                             <svg class="cart-icon sticked_item" aria-hidden="true" focusable="false" role="presentation"
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 viewBox="0 0 16 16">
@@ -422,7 +422,7 @@
                                     class="bi bi-eye"></i>
                                 &#160; Quick
                                 Look</button>
-                            <button type="button" class="popular_cart_btn cart_btn"> <i class="bi bi-cart3"></i> &#160;
+                            <button type="button" class="popular_cart_btn cart_btn"   data-product-id="<%= product._id%>"  > <i class="bi bi-cart3"></i> &#160;
                                 Add
                                 to
                                 Cart</button>
@@ -682,7 +682,7 @@
                     <script>
                         document.write(new Date().getFullYear() + ' ');
                     </script>
-                    CameraX. All Rights Reserved.
+                    Cam Cart. All Rights Reserved.
                     <span>Designed & Built by | <a href="" target="_blank">Kiran
                             Kumar</a> </span>
                 </p>
@@ -796,7 +796,7 @@
                                     <div class="product_btns">
                                         <button type="button" class="buy_btn"> <i class="bi bi-bag"></i> &#160; Buy
                                             Now</button>
-                                        <button type="button" class="me-2 cart_btn"> <i class="bi bi-cart3"></i> &#160;
+                                        <button type="button" class="me-2 cart_btn"   data-product-id="<%= product._id%>" > <i class="bi bi-cart3"></i> &#160;
                                             Add
                                             to
                                             Cart</button>

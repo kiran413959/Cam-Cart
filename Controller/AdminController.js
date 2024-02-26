@@ -162,7 +162,7 @@ module.exports = {
         //     res.redirect('/login')
         // }
         // res.render('adminhome')
-        const admin = await Admin.findOne({ employeeId: req.session.employeeId })
+        const admin = await Admin.findById( {employeeId:req.session.employeeId} )
         console.log(admin)
 
         res.render('dashBoard', { admin })
@@ -271,7 +271,7 @@ module.exports = {
 
             const imageurl = req.file.filename
             const newProduct = new Products({
-                imageurl,
+                imageurl:imageurl,
                 name,
                 brand: foundBrand,
                 category: foundCategory.categoryName,

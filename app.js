@@ -1,5 +1,6 @@
 const express = require('express')
-const port = process.env.port || 2000
+const port = process.env.port || 2003
+
 const path = require('path')
 const app = express()
 const env = require('dotenv')
@@ -60,6 +61,8 @@ app.use('/',adminRouters)
 
 //catching middelware
 app.use(cache())
+
+
 
 
 
