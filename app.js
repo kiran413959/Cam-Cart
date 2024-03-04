@@ -11,7 +11,6 @@ const session = require('express-session')
 
 
 
-
 const userRouters = require('./Routes/UserRoute')
 const productRouters=require('./Routes/ProductsRoute')
 const adminRouters=require('./Routes/AdminRoute')
@@ -31,7 +30,7 @@ env.config();
 
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
+// app.use(express.json())
 
 
 

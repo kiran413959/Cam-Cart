@@ -30,6 +30,9 @@ const {
   addToCartPost,
   removeFromcartPost,
   deletefromcartPost,
+  buyNowPost,
+  Checkoutget,
+  Checkoutpost,
   myOrdersget,
   myOrderspost,
   Errorget,
@@ -97,6 +100,14 @@ router.get('/signup', signupget)
   .post('/cart/add/:productId', addToCartPost)
   .post('/cart/remove/:productId', removeFromcartPost)
   .post('/cart/delete/:productId', deletefromcartPost)
+
+
+  
+  //CheckOut
+  
+    .post('/buynow/:productId',buyNowPost)
+    .get( '/checkout' , Checkoutget )
+    .post( '/checkout' , Checkoutpost )
 
 
   //my Oders related Route

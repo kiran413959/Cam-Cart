@@ -1746,3 +1746,138 @@ a.feature_btn {
 .checkout_btn:active {
     transform: scale(.9)
 }
+
+
+.productDetails {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cart_item{
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 5px;
+    margin-bottom: 10px
+}
+
+.centering{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media (min-width: 768px){
+.cart_item{
+    flex-direction: row;
+
+}
+}
+.cart_product {
+    display: flex;
+    flex: 25%;
+    /* padding: px; */
+    overflow: hidden;
+    border: 1px solid var(--text-color);
+    box-shadow: var(--box-shadow);
+    position: relative
+}
+.cart_product-1{
+    display: flex;
+    position: relative;
+    gap:  10px;
+}
+@media (min-width: 992px){
+    .cart_product-1 {
+        flex-direction: column;
+        position: relative;
+        gap: 10px;
+}
+
+#cartclear{
+    position: relative;
+    top: -48px;
+    right: 10px;
+    z-index: 3;
+}
+}
+
+
+
+@media (min-width: 320px){
+    #cartclear {
+        position: absolute;
+        top: -35px;
+        right: 10px;
+        float:right;
+        
+}}
+
+@media (min-width: 768px){
+    #cartclear {
+        position: absolute;
+        top: -35px;
+        right: 10px;
+        float:right;
+        
+}}
+#productamount{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 0.8rem
+}
+
+.checkoutmain input{
+    color: white;
+
+    width: 100%;
+    border: solid 1px #f7d6c1;
+}
+.checkoutmain textarea{
+    background: none;
+    width: 100%;
+    color: white;
+
+    border: solid 1px #f7d6c1;
+}
+
+.checkoutmain label{
+    width: 100%;
+
+    color: white;
+}
+.checkoutmain{
+    width: 100%;
+    height:max-content ;
+    position: relative;
+    /* max-width: 450px; */
+    padding: 1rem 3rem;
+    background-color: var(--bg-color);
+    color: var(--text-color2);
+    box-shadow: var(--box-shadow2);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 3rem !important;
+    padding-bottom: 5rem !important;
+}
+
+.delivery-details{
+    height: auto ;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.checkoutmain button{
+    width: 100%;
+    height:  30px;
+    background-color: rgb(24, 99, 231);
+    border-radius: 5px;
+    color: white;
+}

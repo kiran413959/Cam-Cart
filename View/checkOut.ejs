@@ -22,6 +22,7 @@
 
     <!-- Main Stylesheets  -->
     <link rel="stylesheet" href="assets/css/style.css">
+
     <link rel="stylesheet" href="assets/css/responsive.css">
 
 </head>
@@ -133,8 +134,7 @@
     <!--============== Side-bar Section ==============-->
     <aside id="sidebar">
         <div class="sidebar_head">
-            <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i> Hello, <%= user.name%>
-            </h5>
+            <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i> Hello, </h5>
             <div class="close_btn sidebar_close" title="Close">
                 <span></span>
                 <span></span>
@@ -199,7 +199,7 @@
                 <script>
                     document.write(new Date().getFullYear() + ' ');
                 </script>
-                CameraX. All Rights Reserved.
+                Cam Cart. All Rights Reserved.
             </p>
         </div>
     </aside>
@@ -211,149 +211,215 @@
             <div class="container">
                 <div class="row text-center">
                     <div class="col-12 title">
-                        <h4 class="mb-0">My Cart &#160; <small class="fs-6">( 3 items )</small></h4>
+                        <h4 class="mb-0">Checkout &#160; <small class="fs-6"> </small></h4>
                     </div>
                 </div>
             </div>
 
             <div class="container-fluid container-xl">
 
-                <div class="row justify-content-center cart_wrapper">
+                <form action="/checkout" method="POST">
 
-                    <!-- Cart-content Top -->
-                    <div
-                        class="col-12 d-flex justify-content-between align-items-center flex-sm-row flex-column px-md-5 px-sm-4 cart_content_top">
-                        <a href='/Home'><i class="bi bi-chevron-left"></i> Go Back</a>
-                        <h6 class="mb-0 mt-4 mt-sm-0">Subtotal - <b id="total">
-                                <%= cart.TotalAmount %>
-                            </b></h6>
-                    </div>
+                    <div class="row justify-content-center cart_wrapper">
 
-                    <!-- Cart-content Left -->
-                    <div class="col-lg-9 col-md-11 cart_content_left">
+                        <!-- Cart-content Top -->
+                        <div
+                            class="col-12 d-flex justify-content-between align-items-center flex-sm-row flex-column px-md-5 px-sm-4 cart_content_top">
+                            <a href='/cart'><i class="bi bi-chevron-left"></i> Go Back</a>
+                            <!-- <h6 class="mb-0 mt-4 mt-sm-0"> <b id="total"> </b></h6> -->
+                        </div>
 
-                        <% if (cart.products && cart.products.length> 0) { %>
-                            <% cart.products.forEach(product=> { %>
+                        <!-- CheckOut-content Left -->
+                        <div class="col-lg-9 col-md-11 cart_content_left">
 
-
+                            <div
+                                class="row justify-content-sm-evenly justify-content-around align-items-center gx-0 mx-xl-4 mx-lg-2 py-4 ">
 
                                 <div
-                                    class="row justify-content-sm-evenly justify-content-around align-items-center gx-0 mx-xl-4 mx-lg-2 py-4 cart_item">
-                                    <div class="col-3 px-md-4 px-sm-0">
+                                    class=" row justify-content-sm-evenly justify-content-around align-items-center gx-0 mx-xl-4 mx-lg-2 py-4  checkoutmain">
+
+                                    <!-- <form action="/checkout" method="POST"> -->
+                                    <div class="delivery-details">
+                                        <label for="Name"> Name
+                                            <input type="text" name="name" id="name" value="<%= user.name %>  ">
+                                        </label>
 
 
-                                        <img src="/images/<%= product.productId.imageurl %>" alt="product-img" />
+                                        <label for="Email"> Email
+                                            <input type="email" name="email" id="email" value="<%= user.email %>  ">
+                                        </label>
+
+
+                                        <label for="Phone"> Phone
+                                            <input type="tel" name="phone" id="phone" value="<%= profile.phone %>  ">
+                                        </label>
 
 
 
+                                        <label for="Address"> Address
+                                            <textarea name="address" id="address"
+                                                placeholder="fill your delivery Address" cols="30"
+                                                rows="10"> <%= profile.address %> </textarea>
+                                        </label>
+
+
+
+
+                                        <!-- <button type="submit" class="btn-chechout">Submit Order </button> -->
                                     </div>
-                                    <div class="col-md-8 col-7 ms-md-4">
-                                        <div class="d-flex justify-content-between cart_title">
+                                    <!-- </form> -->
 
 
-                                            <h5 class="me-md-5 me-2">
-                                                <%= product.productId.name %>
-                                            </h5>
-
-
-
-
-                                            <h6><i class="bi bi-x-lg" id="cartDelete" title="Remove item"
-                                                    data-product-id="<%= product.productId._id%>"></i></h6>
-                                        </div>
-                                        <span class="text-secondary">
-                                            <div class="adding">
-                                                <button id="minus" class="minus"
-                                                    data-product-id="<%= product.productId._id%>">-</button>
-                                                <p id="<%= 'id' + product.productId._id %>">
-
-                                                    <%= product.quantity %>
-
-                                                </p>
-                                                <button id="plus" class="cart_btn"
-                                                    data-product-id="<%= product.productId._id%>">+</button>
-                                            </div>
-                                        </span>
-                                        <div class="cart_price">
-
-
-                                            <b id="<%='totalprice' + product.productId._id %>">
-                                                <%= product.price %> <small>.00</small>
-                                            </b>
-
-
-                                            <small>
-                                                <p class="ms-2 text-muted" id="<%='price' + product.productId._id %>"
-                                                    data-product-id="<%= product.productId._id%>">
-                                                    <%= product.productId.price %> <small>.00</small>
-                                                </p>
-                                            </small>
-                                        </div>
-                                    </div>
                                 </div>
 
-                                <% }) %>
 
-                                    <% } else { %>
-                                        <p>No Cart available.</p>
-                                        <% } %>
+                            </div>
+
+                        </div>
+
+                        <!-- CheckOut-content Right -->
+                        <div class="col-lg-3 col-md-9 col-sm-10 cart_content_right">
 
 
-                                            <p>
+                            <!-- Cart-content Left  -->
+                            <% if (cart.products && cart.products.length> 0) { %>
+                                <% cart.products.forEach(product=> { %>
 
-                                            </p>
+                                    <div class=" mt-5 gx-0 align-items-md-center  cart_product  ">
 
+
+
+                                        <div class=" mt-xxl-5  mt-5 gx-0 mx-xl-4 mx-lg-2  cart_product-1 ">
+                                            <div
+                                                class="mx-lg-0 px-sm-2 w-50 my-lg-0cols-2  ms-lg-6 position-relative bottom-25">
+
+
+                                                <img src="/images/<%= product.productId.imageurl %>"
+                                                    alt="product-img" />
+
+
+
+                                            </div>
+                                            <div class="col-md-8 col-7 justify-content-xxl-center ms-md-5"
+                                                id="productamount">
+                                                <div class="d-flex justify-content-between cart_title">
+
+
+                                                    <h5 class="me-md-4 me-2">
+                                                        <%= product.productId.name %>
+                                                    </h5>
+
+                                                </div>
+                                                <span class="text-secondary ">
+                                                    <div class="adding  me-3">
+                                                        <button id="minus" class="minus"
+                                                            data-product-id=" <%= product.productId._id %>">-</button>
+                                                        <!-- <p>  Qty: </p> -->
+                                                        <p id=" 'id' + product.productId._id">
+
+                                                            <%= product.quantity %>
+
+
+                                                        </p>
+                                                        <button id="plus" class="cart_btn"
+                                                            data-product-id="<%= product.productId._id%>">+</button>
+                                                    </div>
+                                                </span>
+                                                <div class="cart_price">
+
+
+                                                    <b id="'totalprice' + product.productId._id" class="me-2">
+                                                        <%= product.price %>
+                                                            <small>.00</small>
+                                                    </b>
+
+
+                                                    <small>
+                                                        <p class="ms-1 me-3 text-muted"
+                                                            id="'price' + product.productId._id"
+                                                            data-product-id="<%= product.productId._id%>">
+                                                            <%= product.productId.price %>
+                                                                <small>.00</small>
+                                                        </p>
+                                                    </small>
+                                                </div>
+                                            </div>
+
+                                            <h6 id="cartclear"><i class="bi bi-x-lg" id="cartDelete" title="Remove item"
+                                                    data-product-id="<%= product.productId._id%>"></i></h6>
+
+                                        </div>
+
+                                    </div>
+
+                                    <% }) %>
+
+                                        <% } else { %>
+                                            <p>No Cart available.</p>
+                                            <% } %>
+
+
+
+                                                <div class="cart_info_block py-4 mt-xxl-5 mt-lg-4 mt-5">
+                                                    <h6> <i class="bi bi-shield-check me-1"></i> 100% Purchase
+                                                        Protection
+                                                    </h6>
+                                                    <p class="px-xl-4 px-2 mb-0">Original Products | Safe & Secure
+                                                        Payments
+                                                        | Easy Returns</p>
+                                                </div>
+
+                                                <div class="cart_pincode_block mt-4">
+                                                    <label class="field_label"> <i class="bi bi-geo-alt"></i> Check
+                                                        Delivery
+                                                        time &
+                                                        services</label>
+                                                    <div class="cart_field">
+                                                        <!-- <form action="checkout" method="post"> -->
+                                                        <input type="text" placeholder="Enter Pincode" name="pincode"
+                                                            required>
+                                                        <!-- <button type="submit">Check</button> -->
+                                                        <!-- </form> -->
+                                                    </div>
+                                                </div>
+
+                                                <div class="cart_offer_block">
+                                                    <label class="field_label"> <i class="bi bi-tag"></i> Apply
+                                                        Coupons</label>
+                                                    <div class="cart_field">
+                                                        <!-- <form action="checkout" method="post"> -->
+                                                        <input type="text" placeholder="Enter Coupon Code" name="coupon"
+                                                            required>
+                                                        <!-- <button type="submit">Apply</button> -->
+                                                        <!-- </form> -->
+                                                    </div>
+                                                </div>
+
+                                                <div class="cart_payment_block">
+                                                    <h5>Payment Details</h5>
+                                                    <div class="d-flex justify-content-between mt-4">
+                                                        <span>Total MRP</span>
+                                                        <span>₹ <%= cart.TotalAmount %> </span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between my-2">
+                                                        <span>Discount</span>
+                                                        <span class="text-success">-₹ 00</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between mb-3">
+                                                        <span>Delivery Fee</span>
+                                                        <span class="text-danger">Free</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between mb-5 pt-3 total_price">
+                                                        <strong>Total Amount</strong>
+                                                        <strong>₹ <%= cart.TotalAmount %> </strong>
+                                                    </div>
+                                                    <button type="submit" class="checkout_btn p-2"> <i
+                                                            class="bi bi-credit-card-2-back me-1"></i>
+                                                        Place Order</button>
+                                                </div>
+                        </div>
                     </div>
-
-                    <!-- Cart-content Right -->
-                    <div class="col-lg-3 col-md-9 col-sm-10 cart_content_right">
-
-                        <div class="cart_info_block py-4 mt-xxl-5 mt-lg-4 mt-5">
-                            <h6> <i class="bi bi-shield-check me-1"></i> 100% Purchase Protection</h6>
-                            <p class="px-xl-4 px-2 mb-0">Original Products | Safe & Secure Payments | Easy Returns</p>
-                        </div>
-
-                        <div class="cart_pincode_block mt-4">
-                            <label class="field_label"> <i class="bi bi-geo-alt"></i> Check Delivery time &
-                                services</label>
-                            <div class="cart_field">
-                                <input type="text" placeholder="Enter Pincode" required>
-                                <button type="button">Check</button>
-                            </div>
-                        </div>
-
-                        <div class="cart_offer_block">
-                            <label class="field_label"> <i class="bi bi-tag"></i> Apply Coupons</label>
-                            <div class="cart_field">
-                                <input type="text" placeholder="Enter Coupon Code" required>
-                                <button type="button">Apply</button>
-                            </div>
-                        </div>
-
-                        <div class="cart_payment_block">
-                            <h5>Payment Details</h5>
-                            <div class="d-flex justify-content-between mt-4">
-                                <span>Total MRP</span>
-                                <span>₹ <%= cart.TotalAmount %> </span>
-                            </div>
-                            <div class="d-flex justify-content-between my-2">
-                                <span>Discount</span>
-                                <span class="text-success">-₹ 00</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-3">
-                                <span>Delivery Fee</span>
-                                <span class="text-danger">Free</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-5 pt-3 total_price">
-                                <strong>Total Amount</strong>
-                                <strong>₹ <%= cart.TotalAmount %></strong>
-                            </div>
-                            <a href="/checkOut"><button type="button" class="checkout_btn p-2"> <i
-                                        class="bi bi-credit-card-2-back me-1"></i>
-                                    Proceed to Checkout</button></a>
-                        </div>
-                    </div>
-                </div>
+                </form>
 
             </div>
         </section>
@@ -455,6 +521,13 @@
     <script src="assets/swiper/swiper-bundle.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/main.js"></script>
+
+
+    <SCript>
+        const pincode = document.getElementById('pincode').value
+        console.log(pincode);
+
+    </SCript>
 </body>
 
 </html>

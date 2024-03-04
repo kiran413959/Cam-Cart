@@ -1,6 +1,7 @@
 const express = require('express')
-const { User, Profile, Token, Whishlist } = require('../Model/UserData')
+const { User, Profile, Whishlist } = require('../Model/UserData')
 const { Products, Category } = require('../Model/ProductDatas')
+const {Order}=require('../Model/OrderData')
 const { default: mongoose } = require('mongoose')
 const { ObjectId } = require('mongoose').Types;
 const jwt = require("jsonwebtoken")
@@ -245,9 +246,19 @@ module.exports = {
             console.log(error);
         }
     },
-    Profilepost: (req, res) => {
-
-
+    Profilepost: async (req, res) => {
+        const userId = req.session.userId
+        const {phone,age,address}=req.body
+        const profile= await Profile.findOneAndUpdate({userId},
+                
+            {phone,age,address} ,{upsert:true,new:true}) 
+            
+            if(profile){
+                res.redirect('/profile')
+            }else{
+              return  res.sendStatus(406)    
+            }
+            // console.log(profile);
     },
     Whishlistget: async (req, res) => {
         try {
@@ -355,9 +366,10 @@ module.exports = {
                 const cart = await Cart.findOne({ userId: req.session.userId })
                     .populate('products.productId')
                 // console.log(user);
+                // console.log(cart);
 
                 console.log(`hiii${cart.products}`);
-              
+
                 let totalAmount = 0;
                 if (cart && cart.products) {
                     for (let product of cart.products) {
@@ -370,8 +382,8 @@ module.exports = {
                 cart.TotalAmount = totalAmount;
 
                 console.log(cart.TotalAmount);
-              
-                res.render('cart', {  cart, user });
+
+                res.render('cart', { cart, user });
 
             } catch (err) {
                 console.log(err);
@@ -389,7 +401,7 @@ module.exports = {
                 console.log(userId);
                 console.log("hiiiii" + productId);
                 let cart = await Cart.findOne({ userId: userId })
-                const   product=await Products.findById(productId1).lean()
+                const product = await Products.findById(productId1).lean()
                 if (!cart) {
                     cart = new Cart({
                         products: [],
@@ -411,7 +423,7 @@ module.exports = {
                         }
                     }
                     productExists.price = product.price * productExists.quantity;
-                  
+
                     await productExists.save();
                 }
 
@@ -423,7 +435,7 @@ module.exports = {
                     cart.products.push({
                         productId: productId1,
                         quantity: 1,
-                        price:product.price
+                        price: product.price
                     });
                 }
                 // Calculate total amount and save the cart
@@ -447,7 +459,7 @@ module.exports = {
             try {
                 const productId = req.params.productId;
                 const userId = req.session.userId;
-                const product=await Products.findById(productId);
+                const product = await Products.findById(productId);
                 console.log(userId);
                 console.log("hlooooo" + productId);
 
@@ -456,13 +468,13 @@ module.exports = {
                 let productIndex = cart.products.findIndex(item => item.productId.toString() === productId)
 
                 if (productIndex !== -1) {
-        // If the product exists in the cart, decrement its quantity by 1
+                    // If the product exists in the cart, decrement its quantity by 1
                     if (cart.products[productIndex].quantity > 1) {
                         cart.products[productIndex].quantity--;
                         cart.products[productIndex].price = product.price * cart.products[productIndex].quantity
                     } else {
-                         // If the quantity is already 1, do not decrement further
-                         return res.status(400).json({ success: false, error: "Minimum quantity reached" });
+                        // If the quantity is already 1, do not decrement further
+                        return res.status(400).json({ success: false, error: "Minimum quantity reached" });
                     }
                 } else {
                     return res.status(404).json({ success: false, error: "Product not found in cart" });
@@ -471,8 +483,8 @@ module.exports = {
 
                 // Calculate total amount and save the cart
                 cart.TotalAmount = product.price * cart.products[productIndex].quantity;
-              
-                
+
+
 
                 // Save the updated cart to the database
                 await cart.save();
@@ -491,30 +503,40 @@ module.exports = {
 
 
     },
+
+
+    
     deletefromcartPost: async (req, res) => {
 
-        try{
-            if(req.session.email){
+        try {
+            if (req.session.email) {
                 const userId = req.session.userId;
                 const productId = req.params.productId;
-                const cart=await Cart.findOne({userId:userId});
-                await cart.products.deleteOne({productId:productId})
-                
-                await cart.save()
-                .then(()=>res.status(200).send())
-                .catch(()=>res.status(404))
-
-                console.log(cart);
-                if(!cart)
-                   throw new Error("No such cart exists!");
-                res.status(200).json({success:true,message:"Deleted from cart!"})
-            }else{
-               return res.status(401).json({success:false,error:"User is not logged In!"})
+                console.log(productId);
+                const cart = await Cart.findOne({ userId: userId });
+                console.log('cart before removing:',cart);
+                     cart.products.pull({productId:productId}); 
+                    //  cart.TotalAmount -= cart.products.id(productId).price;  
+                    
+                    const deletedProduct = cart.products.id(productId);
+            if (deletedProduct) {
+                cart.TotalAmount -= deletedProduct.price;
             }
-             
-        
 
-        }catch(err){
+                await cart.save()
+                    
+// 
+                console.log('cart after removing:',cart);
+                if (!cart)
+                    throw new Error("No such cart exists!");
+                res.status(200).json({ success: true, message: "Deleted from cart!" })
+            } else {
+                return res.status(401).json({ success: false, error: "User is not logged In!" })
+            }
+
+
+
+        } catch (err) {
             console.log(err);
         }
 
@@ -522,8 +544,102 @@ module.exports = {
 
     },
 
+    buyNowPost: async (req, res) => {
+        try{
+
+            const productId = req.params.productId
+            const product= await Products.findById(productId)
+            console.log("the product"+product);
+            req.session.productDetails= product
+
+            res.status(200).json({buynow:true})
+
+        }catch(err){
+            console.log(err);
+        }
 
 
+    },
+
+
+    Checkoutget: async (req,res)=>{
+        if(req.session.email){
+        try{
+            const userId= req.session.userId;
+            console.log(userId);
+            let cart;
+            const productId = req.session.productDetails
+            const productDetails = await Products.findById(productId)
+            const cartDetails = await Cart.findOne({ userId: req.session.userId })
+            .populate('products.productId');
+            if(req.session.productDetails){
+                cart ={
+                    products:[
+                        {
+                            productId:productDetails,
+                            quantity:1,
+                            price:productDetails.price
+                        }
+                    ]
+                }
+                delete req.session.productDetails
+            }else{
+                cart = cartDetails
+            }
+            
+            console.log("cart"+cart);
+            const profile= await Profile.findOne({userId:userId});
+            const user=await User.findById(userId);
+
+            let totalAmount = 0;
+            if (cart && cart.products) {
+                for (let product of cart.products) {
+                    if (product.productId && product.productId.price && product.quantity) {
+                        totalAmount += product.productId.price * product.quantity;
+                    }
+                }
+            }
+                 cart.TotalAmount = totalAmount;
+                 console.log(cart.TotalAmount);
+
+
+                console.log(user);
+            console.log(cart.products);
+
+            res.render('checkOut',{cart,user,profile})
+        }catch(err){
+            console.log(err);
+        }
+        }
+        
+        
+    },
+    
+    Checkoutpost: async (req, res)=>{
+            if(req.session.email){
+                try{
+                      
+                    let products;
+                    const cart = await Cart.findOne({ userId: req.session.userId })
+                    .populate('products.productId');
+
+
+
+
+
+
+
+
+                }catch(err){
+
+                }
+            
+            }
+
+        
+        
+        console.log(req.body);
+    },
 
 
 

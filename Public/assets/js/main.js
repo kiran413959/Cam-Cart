@@ -112,7 +112,7 @@ $(window).on("load", function () {
     }),
 
 
-    // cart add
+        // cart add
 
         $(document).ready(function () {
             $('.cart_btn').on('click', function (event) {
@@ -138,25 +138,36 @@ $(window).on("load", function () {
 
 
                         success: function (response) {
-                           
+
                             console.log(response);
                             console.log(response + "resond");
                             if (response) {
-                                
+
                                 const cartId = `#id${productId}`;
                                 const cartQuantity = $(cartId);
                                 cartQuantity[0].innerText = `${1 + + cartQuantity[0]?.innerText}`;
                                 const quantity = parseInt(cartQuantity[0].innerText);
                                 console.log(quantity);
-                                const realPrice=  parseFloat($("#realPrice").text().replace('₹', '').trim());
-                                console.log(realPrice);
-                                const productPrice= $("#productPrice");
-                                console.log(productPrice);
-                                const newProductPrice = realPrice * quantity;
-                                productPrice.text(`₹ ${newProductPrice.toFixed(2)}`); 
-                                const totalAmount =$('#total') ;
-                                totalAmount.text(`₹ ${newProductPrice.toFixed(2)}`)
-                                console.log(newProductPrice);
+
+                                const realPrice = `#price${productId}`;
+                                const price = $(realPrice)
+                                const productprice= parseInt(price[0].innerText)
+                                console.log(productprice);
+
+                                const totalprice = `#totalprice${productId}`;
+                                const TotPrice = $(totalprice)
+                                console.log(TotPrice[0].innerText);
+
+                                const newtotalprice = `${ parseInt(price[0].innerText) * quantity}`;
+                                TotPrice[0].innerText = `${newtotalprice}`
+                                console.log(newtotalprice);
+
+                                const totalAmount = $('#total');
+                                totalAmount[0].innerText=`${+totalAmount[0].innerText +  +productprice}`
+                                
+                                const subtotal =parseInt(totalAmount[0].innerText)  ;
+
+                                console.log(totalAmount[0].innerText);
 
                             } else {
                                 console.log(`Error: ${response.success}`);
@@ -172,89 +183,107 @@ $(window).on("load", function () {
 
 
 
-        // cart remove
+    // cart remove
 
-        $(document).ready(function () {
-            $('#minus').on('click', function (event) { 
-                event.preventDefault();
-        
-                var productId = $(this).attr('data-product-id');
-        
-                if (productId) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/cart/remove/' + productId, 
-                        data: {
-                            productId: productId
-                        },
-                        success: function (response) {
-                            console.log(response);
-                            if (response) {
-                                const cartId = `#id${productId}`;
-                                const cartQuantity = $(cartId);
-                                var quantity = parseInt(cartQuantity.text());
-                                if (quantity > 0) {
-                                    cartQuantity.text(quantity - 1); // Decrease quantity by 1
+    $(document).ready(function () {
+        $('.minus').on('click', function (event) {
+            console.log('calling')
+            event.preventDefault();
 
-                                }
-                            } else {
-                                console.log(`Error: ${response.success}`);
+            var productId = $(this).attr('data-product-id');
+
+            if (productId) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/remove/' + productId,
+                    data: {
+                        productId: productId
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        if (response) {
+                            const cartId = `#id${productId}`;
+                            const cartQuantity = $(cartId);
+                            // var quantity = cartQuantity[0].innerText;
+                            console.log(cartQuantity[0].innerText);
+                            if (cartQuantity[0].innerText > 0) {
+                                
+                                cartQuantity[0].innerText= `${cartQuantity[0]?.innerText -1 }`  // Decrease quantity by 1
+                                var quantity=parseInt(cartQuantity[0].innerText)
+                                
+                               
                             }
-
-                            const realPrice=  parseFloat($("#realPrice").text().replace('₹', '').trim());
-                            console.log(realPrice);
-                            const productPrice= $("#productPrice");
-                            console.log(productPrice);
-                            const newProductPrice = realPrice * quantity;
-                            productPrice.text(`₹ ${newProductPrice.toFixed(2)}`); 
-                            const totalAmount =$('#total') ;
-                            totalAmount.text(`₹ ${newProductPrice.toFixed(2)}`)
-                            console.log(newProductPrice);
-
-                        },
-                        error: function (error) {
-                            console.error('Error:', error);
+                        } else {
+                            console.log(`Error: ${response.success}`);
                         }
-                    });
-                }
-            });
+                        console.log(quantity);
+
+                        const realPrice = `#price${productId}`;
+                        const price = $(realPrice)
+                        const productprice= parseInt(price[0].innerText)
+                        console.log(price[0].innerText);
+
+                        const totalprice = `#totalprice${productId}`;
+                        const TotPrice = $(totalprice)
+                        console.log(TotPrice[0].innerText);
+
+                        const newtotalprice = `${ parseInt(price[0].innerText) * quantity}`;
+                        TotPrice[0].innerText = `${newtotalprice}`
+
+
+                        const totalAmount = $('#total');
+                        totalAmount[0].innerText=`${+totalAmount[0].innerText -  +productprice}`
+                        
+                        const subtotal =parseInt(totalAmount[0].innerText)  ;
+
+                        console.log(totalAmount[0].innerText);
+
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
         });
-        
+    });
 
 
-        $(document).ready(function () {
-            $('#cartDelete').on('click', function (event) {
-                event.preventDefault();
-        
-                var productId = $(this).attr('data-product-id');
-        
-                if (productId) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/cart/delete/' + productId,
-                        data: {
-                            productId: productId
-                        },
-                        success: function (response) {
-                            console.log(response);
-                            // Handle the success response here
-                            if (response.success) {
-                                console.log("Product successfully deleted from cart.");
-                                // Optionally, perform any additional actions after successful deletion
-                            } else {
-                                console.log("Error deleting product from cart:", response.error);
-                            }
-                        },
-                        error: function (error) {
-                            console.error('Error:', error);
-                            // Handle the error here
-                            console.log("An error occurred while deleting product from cart.");
+
+    $(document).ready(function () {
+        $('#cartDelete').on('click', function (event) {
+            event.preventDefault();
+
+            var productId = $(this).attr('data-product-id');
+
+            if (productId) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/delete/' + productId,
+                    data: {
+                        productId: productId
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        // Handle the success response here
+                        if (response) {
+                            window.location.reload()
+                            console.log("Product successfully deleted from cart.");
+                        
+
+                            // Optionally, perform any additional actions after successful deletion
+                        } else {
+                            console.log("Error deleting product from cart:", response.error);
                         }
-                    });
-                }
-            });
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                        // Handle the error here
+                        console.log("An error occurred while deleting product from cart.");
+                    }
+                });
+            }
         });
-        
+    });
 
 
 
@@ -262,9 +291,10 @@ $(window).on("load", function () {
 
     $(".cart_btn").click(function () {
         p("Added to Cart")
-    }), $(".buy_btn, .compare_btn").click(function () {
-        p("Login First")
     }),
+    //  $(".buy_btn, .compare_btn").click(function () {
+    //     p("Login First")
+    // }),
 
 
 
@@ -322,6 +352,43 @@ $(window).on("load", function () {
 
 
 
+        $(document).ready(function () {
+            $('.buy_btn').on('click', function (event) {
+                event.preventDefault();
+     
+                var productId = $(this).attr('data-product-id');
+                console.log(productId);
+
+                if (productId) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/buynow/' + productId,
+                        data: {
+                            productId: productId
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            // Handle the success response here
+                            if (response) {
+                                window.location.href= '/checkout'
+                                console.log("order successfully placed.");
+                            
+    
+                                // Optionally, perform any additional actions after successful deletion
+                            } else {
+                                console.log("Error buying products:", response.error);
+                            }
+                        },
+                        error: function (error) {
+                            console.error('Error:', error);
+                            // Handle the error here
+                            console.log("An error occurred.");
+                        }
+                    });
+                }
+            });
+        });
+    
 
 
 
@@ -405,3 +472,7 @@ $(window).on("load", function () {
         ($(e.target).is(".product_modal .modal_centered") || "Escape" === e.key) && (s.removeClass("overflow_hide"), a.removeClass("view"))
     })
 });
+
+
+
+

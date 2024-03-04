@@ -38,23 +38,23 @@ const userSchema = new mongoose.Schema({
 
 
 
-const tokenSchema =new mongoose.Schema({
-    userId:{
-        type:mongoose.Types.ObjectId,  
-        ref:"User"  //referencing to the User model
-    } ,
-    tokens:{
-        type : String,
-        required: true
-        },
-    createdAt:{
+// const tokenSchema =new mongoose.Schema({
+//     userId:{
+//         type:mongoose.Types.ObjectId,  
+//         ref:"User"  //referencing to the User model
+//     } ,
+//     tokens:{
+//         type : String,
+//         required: true
+//         },
+//     createdAt:{
 
-        type:Date,
-        default: Date.now(),
-        required:true,
-        expires: 3600, //expire after one hour
-    }    
-});
+//         type:Date,
+//         default: Date.now(),
+//         required:true,
+//         expires: 3600, //expire after one hour
+//     }    
+// });
 
 //creating a virtual field "token" which will be accessible as user.tokens
 // tokenSchema.virtual("token").get(function () {
@@ -120,6 +120,6 @@ const WhishlistSchema=new mongoose.Schema({
 module.exports = {
       User: mongoose.model("usersdetails", userSchema),
     Profile: mongoose.model("profiles", profileSchema),
-    Token: mongoose.model("tokens", tokenSchema),
+    // Token: mongoose.model("tokens", tokenSchema),
     Whishlist: mongoose.model("whishlist",WhishlistSchema)
 }

@@ -2,7 +2,7 @@
 const { Admin } = require('../Model/AdminData');
 const { Products, Category, Brand } = require('../Model/ProductDatas');
 const express = require('express')
-const { User, Profile, Token } = require('../Model/UserData')
+const { User, Profile } = require('../Model/UserData')
 const { default: mongoose } = require('mongoose')
 const { ObjectId } = require('mongoose').Types;
 const jwt = require("jsonwebtoken")
@@ -50,15 +50,19 @@ module.exports = {
 
         }
         // res.render('admin_Login_signup')
+
+
     },
-    admin_loginpost: async (req, res) => {
-        console.log(req.body);
+    admin_loginpost:async  (req, res) => {
+       try {
+        console.log(req.body,"req");
         const email = req.body.email
-        console.log('email', email);
+        console.log('email', email,"email");
         const admin = await Admin.findOne({ email: email })
-        console.log(admin);
+        console.log(admin ,"admin");
         console.log(admin.isVerified)
         if (admin.isVerified === true) {
+            req.session.employeeId = admin.employeeId
             console.log("redirecting to home")
             res.redirect('/dashBoard')
 
@@ -66,6 +70,9 @@ module.exports = {
             req.msg = 'Account not verified';
             return res.json({ success: false });
         }
+       } catch (error) {
+        console.log(error);
+       }
 
     },
     EmailVerificationget: async (req, res) => {
@@ -154,19 +161,14 @@ module.exports = {
         }
     },
     dashBoardget: async (req, res) => {
-
-        // if (req.session.role === true) {
-        //     const products = await Product.find()
-        //     res.render("adminhome", { products })
-        // } else {
-        //     res.redirect('/login')
-        // }
-        // res.render('adminhome')
-        const admin = await Admin.findById( {employeeId:req.session.employeeId} )
+        if(req.session.employeeId){
+    
+        console.log(req.session.employeeId)
+        const admin = await Admin.findOne( {employeeId:req.session.employeeId} )
         console.log(admin)
 
         res.render('dashBoard', { admin })
-
+        }
     },
     dashBoardpost: (req, res) => {
     },
@@ -246,11 +248,24 @@ module.exports = {
             });
             await newCategory.save()
             console.log(newCategory)
+        
 
             res.redirect('/addProduct');
         }
 
     },
+
+    Add_Couponget: (req, res) => {
+
+
+    },
+    Add_Couponpost: async (req, res) => {
+
+
+
+        
+    },
+
     Add_Productget: (req, res) => {
         res.render('addProduct')
 

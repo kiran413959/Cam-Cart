@@ -1,4 +1,4 @@
-const { User, Profile, Token } = require('../Model/UserData')
+const { User, Profile } = require('../Model/UserData')
 const { default: mongoose } = require('mongoose')
 
 

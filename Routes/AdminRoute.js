@@ -26,6 +26,8 @@ const{
     Add_Brandpost,
     Add_Categoryget,
     Add_Categorypost,
+    Add_Couponget,
+    Add_Couponpost,
     Add_Productget,
     Add_Productpost,
     Update_Productget,
@@ -73,13 +75,16 @@ router.get('/admin_signup',admin_signupget)
       
       .get('/addbrand',Add_Brandget)
       .post('/addbrand',Add_Brandpost)  
-
+      
       .get('/addCategory',Add_Categoryget)
-      .post('/addCategory',Add_Categorypost)  
-
+      .post('/addCategory',Add_Categorypost) 
+      
       .get('/addProduct',Add_Productget)
       .post('/addProduct',upload.single('image'),Add_Productpost)   //multer
-
+      
+      .get('/addCoupon',Add_Couponget)
+      .post('/addCoupon',Add_Couponpost)  
+      
       .get('/Update_Product',Update_Productget)
       .post('/Update_Product',Update_Productpost)
 
