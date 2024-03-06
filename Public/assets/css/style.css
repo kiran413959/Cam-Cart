@@ -1,5 +1,5 @@
 /* 
-    Project Name : CameraX - Ecommerce Website
+    Project Name : Cam Cart - Ecommerce Website
     Designed & Coded by : Kiran Kumar
 */
 
@@ -1636,7 +1636,7 @@ a.feature_btn {
 
 .cart_field>input {
     color: var(--text-color);
-    width: 80%;
+    width: 100%;
     padding: 5px 35px 5px 8px;
     font-size: .9rem
 }
@@ -1901,4 +1901,3 @@ a.feature_btn {
     display: flex;
     gap: 15px;
 }
-

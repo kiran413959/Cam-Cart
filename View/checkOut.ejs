@@ -415,7 +415,7 @@
                                                         services</label>
                                                     <div class="cart_field">
                                                         <!-- <form action="checkout" method="post"> -->
-                                                        <input type="number" placeholder="Enter Pincode" name="pincode"
+                                                        <input type="text" placeholder="Enter Pincode" class="pincode" name="pincode"
                                                             required>
                                                         <!-- <button type="submit">Check</button> -->
                                                         <!-- </form> -->
@@ -450,7 +450,7 @@
                                                         <strong>Total Amount</strong>
                                                         <strong>₹ <%= cart.TotalAmount %> </strong>
                                                     </div>
-                                                    <button type="submit" class="checkout_btn p-2"> <i
+                                                    <button type="submit" class="checkout_btn p-2"  id="order_place_btn"> <i
                                                             class="bi bi-credit-card-2-back me-1"></i>
                                                         Place Order</button>
                                                 </div>
@@ -558,6 +558,8 @@
     <script src="assets/swiper/swiper-bundle.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <SCript>

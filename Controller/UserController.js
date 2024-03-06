@@ -666,7 +666,7 @@ module.exports = {
                     const order = new Order({
                         products: cart.products,
                         Address: address,
-                        Pincode:pincode,
+                        Pincode:parseInt(pincode),
                         Coupon:coupon,
                         TotalAmount: cart.TotalAmount,
                         Payment: payment,

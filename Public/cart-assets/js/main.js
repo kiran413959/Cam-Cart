@@ -1,6 +1,6 @@
 /* 
-    Project Name : CameraX - Ecommerce Website
-    Designed & Coded by : Gulshan Songara
+    Project Name : Cam Cart - Ecommerce Website
+    Designed & Coded by : Kiran Kumar
 */
 
 

@@ -1,5 +1,5 @@
 /* 
-    Project Name : CameraX - Ecommerce Website
+    Project Name : Cam Cart - Ecommerce Website
     Designed & Coded by : Kiran kumar
 */
 
@@ -9,10 +9,12 @@
 
 
 /* 
-    Project Name : CameraX - Ecommerce Website
-    Designed & Coded by : Kiran kumar
+Project Name : Cam Cart - Ecommerce Website
+Designed & Coded by : Kiran kumar
 */
 
+// import Swal from 'sweetalert2/dist/sweetalert2.js'
+// import 'sweetalert2/src/sweetalert2.scss'
 
 $(window).on("load", function () {
     $("#preloader").fadeOut(1e3)
@@ -391,6 +393,54 @@ $(window).on("load", function () {
     
 
 
+
+
+        ///////  place order   -   sweet alert  ///////
+
+
+
+
+        
+    $(document).ready(function () {
+        $('#order_place_btn').on('click', function (event) {
+            event.preventDefault();
+
+
+           
+                $.ajax({
+                    type: 'POST',
+                    url: '/checkout' ,
+                    
+                    success: function (response) {
+                        console.log(response);
+                        // Handle the success response here
+                        if (response) {
+
+                            Swal.fire({
+                                position: "top-center",
+                                icon: "success",
+                                title: "Your Order  has been placed successfully!",
+                                showConfirmButton: false,
+                                timer: 1500
+                              });
+                            
+                            console.log(" Order has been placed successfully.");
+                        
+
+                            // Optionally, perform any additional actions after successful deletion
+                        } else {
+                            console.log("Error placing order:", response.error);
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                        // Handle the error here
+                        console.log("An error occurred while deleting product from cart.");
+                    }
+                });
+            
+        });
+    });
 
 
 
