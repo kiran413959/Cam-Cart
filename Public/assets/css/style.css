@@ -1776,9 +1776,8 @@ a.feature_btn {
 }
 }
 .cart_product {
-    display: flex;
+    /* display: flex; */
     flex: 25%;
-    /* padding: px; */
     overflow: hidden;
     border: 1px solid var(--text-color);
     box-shadow: var(--box-shadow);
@@ -1881,3 +1880,25 @@ a.feature_btn {
     border-radius: 5px;
     color: white;
 }
+
+.payments_methode{
+    width: 100%;
+    height:max-content ;
+    position: relative;
+    gap: 20px;
+    /* max-width: 450px; */
+    padding: 1rem 3rem;
+    background-color: var(--bg-color);
+    color: var(--text-color2);
+    box-shadow: var(--box-shadow2);
+    border-radius: 5px;
+    display: flex;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+.payment_options{
+    display: flex;
+    gap: 15px;
+}
+

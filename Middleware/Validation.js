@@ -74,7 +74,7 @@ const loginValidation = async (req, res, next) => {
     const { email,
         password
     } = req.body
-    console.log(req.body);
+    // console.log(req.body);
     if (!email || !password) {
         return res.json({success:false, message:'Please provide an email and a password'})
     }

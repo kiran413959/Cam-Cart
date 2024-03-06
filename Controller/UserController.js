@@ -1,7 +1,7 @@
 const express = require('express')
 const { User, Profile, Whishlist } = require('../Model/UserData')
 const { Products, Category } = require('../Model/ProductDatas')
-const {Order}=require('../Model/OrderData')
+const { Order } = require('../Model/OrderData')
 const { default: mongoose } = require('mongoose')
 const { ObjectId } = require('mongoose').Types;
 const jwt = require("jsonwebtoken")
@@ -143,11 +143,12 @@ module.exports = {
     },
     loginpost: async (req, res) => {
         const email = req.body.email
-        console.log('email', email);
+
         const user = await User.findOne({ email: email })
         console.log(user);
         if (user.isVerified === true) {
-            console.log("redirecting to home")
+
+            // console.log("redirecting to home")
             return res.json({ success: true, alert: true })
         } else {
             req.msg = 'user not verified';
@@ -248,17 +249,17 @@ module.exports = {
     },
     Profilepost: async (req, res) => {
         const userId = req.session.userId
-        const {phone,age,address}=req.body
-        const profile= await Profile.findOneAndUpdate({userId},
-                
-            {phone,age,address} ,{upsert:true,new:true}) 
-            
-            if(profile){
-                res.redirect('/profile')
-            }else{
-              return  res.sendStatus(406)    
-            }
-            // console.log(profile);
+        const { phone, age, address } = req.body
+        const profile = await Profile.findOneAndUpdate({ userId },
+
+            { phone, age, address }, { upsert: true, new: true })
+
+        if (profile) {
+            res.redirect('/profile')
+        } else {
+            return res.sendStatus(406)
+        }
+        // console.log(profile);
     },
     Whishlistget: async (req, res) => {
         try {
@@ -366,7 +367,7 @@ module.exports = {
                 const cart = await Cart.findOne({ userId: req.session.userId })
                     .populate('products.productId')
                 // console.log(user);
-                // console.log(cart);
+                console.log(cart);
 
                 console.log(`hiii${cart.products}`);
 
@@ -505,7 +506,7 @@ module.exports = {
     },
 
 
-    
+
     deletefromcartPost: async (req, res) => {
 
         try {
@@ -514,19 +515,19 @@ module.exports = {
                 const productId = req.params.productId;
                 console.log(productId);
                 const cart = await Cart.findOne({ userId: userId });
-                console.log('cart before removing:',cart);
-                     cart.products.pull({productId:productId}); 
-                    //  cart.TotalAmount -= cart.products.id(productId).price;  
-                    
-                    const deletedProduct = cart.products.id(productId);
-            if (deletedProduct) {
-                cart.TotalAmount -= deletedProduct.price;
-            }
+                console.log('cart before removing:', cart);
+                cart.products.pull({ productId: productId });
+                //  cart.TotalAmount -= cart.products.id(productId).price;  
+
+                const deletedProduct = cart.products.id(productId);
+                if (deletedProduct) {
+                    cart.TotalAmount -= deletedProduct.price;
+                }
 
                 await cart.save()
-                    
-// 
-                console.log('cart after removing:',cart);
+
+                // 
+                console.log('cart after removing:', cart);
                 if (!cart)
                     throw new Error("No such cart exists!");
                 res.status(200).json({ success: true, message: "Deleted from cart!" })
@@ -545,16 +546,17 @@ module.exports = {
     },
 
     buyNowPost: async (req, res) => {
-        try{
+        try {
 
             const productId = req.params.productId
-            const product= await Products.findById(productId)
-            console.log("the product"+product);
-            req.session.productDetails= product
+            const product = await Products.findById(productId)
+            // console.log("the product" + product);
+            req.session.productDetails = product
+            req.session.productDetails2=product
 
-            res.status(200).json({buynow:true})
+            res.status(200).json({ buynow: true })
 
-        }catch(err){
+        } catch (err) {
             console.log(err);
         }
 
@@ -562,83 +564,169 @@ module.exports = {
     },
 
 
-    Checkoutget: async (req,res)=>{
-        if(req.session.email){
-        try{
-            const userId= req.session.userId;
-            console.log(userId);
-            let cart;
-            const productId = req.session.productDetails
-            const productDetails = await Products.findById(productId)
-            const cartDetails = await Cart.findOne({ userId: req.session.userId })
-            .populate('products.productId');
-            if(req.session.productDetails){
-                cart ={
-                    products:[
-                        {
-                            productId:productDetails,
-                            quantity:1,
-                            price:productDetails.price
-                        }
-                    ]
-                }
-                delete req.session.productDetails
-            }else{
-                cart = cartDetails
-            }
-            
-            console.log("cart"+cart);
-            const profile= await Profile.findOne({userId:userId});
-            const user=await User.findById(userId);
+    Checkoutget: async (req, res) => {
+        if (req.session.email) {
+            try {
+                const userId = req.session.userId;
+                // console.log(userId);
+                console.log(req.session);
 
-            let totalAmount = 0;
-            if (cart && cart.products) {
-                for (let product of cart.products) {
-                    if (product.productId && product.productId.price && product.quantity) {
-                        totalAmount += product.productId.price * product.quantity;
+                let cart;
+                const productId = req.session.productDetails
+                const productDetails = await Products.findById(productId)
+                const cartDetails = await Cart.findOne({ userId: req.session.userId })
+                    .populate('products.productId');
+                if (req.session.productDetails) {
+                    cart = {
+                        products: [
+                            {
+                                productId: productDetails,
+                                quantity: 1,
+                                price: productDetails.price
+                            }
+                        ]
+                    }
+                    delete req.session.productDetails
+                } else {
+                    cart = cartDetails
+                }
+
+                console.log(cart.products);
+                const profile = await Profile.findOne({ userId: userId });
+                const user = await User.findById(userId);
+
+                let totalAmount = 0;
+                if (cart && cart.products) {
+                    for (let product of cart.products) {
+                        if (product.productId && product.productId.price && product.quantity) {
+                            totalAmount += product.productId.price * product.quantity;
+                        }
                     }
                 }
+                cart.TotalAmount = totalAmount;
+                console.log(`total  :${cart.TotalAmount}`);
+
+
+                // console.log(user);
+                // console.log(cart.products);
+
+                res.render('checkOut', { cart, user, profile })
+            } catch (err) {
+                console.log(err);
             }
-                 cart.TotalAmount = totalAmount;
-                 console.log(cart.TotalAmount);
-
-
-                console.log(user);
-            console.log(cart.products);
-
-            res.render('checkOut',{cart,user,profile})
-        }catch(err){
-            console.log(err);
         }
-        }
-        
-        
+
+
     },
-    
-    Checkoutpost: async (req, res)=>{
-            if(req.session.email){
-                try{
-                      
-                    let products;
-                    const cart = await Cart.findOne({ userId: req.session.userId })
+
+    Checkoutpost: async (req, res) => {
+        if (req.session.email) {
+            try {
+
+                const userId = req.session.userId;
+               
+                console.log(userId);
+               
+                console.log(req.session);
+
+                let cart;
+                const productId = req.session.productDetails2
+             
+                const productDetails = await Products.findById(productId)
+               
+                console.log("there is the product :" + productId);
+
+
+                const cartDetails = await Cart.findOne({ userId: req.session.userId })
                     .populate('products.productId');
+                if (req.session.productDetails2) {
+                    cart = {
+                        products: [
+                            {
+                                productId: productDetails,
+                                quantity: 1,
+                                price: productDetails.price
+                            }
+                        ]
+                    }
+
+                    let totalAmount = 0;
+                    if (cart && cart.products) {
+                        for (let product of cart.products) {
+                            if (product.productId && product.productId.price && product.quantity) {
+                                totalAmount += product.productId.price * product.quantity;
+                            }
+                        }
+                    }
+
+                    cart.TotalAmount = totalAmount;
+                    console.log(cart.TotalAmount);
+
+                    const { address, pincode,coupon, payment } = req.body
+                    const order = new Order({
+                        products: cart.products,
+                        Address: address,
+                        Pincode:pincode,
+                        Coupon:coupon,
+                        TotalAmount: cart.TotalAmount,
+                        Payment: payment,
+                        userId: userId,
+                        status: "Pending"
+                    })
+
+                    await order.save()
+                    console.log('order is =' + order);
+
+                    delete req.session.productDetails
+
+                } else {
+                    cart = cartDetails
 
 
+                    let totalAmount = 0;
+                    if (cart && cart.products) {
+                        for (let product of cart.products) {
+                            if (product.productId && product.productId.price && product.quantity) {
+                                totalAmount += product.productId.price * product.quantity;
+                            }
+                        }
+                    }
+
+                    cart.TotalAmount = totalAmount;
+                console.log("hiiiiiiiii  "+cart.TotalAmount);
+
+                    console.log("cart is =" + cart.products);
+                    const { address, pincode, coupon ,payment } = req.body
+                    console.log(`pincode ${pincode}`);
 
 
+                    const order = new Order({
+                        products: cart.products,
+                        Address: address,
+                        Pincode:pincode,
+                        Coupon:coupon,
 
+                        TotalAmount: cart.TotalAmount,
+                        Payment: payment,
+                        userId: userId,
+                        status: "Pending"
+                    })
 
+                    await order.save()
 
-
-                }catch(err){
-
+                    console.log('order is =' + order);
                 }
-            
+                res.status(200).json({ success: true, message: 'Order created successfully' });
+
+            } catch (err) {
+                res.status(500).json({ success: false, message: 'Error creating order' });
             }
 
-        
-        
-        console.log(req.body);
+        }
+
+
+
+        // console.log(req.body);
     },
 
 

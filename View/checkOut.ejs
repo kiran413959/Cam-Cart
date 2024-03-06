@@ -275,6 +275,45 @@
 
                             </div>
 
+
+
+
+
+                            <!-- /////////////// payment options ///////////// -->
+
+
+                            <div
+                                class="row justify-content-sm-evenly justify-content-around align-items-center gx-0 mx-xl-4 mx-lg-2 py-4 ">
+
+                                <div
+                                    class=" row gx-0 mx-xl-4 mx-lg-2 py-4 payments_methode "  >
+
+                                    <!-- <form action="/checkout" method="POST"> -->
+                                    <div class="payment_options">
+                                       
+                                        <input type="radio" id="COD" name="payment" value="COD" required>
+                                        <label for="COD"> Cash On Delivery</label> <br>
+
+                                    </div>
+
+                                    <div class="payment_options">
+                                       
+
+                                        <input type="radio" id="RazoPay" name="payment" value="RazoPay" required>
+                                        <label for="RazoPay"> RazoPay</label>
+
+                                    </div>
+                                    
+                                    <!-- </form> -->
+
+
+                                </div>
+
+
+                            </div>
+
+                            
+
                         </div>
 
                         <!-- CheckOut-content Right -->
@@ -294,7 +333,7 @@
                                                 class="mx-lg-0 px-sm-2 w-50 my-lg-0cols-2  ms-lg-6 position-relative bottom-25">
 
 
-                                                <img src="/images/<%= product.productId.imageurl %>"
+                                                <img class="product_image" src="/images/<%= product.productId.imageurl %>"
                                                     alt="product-img" />
 
 
@@ -376,7 +415,7 @@
                                                         services</label>
                                                     <div class="cart_field">
                                                         <!-- <form action="checkout" method="post"> -->
-                                                        <input type="text" placeholder="Enter Pincode" name="pincode"
+                                                        <input type="number" placeholder="Enter Pincode" name="pincode"
                                                             required>
                                                         <!-- <button type="submit">Check</button> -->
                                                         <!-- </form> -->
@@ -388,9 +427,7 @@
                                                         Coupons</label>
                                                     <div class="cart_field">
                                                         <!-- <form action="checkout" method="post"> -->
-                                                        <input type="text" placeholder="Enter Coupon Code" name="coupon"
-                                                            required>
-                                                        <!-- <button type="submit">Apply</button> -->
+                                                        <input type="text" placeholder="Enter Coupon Code" name="coupon">
                                                         <!-- </form> -->
                                                     </div>
                                                 </div>
