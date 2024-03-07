@@ -2,29 +2,68 @@ const express = require('express')
 const router = express.Router()
 
 
+
+
+
 const{
-    Productget,
-    Productpost,
+    categoryget,
+    categorypost,
+
     Oderget,
     Oderpost,
+
     OderStatusget,
     OderStatuspost,
-    cartget,
-    cartpost,
     Paymentget,
     Paymentpost
 
 
 }=require('../Controller/ProductsController')
 
-router.get('/Product',Productget)
-      .post('/Product',Productpost)
+
+const {
+    Whishlistget,
+    // Wishlistdataget,
+    toggleWhishlistpost,
+}=require('../Controller/WishlistController')
+
+
+const {
+
+    cartget,
+    addToCartPost,
+    removeFromcartPost,
+    deletefromcartPost,
+
+}=require('../Controller/cartController')
+
+
+
+
+router
+.get('/product', categoryget)
+.post('/product', categorypost)
+
+
+ //WishList Related Routs
+
+ .get('/Whishlist', Whishlistget)
+ // .get('/wishlist/get',Wishlistdataget)
+ .post('/Whishlist/add/:productId', toggleWhishlistpost)
+
+
       .get('/Oder',Oderget)
       .post('/Oder',Oderpost)
       .get('/OderStatus',OderStatusget)
       .post('/OderStatus',OderStatuspost)
+
+
       .get('/cart',cartget)
-      .post('/cart',cartpost)
+      .post('/cart/add/:productId', addToCartPost)
+      .post('/cart/remove/:productId', removeFromcartPost)
+      .post('/cart/delete/:productId', deletefromcartPost)
+
+
       .get('/Payment',Paymentget)
       .post('/Payment',Paymentpost)
 

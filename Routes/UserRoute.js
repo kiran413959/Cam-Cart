@@ -3,8 +3,7 @@ const router = express.Router();
 const { loginValidation, signupValidation } = require('../Middleware/Validation')
 // ,
 
-
-const {
+const{
   signupget,
   signuppost,
   EmailVerificationget,
@@ -17,22 +16,19 @@ const {
   OtpValidationpost,
   fotgetPasswordget,
   fotgetPasswordpost,
+}= require('../Controller/user_Auth_Controller')
+
+
+
+const {
   Homeget,
   Homepost,
-  categoryget,
-  categorypost,
+  
   Profileget,
   Profilepost,
-  Whishlistget,
-  // Wishlistdataget,
-  toggleWhishlistpost,
-  cartget,
-  addToCartPost,
-  removeFromcartPost,
-  deletefromcartPost,
-  buyNowPost,
-  Checkoutget,
-  Checkoutpost,
+ 
+ 
+  
   myOrdersget,
   myOrderspost,
   Errorget,
@@ -41,6 +37,11 @@ const {
 } = require('../Controller/UserController')
 
 
+const {
+  buyNowPost,
+  Checkoutget,
+  Checkoutpost,
+}=require('../Controller/checkOut_Controller')
 
 
 router.get('/signup', signupget)
@@ -80,8 +81,7 @@ router.get('/signup', signupget)
 
   // CRUD operation on Category
 
-  .get('/product', categoryget)
-  .post('/product', categorypost)
+  
 
   //Profile related routes
 
@@ -89,19 +89,9 @@ router.get('/signup', signupget)
 
   .post('/Profile', Profilepost)
 
-  //WishList Related Routs
+ 
 
-  .get('/Whishlist', Whishlistget)
-  // .get('/wishlist/get',Wishlistdataget)
-  .post('/Whishlist/add/:productId', toggleWhishlistpost)
-
-
-  .get('/cart',cartget)
-  .post('/cart/add/:productId', addToCartPost)
-  .post('/cart/remove/:productId', removeFromcartPost)
-  .post('/cart/delete/:productId', deletefromcartPost)
-
-
+  
   
   //CheckOut
   

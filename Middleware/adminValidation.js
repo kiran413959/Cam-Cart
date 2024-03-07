@@ -167,6 +167,7 @@ const AdminsignupValidation = async (req, res, next) => {
             password: hash_password,
             isVerified: false,
         };
+        
 
         const newAdmin = new Admin(adminData);
         await newAdmin.save();

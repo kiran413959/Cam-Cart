@@ -1,17 +1,46 @@
-const { User, Profile } = require('../Model/UserData')
+const { User, Profile, Whishlist } = require('../Model/UserData')
+const { Products, Category } = require('../Model/ProductDatas')
+const { Order } = require('../Model/OrderData')
 const { default: mongoose } = require('mongoose')
-
-
+const { ObjectId } = require('mongoose').Types;
+const jwt = require("jsonwebtoken")
+const nodemailer = require('nodemailer')
+const { Cart } = require('../Model/CartData')
 
 
 module.exports={
 
-    Productget:(req,res)=>{
+    categoryget: async (req, res) => {
+
+        try {
+            const catName = req.query.category;
+
+            // Query the database for products in the specified category
+            const category = await Products.find({ category: catName });
+            // console.log('category:', category);
+
+            // console.log(category);
+            if (!category) {
+                // Handle case where no products are found for the specified category
+                return res.status(404).json({ error: "No products found for the specified category" });
+            }
+            const wishlist = await Whishlist.findOne({ userId: req.session.userId })
+            // Render the 'allProducts' template with the retrieved products
+            res.render('allProducts', { category, wishlist: wishlist });
+        } catch (error) {
+            // Handle any errors that occur during database query or rendering
+            console.error("Error retrieving products:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
 
     },
-    Productpost:(req,res)=>{
+    categorypost: (req, res) => {
 
-    }, 
+
+
+
+    },
+     
     Oderget:(req,res)=>{
 
     },

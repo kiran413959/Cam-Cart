@@ -5,8 +5,7 @@ const upload=require('../Middleware/Multer')
 const {AdminloginValidation, AdminsignupValidation } = require('../Middleware/adminValidation')
 
 
-
-const{
+const {
     admin_signupget,
     admin_signuppost,
     admin_loginget,
@@ -14,22 +13,19 @@ const{
     EmailVerificationget,
     EmailVerificationpost,
     resendEmailpost,
+}=require('../Controller/admin_Auth_Contrtoller')
+
+
+const{
+   
     dashBoardget,
     dashBoardpost,
-    Product_listget,
-    Product_listpost,
+    
     customersget,
     customerspost,
     Ordersget,
     Orderspost,
-    Add_Brandget,
-    Add_Brandpost,
-    Add_Categoryget,
-    Add_Categorypost,
-    Add_Couponget,
-    Add_Couponpost,
-    Add_Productget,
-    Add_Productpost,
+   
     Update_Productget,
     Update_Productpost,
     Indboxget,
@@ -44,6 +40,20 @@ const{
     salesReportpost,
 
 } = require('../Controller/AdminController')
+
+
+const{
+    Product_listget,
+    Product_listpost,
+    Add_Brandget,
+    Add_Brandpost,
+    Add_Categoryget,
+    Add_Categorypost,
+    Add_Couponget,
+    Add_Couponpost,
+    Add_Productget,
+    Add_Productpost,
+}=require('../Controller/admin_Product_controller')
 
 router.get('/admin_signup',admin_signupget)
       .post('/admin_signup',AdminsignupValidation,admin_signuppost)
