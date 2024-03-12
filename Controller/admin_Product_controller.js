@@ -1,4 +1,5 @@
 const { Admin } = require('../Model/AdminData');
+const { Coupon } = require('../Model/CouponData');
 const { Products, Category, Brand } = require('../Model/ProductDatas');
 const { User, Profile } = require('../Model/UserData')
 
@@ -77,12 +78,33 @@ module.exports ={
 
     },
 
-    Add_Couponget: (req, res) => {
+    Add_Couponget: async (req, res) => {
+        
 
+        
 
     },
     Add_Couponpost: async (req, res) => {
+        const {couponCode,discountPercentage,expireDate }= req.body;
+        const  todayDate = new Date()
+        let expire= new Date()
+        expire.setDate(todayDate.getDate() + parseInt(expireDate))
 
+        req.body.expireDate=expire;
+        // console.log(expire);
+        
+        console.log(couponCode);
+        if (!couponCode) {
+            return res.status(400).json({ message: "please fill all fields" })
+
+        } else {
+           const newcoupon= await  Coupon.create(req.body)
+           console.log(newcoupon);
+        };
+        
+
+            res.redirect('/addProduct');
+        
 
 
         

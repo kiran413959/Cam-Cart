@@ -1,11 +1,12 @@
+const { date, string } = require('joi')
 const mongoose = require('mongoose')
 
 
 
 const CouponSchema=new mongoose.Schema({
         discountPercentage:{
-            type:Number,
-            required:[true,'Please provide the discount percentage']
+            type:String,
+            // required:[true,'Please provide the discount percentage']
         },
         couponCode:{
             type:String,
@@ -15,7 +16,7 @@ const CouponSchema=new mongoose.Schema({
 
         expireDate:{
             type: Date,
-            require: [true, 'Expiry date is required'],
+            // require: [true, 'Expiry date is required'],
         }
 })
 

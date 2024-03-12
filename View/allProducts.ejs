@@ -418,7 +418,7 @@
                             </div>
                         </div>
                         <div class="popular_btns">
-                            <button type="button" class="popular_quick_btn" data-filter="product1"> <i
+                            <button type="button" class="popular_quick_btn" data-filter="<%= product._id%>"> <i
                                     class="bi bi-eye"></i>
                                 &#160; Quick
                                 Look</button>
@@ -707,7 +707,7 @@
 
     <!--============== Product- ==============-->
     <% category.forEach(product=> { %>
-    <section class="product_modal product1">
+    <section class="product_modal <%= product._id%>">
         <div class="modal_centered">
             <div class="container">
                     <div class="row justify-content-center">

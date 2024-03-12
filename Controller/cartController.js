@@ -11,7 +11,7 @@ const { Cart } = require('../Model/CartData')
 
 
 
-module.exports ={
+module.exports = {
     cartget: async (req, res) => {
         console.log(req.session.email);
         if (req.session.email) {
@@ -42,6 +42,8 @@ module.exports ={
             } catch (err) {
                 console.log(err);
             }
+        } else {
+            res.redirect('/login')
         }
     },
 
@@ -104,6 +106,8 @@ module.exports ={
             } catch (err) {
                 console.log(err)
             }
+        } else {
+            res.redirect('/login')
         }
 
     },
@@ -185,7 +189,8 @@ module.exports ={
                     throw new Error("No such cart exists!");
                 res.status(200).json({ success: true, message: "Deleted from cart!" })
             } else {
-                return res.status(401).json({ success: false, error: "User is not logged In!" })
+                res,redirect( '/login' )
+                // return res.status(401).json({ success: false, error: "User is not logged In!" })
             }
 
 

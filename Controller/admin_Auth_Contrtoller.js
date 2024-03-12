@@ -39,7 +39,9 @@ module.exports={
     admin_loginget: (req, res) => {
         if (req.session.email) {
             console.log('email found')
+
             res.redirect('/dashBoard')
+            
         } else {
             const isVerified = {
                 isVerified: false

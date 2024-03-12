@@ -6,7 +6,7 @@ const OrderSchema = new mongoose.Schema({
 
   products: [{
     productId: {
-      type: mongoose.Schema.Types.ObjectId
+      type: mongoose.Types.ObjectId
       , ref: 'products'
     },
     quantity: {
@@ -15,8 +15,15 @@ const OrderSchema = new mongoose.Schema({
     price: {
       type: Number
     }
+    
   }
   ],
+  Name:{
+    type : String,
+  },
+  Phone:{
+    type:Number,
+  },
   Address: {
     type: String,
   },

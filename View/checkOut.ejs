@@ -427,7 +427,8 @@
                                                         Coupons</label>
                                                     <div class="cart_field">
                                                         <!-- <form action="checkout" method="post"> -->
-                                                        <input type="text" placeholder="Enter Coupon Code" name="coupon">
+                                                        <input type="text" placeholder="Enter Coupon Code" name="coupon" id="Coupon"  >
+                                                        <button type="button" id="coupon_btn" data-order-id=" " >Apply</button>
                                                         <!-- </form> -->
 
                                                     </div>
@@ -441,7 +442,7 @@
                                                     </div>
                                                     <div class="d-flex justify-content-between my-2">
                                                         <span>Discount</span>
-                                                        <span class="text-success">-₹ 00</span>
+                                                        <span class="text-success"  id="discountedAmount"> </span>
                                                     </div>
                                                     <div class="d-flex justify-content-between mb-3">
                                                         <span>Delivery Fee</span>
@@ -449,7 +450,7 @@
                                                     </div>
                                                     <div class="d-flex justify-content-between mb-5 pt-3 total_price">
                                                         <strong>Total Amount</strong>
-                                                        <strong>₹ <%= cart.TotalAmount %> </strong>
+                                                        <strong id="totalprice"> <%= cart.TotalAmount %> </strong>
                                                     </div>
                                                     <button type="submit" class="checkout_btn p-2"  id="order_place_btn"> <i
                                                             class="bi bi-credit-card-2-back me-1"></i>

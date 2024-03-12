@@ -838,6 +838,9 @@ img {
     transition: var(--popTransition)
 }
 
+
+
+
 .popular_card:hover .popular_quick_btn {
     opacity: 1;
     bottom: 42px

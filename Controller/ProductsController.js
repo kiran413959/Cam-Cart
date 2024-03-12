@@ -11,6 +11,7 @@ const { Cart } = require('../Model/CartData')
 module.exports={
 
     categoryget: async (req, res) => {
+        if(req.session.email){   
 
         try {
             const catName = req.query.category;
@@ -33,6 +34,10 @@ module.exports={
             res.status(500).json({ error: "Internal Server Error" });
         }
 
+    }else{
+        res.redirect('/login')
+    }
+
     },
     categorypost: (req, res) => {
 
@@ -54,9 +59,13 @@ module.exports={
 
     },
     cartget: async(req,res)=>{
+        if(req.session.email){
         const user= await  User.findById(req.session.userId)
         console.log(user)
         res.render('cart',{user})
+        }else{
+            res.redirect('/login')
+        }
     },
     cartpost:(req,res)=>{
 

@@ -51,7 +51,7 @@
 
                     <!-- Logo -->
                     <a class='nav_logo sticked_item' href='/Home'>
-                        <img  class="camlog" src="images/cam logo.png"" alt="logo"> 
+                        <img class="camlog" src="images/cam logo.png"" alt=" logo">
                     </a>
                 </div>
 
@@ -86,7 +86,7 @@
 
                     <!-- Cart-icon -->
                     <div class="nav_icon mx-sm-4 mx-2">
-                        <a href="javascript:void(0);">
+                        <a href="/cart">
                             <svg class="cart-icon sticked_item" aria-hidden="true" focusable="false" role="presentation"
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 viewBox="0 0 16 16">
@@ -100,17 +100,18 @@
 
                     <!-- User-icon -->
                     <div class="nav_icon">
-                        <a href="profile"> <svg class="user-icon sticked_item" aria-hidden="true" focusable="false" role="presentation"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M20.5 19.5V21.525C20.5 21.5802 20.4552 21.625 20.4 21.625H3.6C3.54477 21.625 3.5 21.5802 3.5 21.525V19.5C3.5 18.3728 3.94777 17.2918 4.7448 16.4948C5.54183 15.6978 6.62283 15.25 7.75 15.25H16.25C17.3772 15.25 18.4582 15.6978 19.2552 16.4948C20.0522 17.2918 20.5 18.3728 20.5 19.5Z"
-                                stroke="currentColor" stroke-width="1.75"></path>
-                            <path
-                                d="M12 11C14.3472 11 16.25 9.09721 16.25 6.75C16.25 4.40279 14.3472 2.5 12 2.5C9.65279 2.5 7.75 4.40279 7.75 6.75C7.75 9.09721 9.65279 11 12 11Z"
-                                stroke="currentColor" stroke-width="1.75" stroke-linejoin="round">
-                            </path>
-                        </svg>
-                    </a>
+                        <a href="profile"> <svg class="user-icon sticked_item" aria-hidden="true" focusable="false"
+                                role="presentation" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20.5 19.5V21.525C20.5 21.5802 20.4552 21.625 20.4 21.625H3.6C3.54477 21.625 3.5 21.5802 3.5 21.525V19.5C3.5 18.3728 3.94777 17.2918 4.7448 16.4948C5.54183 15.6978 6.62283 15.25 7.75 15.25H16.25C17.3772 15.25 18.4582 15.6978 19.2552 16.4948C20.0522 17.2918 20.5 18.3728 20.5 19.5Z"
+                                    stroke="currentColor" stroke-width="1.75"></path>
+                                <path
+                                    d="M12 11C14.3472 11 16.25 9.09721 16.25 6.75C16.25 4.40279 14.3472 2.5 12 2.5C9.65279 2.5 7.75 4.40279 7.75 6.75C7.75 9.09721 9.65279 11 12 11Z"
+                                    stroke="currentColor" stroke-width="1.75" stroke-linejoin="round">
+                                </path>
+                            </svg>
+                        </a>
                     </div>
 
                 </div>
@@ -132,7 +133,7 @@
     <!--============== Side-bar Section ==============-->
     <aside id="sidebar">
         <div class="sidebar_head">
-            <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i> Hello, <%= user.name%></h5>
+            <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i> Hello, </h5>
             <div class="close_btn sidebar_close" title="Close">
                 <span></span>
                 <span></span>
@@ -157,8 +158,8 @@
             </div>
 
             <ul class="mb-0 ps-0 sidebar_list">
-                <li><i class="bi bi-bag-check me-2"></i> <a href="javascript:void(0);">My Orders</a></li>
-                <li><i class="bi bi-heart me-2"></i> <a href="javascript:void(0);">My Wishlist</a></li>
+                <li><i class="bi bi-bag-check me-2"></i> <a href="/myOrders">My Orders</a></li>
+                <li><i class="bi bi-heart me-2"></i> <a href="/whishlist">My Wishlist</a></li>
                 <li><i class="bi bi-person me-2"></i> <a href="/profile">My Account</a></li>
                 <li><i class="bi bi-geo-alt me-2"></i> <a href="javascript:void(0);">Order Tracking</a></li>
                 <li><i class="bi bi-headset me-2"></i> <a href="javascript:void(0);">Help & Support</a></li>
@@ -206,10 +207,16 @@
     <main>
         <!--============== Cart Section ==============-->
         <section id="cart">
+            <div
+            class="col-12 d-flex justify-content-between align-items-center flex-sm-row flex-column px-md-5 px-sm-4 cart_content_top">
+            <a href='/Home'><i class="bi bi-chevron-left"></i> Go Back</a>
+            
+            
+            </div>
             <div class="container">
                 <div class="row text-center">
                     <div class="col-12 title">
-                        <h4 class="mb-0">My Cart &#160; <small class="fs-6">( 3 items )</small></h4>
+                        <h4 class="mb-0">My Orders &#160; <small class="fs-6"></small></h4>
                     </div>
                 </div>
             </div>
@@ -219,127 +226,256 @@
                 <div class="row justify-content-center cart_wrapper">
 
                     <!-- Cart-content Top -->
+
+
+                    <% orders.forEach(order=> { %>
                     <div
-                        class="col-12 d-flex justify-content-between align-items-center flex-sm-row flex-column px-md-5 px-sm-4 cart_content_top">
-                        <a href='/Home'><i class="bi bi-chevron-left"></i> Go Back</a>
-                        <h6 class="mb-0 mt-4 mt-sm-0">Subtotal - <b>₹ 2,03,980</b></h6>
+                    class="col-12 d-flex justify-content-between align-items-center flex-sm-row flex-column px-md-5 px-sm-4 cart_content_top">
+                    <a  href='/Home'  id="atag"></a>
+                    
+                    <h6 class="mb-0 mt-4 mt-sm-0">Subtotal - <b>
+                                ₹ <%= order.TotalAmount %>
+                            </b></h6>
                     </div>
 
-                    <!-- Cart-content Left -->
-                    <div class="col-lg-9 col-md-11 cart_content_left">
 
-                        <div
-                            class="row justify-content-sm-evenly justify-content-around align-items-center gx-0 mx-xl-4 mx-lg-2 py-4 cart_item">
-                            <div class="col-3 px-md-4 px-sm-0">
-                                <img src="assets/img/popular/2.png" alt="">
-                            </div>
-                            <div class="col-md-8 col-7 ms-md-4">
-                                <div class="d-flex justify-content-between cart_title">
-                                    <h5 class="me-md-5 me-2">Canon EOS 1500D 24.1 MP DSLR Camera with EF S18-55 mm IS II
-                                        Lens (Black)</h5>
-                                    <h6><i class="bi bi-x-lg" title="Remove item"></i></h6>
+                        <% if(order.products && order.products.length> 0) { %>
+                            <% order.products.forEach(product=> { %>
+
+                                <!-- Cart-content Left -->
+                                <div class="col-lg-9 col-md-11 cart_content_left  ">
+
+                                    <div
+                                        class="row justify-content-sm-evenly justify-content-around align-items-center gx-0 mx-xl-4 mx-lg-2 py-4 order_item  product_quicklook">
+                                        <div class=" row col-3 px-md-4 px-sm-0">
+                                            <img src="/images/<%= product.productId.imageurl  %>" alt="">
+                                        </div>
+
+
+                                        <div class=" row col-md-6 col-6 ms-md-4">
+                                            <div class="d-flex justify-content-between cart_title">
+                                                <h5 class="me-md-5 me-2">
+                                                    <%= product.productId.name %>
+                                                </h5>
+                                                <!-- <h6><i class="bi bi-x-lg" title="Remove item"></i></h6> -->
+                                            </div>
+
+                                            <span class="   quatyity_change">
+                                                <b>
+                                                    QTY : <%= product.quantity %> </span>
+                                            </b>
+                                            <div class="cart_price">
+                                                <b>₹ <%= product.price %><small>.00</small></b>
+
+
+                                                <small>
+                                                    <p class="ms-2 text-muted">
+
+                                                    </p>
+                                                </small>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="quicklook_btn col-3 px-md-4 px-sm-0">
+                                            <button type="button" class="quicklook"
+                                                data-filter="<%= product.productId._id %>">
+                                                <i class="bi bi-eye"></i>
+                                                &#160; View Order
+                                            </button>
+                                            <!-- <button type="button" class="popular_cart_btn cart_btn"   data-product-id=""  > <i class="bi bi-cart3"></i> &#160;
+                                                Add
+                                                to
+                                                Cart</button> -->
+                                        </div>
+
+
+                                    </div>
+
                                 </div>
-                                <span class="text-secondary">Product Id - 5544663</span>
-                                <div class="cart_price">
-                                    <b>₹ 31,000<small>.00</small></b>
-                                    <small><del class="ms-2 text-muted">MRP: 34,995<small>.00</small></del></small>
-                                </div>
-                            </div>
-                        </div>
+                                <% }) %>
+                                    <% } %>
+                                        <% }) %>
 
-                        <div
-                            class="row justify-content-sm-evenly justify-content-around align-items-center gx-0 mx-xl-4 mx-lg-2 py-4 cart_item">
-                            <div class="col-3 px-md-4 px-sm-0">
-                                <img src="assets/img/products/pro6.png" alt="">
-                            </div>
-                            <div class="col-md-8 col-7 ms-md-4">
-                                <div class="d-flex justify-content-between cart_title">
-                                    <h5 class="me-md-5 me-2">Canon Speedlite 470EX-AI Flash (Black)</h5>
-                                    <h6><i class="bi bi-x-lg" title="Remove item"></i></h6>
-                                </div>
-                                <span class="text-secondary">Product Id - 5544663</span>
-                                <div class="cart_price">
-                                    <b>₹ 24,990<small>.00</small></b>
-                                    <small><del class="ms-2 text-muted">MRP: 28,995<small>.00</small></del></small>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div
-                            class="row justify-content-sm-evenly justify-content-around align-items-center gx-0 mx-xl-4 mx-lg-2 py-4 cart_item">
-                            <div class="col-3 px-md-4 px-sm-0">
-                                <img src="assets/img/popular/5.png" alt="">
-                            </div>
-                            <div class="col-md-8 col-7 ms-md-4">
-                                <div class="d-flex justify-content-between cart_title">
-                                    <h5 class="me-md-5 me-2">Sony FE 14mm f/1.8 G Master Series ultra-wide-angle prime
-                                        lens
-                                    </h5>
-                                    <h6><i class="bi bi-x-lg" title="Remove item"></i></h6>
-                                </div>
-                                <span class="text-secondary">Product Id - 5544663</span>
-                                <div class="cart_price">
-                                    <b>₹ 1,47,990 <small>.00</small></b>
-                                    <small><del class="ms-2 text-muted">MRP: 1,62,990<small>.00</small></del></small>
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-
-                    <!-- Cart-content Right -->
-                    <div class="col-lg-3 col-md-9 col-sm-10 cart_content_right">
-
-                        <div class="cart_info_block py-4 mt-xxl-5 mt-lg-4 mt-5">
-                            <h6> <i class="bi bi-shield-check me-1"></i> 100% Purchase Protection</h6>
-                            <p class="px-xl-4 px-2 mb-0">Original Products | Safe & Secure Payments | Easy Returns</p>
-                        </div>
-
-                        <div class="cart_pincode_block mt-4">
-                            <label class="field_label"> <i class="bi bi-geo-alt"></i> Check Delivery time &
-                                services</label>
-                            <div class="cart_field">
-                                <input type="text" placeholder="Enter Pincode" required>
-                                <button type="button">Check</button>
-                            </div>
-                        </div>
-
-                        <div class="cart_offer_block">
-                            <label class="field_label"> <i class="bi bi-tag"></i> Apply Coupons</label>
-                            <div class="cart_field">
-                                <input type="text" placeholder="Enter Coupon Code" required>
-                                <button type="button">Apply</button>
-                            </div>
-                        </div>
-
-                        <div class="cart_payment_block">
-                            <h5>Payment Details</h5>
-                            <div class="d-flex justify-content-between mt-4">
-                                <span>Total MRP</span>
-                                <span>₹ 2,26,980</span>
-                            </div>
-                            <div class="d-flex justify-content-between my-2">
-                                <span>Discount</span>
-                                <span class="text-success">-₹ 99,000</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-3">
-                                <span>Delivery Fee</span>
-                                <span class="text-danger">Free</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-5 pt-3 total_price">
-                                <strong>Total Amount</strong>
-                                <strong>₹ 2,03,980</strong>
-                            </div>
-                            <button type="button" class="checkout_btn p-2"> <i
-                                    class="bi bi-credit-card-2-back me-1"></i>
-                                Proceed to Checkout</button>
-                        </div>
-                    </div>
                 </div>
 
             </div>
         </section>
-        <!-- /Cart Section -->
+
+
+        <!--============== *Quick View Section* ==============-->
+
+        <% orders.forEach(order=> { %>
+            <% if(order.products && order.products.length> 0) { %>
+                <% order.products.forEach(product=> { %>
+
+                    <section class="order_product <%= product.productId._id %> ">
+                        <div class="modal_centered">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-xxl-10 col-xl-11 col-12">
+
+                                        <div class="row product_modal_wrapper">
+
+                                            <div class="col-lg-7 product_lightbox">
+
+                                                <div class="swiper product_swiper">
+                                                    <div class="swiper-wrapper">
+
+                                                        <div class="swiper-slide">
+                                                            <img src="/images/<%= product.productId.imageurl %>"
+                                                                alt="product-img" />
+                                                        </div>
+                                                        <!-- <div class="swiper-slide">
+                                                <img src="<%=   %>" alt="product-img" />
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="<%=   %>" alt="product-img" />
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="<%=   %>" alt="product-img" />
+                                            </div> -->
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div thumbsSlider="" class="swiper thumb_swiper">
+                                                    <div class="swiper-wrapper">
+
+                                                        <div class="swiper-slide">
+                                                            <img src="/images/<%= product.productId.imageurl %>"
+                                                                alt="product-img">
+                                                        </div>
+                                                        <!-- <div class="swiper-slide">
+                                                <img src="<%=   %>" alt="product-img" />
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="<%=   %>" alt="product-img" />
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="<%=   %>" alt="product-img" />
+                                            </div> -->
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-lg-5 product_details">
+
+                                                <div class="product_title">
+                                                    <h4>
+                                                        <%=  product.productId.name %>
+                                                    </h4>
+                                                    <h6>
+                                                        <%= product.productId.category %>
+                                                    </h6>
+                                                    <h6>
+
+                                                        QTY: <%= product.quantity %>
+                                                    </h6>
+                                                </div>
+
+                                                <div class="product_ratings">
+                                                    <strong>&#9733;&#9733;&#9733;&#9733;<b
+                                                            class="text-muted">&#9733;</b></strong>
+                                                    <a href="javascript:void(0);" class="ms-2">400
+                                                        Ratings & Reviews</a>
+                                                </div>
+
+                                              
+
+                                                <div class="badge product_badge">
+                                                    <span><i class="bi bi-check-circle"></i> Product Available</span>
+                                                </div>
+
+                                                <div class="product_price">
+                                                    <b>₹
+                                                        <%= product.price %>
+                                                            <small>.00</small>
+                                                    </b>
+                                                </div>
+
+                                                <div class="shipping_details">
+                                                    <div>
+
+                                                        <h4> NAME :
+                                                             <b> <%= order.Name %> </b> </h4>
+
+                                                             <h4> PHONE  : 
+                                                                 <b> <%= order.Phone%> </b> </h4>
+
+                                                        <h4> ADDRESS :<br>
+                                                            <b> <%= order.Address%>  </b> </h4>
+
+                                                        <h4> PINCODE :
+                                                             <b> <%= order.Pincode %>  </b> </h4>
+
+                                                        <h4> Payment Type  : <b> <%= order.Payment %> </b> </h4>
+
+                                                        <h4> Shipping Status  : <b> <%= order.status %></b> </h4>
+
+
+
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="product_btns">
+                                                    <button type="button" class="cancel" id="order_cancel"
+                                                        data-product-id=" <%= product.productId._id %>"> <i class="bi"></i> &#160; Cancel
+                                                        Order</button>
+                                                    <!-- <button type="button" class="me-2 cart_btn"
+                                                        data-product-id=" <%= product.productId._id %> "> <i
+                                                            class="bi bi-cart3"></i> &#160;
+                                                        Add
+                                                        to
+                                                        Cart</button>
+                                                    <button type="button" class="compare_btn"> <i
+                                                            class="bi bi-arrow-repeat"></i>
+                                                        &#160;
+                                                        Compare</button> -->
+                                                </div>
+
+                                                <div class="product_features">
+                                                    <h5>Product Highlights -</h5>
+                                                    <ul class="mt-3">
+                                                        <li>
+
+                                                            <%= product.productId.discription %>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="close_btn product_close" title="Close">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </section>
+                    <% }) %>
+                        <% } %>
+                            <% }) %>
+
+                                <!--============== *Quick View Section* ==============-->
+
+
     </main>
 
     <!--============== Footer Section ==============-->
@@ -430,7 +566,7 @@
     </div>
     <!-- /Go-to-top btn -->
 
-   
+
 
     <!--============== Javascript Files ==============-->
     <script src="assets/js/jquery-3.6.0.min.js"></script>

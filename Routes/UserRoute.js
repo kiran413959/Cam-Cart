@@ -27,15 +27,17 @@ const {
   Profileget,
   Profilepost,
  
- 
-  
-  myOrdersget,
-  myOrderspost,
   Errorget,
   logoutget,
 
 } = require('../Controller/UserController')
 
+
+
+const {
+  myOrdersget,
+  myOrderspost,
+}=require("../Controller/Order_Controller")
 
 const {
   buyNowPost,
@@ -44,40 +46,46 @@ const {
 }=require('../Controller/checkOut_Controller')
 
 
+const {
+  couponApplyget,
+  couponApplypost
+}=require('../Controller/coupon_Controller');
+
+
 router.get('/signup', signupget)
-  .post('/signup', signupValidation, signuppost)
+      .post('/signup', signupValidation, signuppost)
 
   //For OTP Validation
 
-  .get('/OtpValidation', OtpValidationget)
-  .post('/OtpValidation', OtpValidationpost)
+      .get('/OtpValidation', OtpValidationget)
+      .post('/OtpValidation', OtpValidationpost)
 
   //Middleware for protect the route
   //   
 
-  .get('/login', loginget)
-  .post('/login', loginValidation, loginpost)
+      .get('/login', loginget)
+      .post('/login', loginValidation, loginpost)
 
   // Route for sending email to user's registered email id
 
-  .get('/EmailVerification/:token', EmailVerificationget)
-  .post('/EmailVerification/:token', EmailVerificationpost)
+      .get('/EmailVerification/:token', EmailVerificationget)
+      .post('/EmailVerification/:token', EmailVerificationpost)
 
   //route for resend email
-  .get('/resendEmail', resendEmailget)
-  .post('/resendEmail', resendEmailpost)
+      .get('/resendEmail', resendEmailget)
+      .post('/resendEmail', resendEmailpost)
 
 
   //Route For Forgot Password
 
-  .get('/fotgetPassword', fotgetPasswordget)
-  .post('/fotgetPassword', fotgetPasswordpost)
+      .get('/fotgetPassword', fotgetPasswordget)
+      .post('/fotgetPassword', fotgetPasswordpost)  
 
   //All Routes are protected from here
 
 
-  .get('/Home', Homeget)
-  .post('/Home', Homepost)
+      .get('/Home', Homeget)
+      .post('/Home', Homepost)
 
   // CRUD operation on Category
 
@@ -85,32 +93,37 @@ router.get('/signup', signupget)
 
   //Profile related routes
 
-  .get('/Profile', Profileget)
+      .get('/Profile', Profileget)
 
-  .post('/Profile', Profilepost)
+      .post('/Profile', Profilepost)
 
  
-
-  
-  
   //CheckOut
   
-    .post('/buynow/:productId',buyNowPost)
-    .get( '/checkout' , Checkoutget )
-    .post( '/checkout' , Checkoutpost )
+      .post('/buynow/:productId',buyNowPost)
+      .get( '/checkout' , Checkoutget )
+      .post( '/checkout' , Checkoutpost )
 
 
   //my Oders related Route
 
-  .get('/myOrders', myOrdersget)
-  .post('/myOrders', myOrderspost)
+      .get('/myOrders', myOrdersget)
+      .post('/myOrders', myOrderspost)
+
+
+  // Coupon Routes
+
+      .get('/couponApply',couponApplyget)
+      .post('/couponApply',couponApplypost)
+
+
 
 
   //Error Handling 404 Page Not Found
 
-  .get('/Error', Errorget)
+      .get('/Error', Errorget)
 
-  .get('/logout', logoutget)
+      .get('/logout', logoutget)
 
 
 

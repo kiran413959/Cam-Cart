@@ -17,10 +17,14 @@ module.exports = {
 
    
     Homeget: async (req, res) => {
+        if(req.session.email){  
         const user = await User.findById(req.session.userId)
         // console.log(id);
 
         res.render('userHome', { user });
+        }else{
+            res.redirect('/login')
+        }
 
     },
     Homepost: (req, res) => {
@@ -68,6 +72,7 @@ module.exports = {
         }
     },
     Profilepost: async (req, res) => {
+        if(req.session.email){  
         const userId = req.session.userId
         const { phone, age, address } = req.body
         const profile = await Profile.findOneAndUpdate({ userId },
@@ -79,6 +84,9 @@ module.exports = {
         } else {
             return res.sendStatus(406)
         }
+    }else{
+        res.redirect('/login')
+    }
         // console.log(profile);
     },
    
@@ -87,12 +95,7 @@ module.exports = {
     
 
 
-    myOrdersget: async (req, res) => {
-
-        res.render('myOrders');
-    },
-    myOrderspost: async (req, res) => {
-    },
+    
     Errorget: (req, res) => {
 
     },

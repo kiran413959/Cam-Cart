@@ -146,6 +146,13 @@
         margin-bottom: 0
     }
 
+    .order_product>.modal_centered {
+        margin-top: 0;
+        margin-bottom: 0
+    }
+
+
+
     .product_details {
         padding: 1.56rem 1rem
     }

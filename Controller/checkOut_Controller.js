@@ -1,6 +1,8 @@
 const { User, Profile, Whishlist } = require('../Model/UserData')
 const { Products, Category } = require('../Model/ProductDatas')
 const { Order } = require('../Model/OrderData')
+const {Coupon} = require("../Model/CouponData")
+
 const { default: mongoose } = require('mongoose')
 const { ObjectId } = require('mongoose').Types;
 const jwt = require("jsonwebtoken")
@@ -55,7 +57,15 @@ module.exports={
                     cart = cartDetails
                 }
 
-                console.log(cart.products);
+                let couponcode = req.body.coupon
+                    const CouponCode = await Coupon.findOne({couponcode:couponcode})
+                    let couponId=CouponCode._id
+                    
+
+                    console.log("coupon code is  :"+CouponCode);
+                    console.log("couponId is  innnnn  :"+couponId);
+
+                // console.log(cart.products);
                 const profile = await Profile.findOne({ userId: userId });
                 const user = await User.findById(userId);
 
@@ -68,7 +78,7 @@ module.exports={
                     }
                 }
                 cart.TotalAmount = totalAmount;
-                console.log(`total  :${cart.TotalAmount}`);
+                // console.log(`total  :${cart.TotalAmount}`);
 
 
                 // console.log(user);
@@ -85,13 +95,15 @@ module.exports={
 
     Checkoutpost: async (req, res) => {
         if (req.session.email) {
+            console.log("inside the email");
             try {
+                console.log("inside the tyr");
 
                 const userId = req.session.userId;
                
-                console.log(userId);
+                // console.log(userId);
                
-                console.log(req.session);
+                // console.log(req.session);
 
                 let cart;
                 const productId = req.session.productDetails2
@@ -124,13 +136,26 @@ module.exports={
                     }
 
                     cart.TotalAmount = totalAmount;
-                    console.log(cart.TotalAmount);
+                    // console.log(cart.TotalAmount);
 
-                    const { address, pincode,coupon, payment } = req.body
+                      console.log("Total Amount Has been clear");
 
-                    console.log(req.body);
+
+                    // let couponcode = req.body.coupon
+                    // const CouponCode = await Coupon.findOne({couponcode:couponcode})
+                    // let couponId=CouponCode._id
+                    
+
+                    // console.log("coupon code is  :"+CouponCode);
+                    // console.log("couponId is  :"+couponId);
+
+                    const { name, phone ,address, pincode,coupon, payment} = req.body
+                    // console.log("phone    : "+phone);
+                    // console.log(req.body);
                     const order = new Order({
                         products: cart.products,
+                        Name:name,
+                        Phone:phone,
                         Address: address,
                         Pincode:parseInt(pincode),
                         Coupon:coupon,
@@ -140,10 +165,21 @@ module.exports={
                         status: "Pending"
                     })
 
+
+                    if(Coupon){
+
+                        const CouponCode = await Coupon.findOne({couponcode:Coupon});
+                        let couponId=CouponCode._id
+                        console.log("coupon code is  :"+CouponCode);
+                        console.log("couponId is  :"+couponId);
+    
+                     }
+
                  const orderplaced =   await order.save()
+
+                
                  if(orderplaced){
-                     console.log('order is =' + order);
-                     console.log('order placed........................................................');
+                    //  console.log('order is =' + order);
  
                      delete req.session.productDetails
 
@@ -165,16 +201,27 @@ module.exports={
                     }
 
                     cart.TotalAmount = totalAmount;
-                    console.log("hiiiiiiiii  "+cart.TotalAmount);
+                    // console.log("hiiiiiiiii  "+cart.TotalAmount);
 
-                    console.log("cart is =" + cart.products);
-                    const { address, pincode, coupon ,payment } = req.body
-                    console.log(`pincode ${pincode}`);
+                    // let couponcode = req.body.coupon
+                    // const CouponCode = await Coupon.findOne({couponcode:couponcode})
+                    // let couponId=CouponCode._id
+                    
 
-                    console.log(req.body);
+                    // console.log("coupon code is  :"+CouponCode);
+                    // console.log("couponId is  :"+couponId);
+
+                    // console.log("cart is =" + cart.products);
+                    const {name, phone,address, pincode, coupon ,payment } = req.body
+                    // console.log(`pincode ${pincode}`);
+                    console.log("phone    : "+phone);
+
+                    // console.log(req.body);
 
                     const order = new Order({
                         products: cart.products,
+                        Name:name,
+                        Phone:phone,
                         Address: address,
                         Pincode:pincode,
                         Coupon:coupon,
@@ -190,13 +237,15 @@ module.exports={
                     console.log('order is =' + order);
                 }
 
-
+ 
                 res.render('orderPlaced')
 
             } catch (err) {
                 res.status(500).json({ success: false, message: 'Error creating order' });
             }
 
+        }else{
+            res.redirect('/login')
         }
 
 

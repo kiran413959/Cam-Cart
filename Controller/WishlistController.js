@@ -39,7 +39,7 @@ module.exports ={
                 res.render('whishlist', { wishLists, user, products: products });
             }
             else {
-                res.redirect("/Home")
+                res.redirect("/login")
             }
         } catch (err) {
             console.log(err);
@@ -102,6 +102,8 @@ module.exports ={
             } catch (err) {
                 console.log(err)
             }
+        }else{
+            res.redirect('/login')
         }
 
 
