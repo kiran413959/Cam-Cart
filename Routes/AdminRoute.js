@@ -23,8 +23,7 @@ const{
     
     customersget,
     customerspost,
-    Ordersget,
-    Orderspost,
+
    
     Update_Productget,
     Update_Productpost,
@@ -40,6 +39,11 @@ const{
     salesReportpost,
 
 } = require('../Controller/AdminController')
+
+const{
+    Ordersget,
+    Orderspost,
+}=require('../Controller/admin_Order_Controller')
 
 
 const{

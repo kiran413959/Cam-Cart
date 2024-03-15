@@ -2,7 +2,7 @@
 @media screen and (max-width: 1200px) {
   .container {
     width: 94%;
-    grid-template-columns: 7rem auto 23rem;
+    grid-template-columns: 7rem auto ;
   }
 
   aside .logo h2 {
@@ -55,6 +55,7 @@
   }
 
   aside {
+    height: 100vh;
     position: fixed;
     left: -100%;
     background-color: var(--color-white);
@@ -91,7 +92,7 @@
 
   aside .sidebar a:last-child {
     position: absolute;
-    bottom: 5rem;
+    bottom: 1rem;
   }
 
   aside .close {
@@ -120,7 +121,7 @@
     margin: 0 auto 4rem;
   }
 
-  .right .top {
+  main .top {
     align-items: center;
     background-color: var(--color-white);
     position: fixed;
@@ -133,24 +134,24 @@
     box-shadow: 0 1rem 1rem var(--color-light);
   }
 
-  .right .top .theme-toggler {
+  main .top .theme-toggler {
     position: absolute;
     left: 66%;
     width: 4.4rem;
   }
 
-  .right .profile .info {
+  main .profile .info {
     display: none;
   }
 
-  .right .profile .profile-photo {
+  main .profile .profile-photo {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     right: 1rem;
   }
 
-  .right .top button {
+  main .top button {
     display: inline-block;
     background-color: transparent;
     border: none;
@@ -160,7 +161,15 @@
     left: 1rem;
   }
 
-  .right .top button span {
+  main .top button span {
     font-size: 2rem;
   }
+}
+
+@media (max-width:575.98px) {
+  .product_modal>.modal_centered {
+    margin-top: 0;
+    margin-bottom: 0
+}
+
 }

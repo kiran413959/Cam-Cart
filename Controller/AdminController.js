@@ -1,6 +1,8 @@
 
 const { Admin } = require('../Model/AdminData');
 const { Products, Category, Brand } = require('../Model/ProductDatas');
+const { Order } = require('../Model/OrderData')
+
 const express = require('express')
 const { User, Profile } = require('../Model/UserData')
 const { default: mongoose } = require('mongoose')
@@ -42,12 +44,7 @@ module.exports = {
     customerspost: (req, res) => {
 
     },
-    Ordersget: (req, res) => {
-        res.render('order_List')
-    },
-    Orderspost: (req, res) => {
-
-    },
+   
 
     
     Update_Productget: (req, res) => {
