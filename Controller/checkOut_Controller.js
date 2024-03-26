@@ -1,7 +1,9 @@
 const { User, Profile, Whishlist } = require('../Model/UserData')
 const { Products, Category } = require('../Model/ProductDatas')
 const { Order } = require('../Model/OrderData')
-const {Coupon} = require("../Model/CouponData")
+const { Coupon } = require("../Model/CouponData")
+const Razopay = require('razorpay')
+const { RAZORPAY_ID_KEY, RAZORPAY_SECRET_KEY } = process.env;
 
 const { default: mongoose } = require('mongoose')
 const { ObjectId } = require('mongoose').Types;
@@ -10,15 +12,17 @@ const nodemailer = require('nodemailer')
 const { Cart } = require('../Model/CartData')
 
 
-module.exports={
+module.exports = {
     buyNowPost: async (req, res) => {
         try {
+
+            let cart = await Cart.findOne({ userId: req.session.userId })
 
             const productId = req.params.productId
             const product = await Products.findById(productId)
             // console.log("the product" + product);
             req.session.productDetails = product
-            req.session.productDetails2=product
+            req.session.productDetails2 = product
 
             res.status(200).json({ buynow: true })
 
@@ -58,12 +62,11 @@ module.exports={
                 }
 
                 let couponcode = req.body.coupon
-                    const CouponCode = await Coupon.findOne({couponcode:couponcode})
-                    let couponId=CouponCode._id
-                    
+                const CouponCode = await Coupon.findOne({ couponcode: couponcode })
+                let couponId = CouponCode._id
 
-                    console.log("coupon code is  :"+CouponCode);
-                    console.log("couponId is  innnnn  :"+couponId);
+
+
 
                 // console.log(cart.products);
                 const profile = await Profile.findOne({ userId: userId });
@@ -84,7 +87,7 @@ module.exports={
                 // console.log(user);
                 // console.log(cart.products);
 
-                res.render('checkOut', { cart, user, profile })
+                res.render('checkOut', { cart, user, profile, cartDetails })
             } catch (err) {
                 console.log(err);
             }
@@ -95,26 +98,21 @@ module.exports={
 
     Checkoutpost: async (req, res) => {
         if (req.session.email) {
-            console.log("inside the email");
             try {
-                console.log("inside the tyr");
 
                 const userId = req.session.userId;
-               
-                // console.log(userId);
-               
-                // console.log(req.session);
 
                 let cart;
-                const productId = req.session.productDetails2
-             
-                const productDetails = await Products.findById(productId)
-               
-                console.log("there is the product :" + productId);
 
+                const productId = req.session.productDetails2
+
+                const productDetails = await Products.findById(productId)
 
                 const cartDetails = await Cart.findOne({ userId: req.session.userId })
                     .populate('products.productId');
+
+                let order;
+
                 if (req.session.productDetails2) {
                     cart = {
                         products: [
@@ -127,6 +125,7 @@ module.exports={
                     }
 
                     let totalAmount = 0;
+
                     if (cart && cart.products) {
                         for (let product of cart.products) {
                             if (product.productId && product.productId.price && product.quantity) {
@@ -134,64 +133,50 @@ module.exports={
                             }
                         }
                     }
-
+                    // console.log(totalAmount);
                     cart.TotalAmount = totalAmount;
-                    // console.log(cart.TotalAmount);
 
-                      console.log("Total Amount Has been clear");
-
-
-                    // let couponcode = req.body.coupon
-                    // const CouponCode = await Coupon.findOne({couponcode:couponcode})
-                    // let couponId=CouponCode._id
-                    
-
-                    // console.log("coupon code is  :"+CouponCode);
-                    // console.log("couponId is  :"+couponId);
-
-                    const { name, phone ,address, pincode,coupon, payment} = req.body
-                    // console.log("phone    : "+phone);
-                    // console.log(req.body);
-                    const order = new Order({
+                    const { name, phone, address, pincode, coupon, payment } = req.body
+                    console.log(" first body", req.body);
+                    order = new Order({
                         products: cart.products,
-                        Name:name,
-                        Phone:phone,
+                        Name: name,
+                        Phone: phone,
                         Address: address,
-                        Pincode:parseInt(pincode),
-                        Coupon:coupon,
+                        Pincode: pincode,
+                        Coupon: coupon,
                         TotalAmount: cart.TotalAmount,
-                        Payment: payment,
+                        Payment: [{ type: payment }],
+                        PaymentStatus: "Pending",
                         userId: userId,
                         status: "Pending"
                     })
+                    // Saving the order
 
 
-                    if(Coupon){
+                    if (!Coupon == "") {
 
-                        const CouponCode = await Coupon.findOne({couponcode:Coupon});
-                        let couponId=CouponCode._id
-                        console.log("coupon code is  :"+CouponCode);
-                        console.log("couponId is  :"+couponId);
-    
-                     }
+                        const CouponCode = await Coupon.findOne({ couponcode: Coupon });
+                        let couponId = CouponCode._id
 
-                 const orderplaced =   await order.save()
+                    }
 
-                
-                 if(orderplaced){
-                    //  console.log('order is =' + order);
- 
-                     delete req.session.productDetails
+                    const orderPlaced = await order.save()
+                    console.log(orderPlaced, "Order placed");
+                    console.log('order saved');
 
-                 }
+                    if (orderPlaced) {
+
+                        delete req.session.productDetails
+
+                    }
 
 
 
                 } else {
                     cart = cartDetails
-
-
                     let totalAmount = 0;
+
                     if (cart && cart.products) {
                         for (let product of cart.products) {
                             if (product.productId && product.productId.price && product.quantity) {
@@ -201,56 +186,90 @@ module.exports={
                     }
 
                     cart.TotalAmount = totalAmount;
-                    // console.log("hiiiiiiiii  "+cart.TotalAmount);
 
-                    // let couponcode = req.body.coupon
-                    // const CouponCode = await Coupon.findOne({couponcode:couponcode})
-                    // let couponId=CouponCode._id
-                    
+                    const { name, phone, address, pincode, coupon, payment } = req.body
 
-                    // console.log("coupon code is  :"+CouponCode);
-                    // console.log("couponId is  :"+couponId);
+                    console.log("req body befor saving", req.body);
 
-                    // console.log("cart is =" + cart.products);
-                    const {name, phone,address, pincode, coupon ,payment } = req.body
-                    // console.log(`pincode ${pincode}`);
-                    console.log("phone    : "+phone);
-
-                    // console.log(req.body);
-
-                    const order = new Order({
+                    order = new Order({
                         products: cart.products,
-                        Name:name,
-                        Phone:phone,
+                        Name: name,
+                        Phone: phone,
                         Address: address,
-                        Pincode:pincode,
-                        Coupon:coupon,
-
+                        Pincode: pincode,
+                        Coupon: coupon,
                         TotalAmount: cart.TotalAmount,
-                        Payment: payment,
+                        Payment: [
+                           {type: payment}
+                        ],
+                        PaymentStatus: "Pending",
                         userId: userId,
                         status: "Pending"
                     })
 
-                    await order.save()
 
-                    console.log('order is =' + order);
+                    if (Coupon) {
+
+                        const CouponCode = await Coupon.findOne({ couponcode: Coupon });
+                        let couponId = CouponCode._id
+
+                    }
+
+                    await order.save()
+                    console.log(" order placed  :", order);
+
                 }
 
- 
-                res.render('orderPlaced')
+                if (req.body.payment == "COD") {
 
+                    console.log("cod  is   :", req.body.payment);
+                    res.status(200).json({ success: true, message: "Order Placed Successfully! Your order will be processed soon." })
+
+                } else {
+
+                    let Totalamount = order.TotalAmount;
+
+                    var instance = new Razopay({
+                        key_id: RAZORPAY_ID_KEY,
+                        key_secret: RAZORPAY_SECRET_KEY
+                    });
+
+
+                    var options = {
+                        amount: Totalamount,
+                        currency: "INR",
+                        receipt: toString(order._id)
+                    };
+
+                    const key_id = RAZORPAY_ID_KEY
+
+                    instance.orders.create(options, function (err, CreateOrder) {
+                        if (err) {
+                            console.log(err);
+                            return (err);
+                        } else {
+                            console.log("order is here " + JSON.stringify(CreateOrder));
+
+                        }
+
+                        res.json({ CreateOrder, key_id, order });
+                    });
+                }
             } catch (err) {
+                console.log(err)
                 res.status(500).json({ success: false, message: 'Error creating order' });
             }
 
-        }else{
+        } else {
             res.redirect('/login')
         }
 
-
-
-        // console.log(req.body);
     },
+
+
+
+    orderpalced_successget: (req, res) => {
+        res.render('orderPlaced')
+    }
 
 }

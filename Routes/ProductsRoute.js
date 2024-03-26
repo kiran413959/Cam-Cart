@@ -15,7 +15,7 @@ const{
     OderStatusget,
     OderStatuspost,
     Paymentget,
-    Paymentpost
+    Paymentpost,
 
 
 }=require('../Controller/ProductsController')
@@ -31,6 +31,7 @@ const {
 const {
 
     cartget,
+    cartcountpopst,
     addToCartPost,
     removeFromcartPost,
     deletefromcartPost,
@@ -59,6 +60,7 @@ router
 
 
       .get('/cart',cartget)
+      .post('/cart/count/:productId', cartcountpopst)
       .post('/cart/add/:productId', addToCartPost)
       .post('/cart/remove/:productId', removeFromcartPost)
       .post('/cart/delete/:productId', deletefromcartPost)

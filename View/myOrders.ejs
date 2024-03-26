@@ -94,7 +94,7 @@
                                     d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                             </svg>
                         </a>
-                        <div class="badge rounded-pill cart_badge">3</div>
+                        <div class="badge rounded-pill cart_badge"> <%= cart.products.length %> </div>
                         <span class="tool_tip">Cart</span>
                     </div>
 
@@ -396,28 +396,35 @@
                                                 <div class="product_price">
                                                     <b>₹
                                                         <%= product.price %>
+
                                                             <small>.00</small>
                                                     </b>
                                                 </div>
 
+
+                                                
                                                 <div class="shipping_details">
-                                                    <div>
-
+                                                        <div>
+                                                            
                                                         <h4> NAME :
-                                                             <b> <%= order.Name %> </b> </h4>
+                                                            <b> <%= order.Name %> </b> </h4>
 
-                                                             <h4> PHONE  : 
-                                                                 <b> <%= order.Phone%> </b> </h4>
+                                                            <h4> PHONE  : 
+                                                                <b> <%= order.Phone%> </b> </h4>
+                                                                
+                                                                 <h4> ADDRESS :<br>
+                                                                    <b> <%= order.Address%>  </b> </h4>
+                                                                    
+                                                                    <h4> PINCODE :
+                                                                        <b> <%= order.Pincode %>  </b> </h4>
+                                                                        
+                                                                       
 
-                                                        <h4> ADDRESS :<br>
-                                                            <b> <%= order.Address%>  </b> </h4>
+                                                                        <h4> Payment Type  : <b> <%= order.Payment[0].type %> </b> </h4>
 
-                                                        <h4> PINCODE :
-                                                             <b> <%= order.Pincode %>  </b> </h4>
-
-                                                        <h4> Payment Type  : <b> <%= order.Payment %> </b> </h4>
-
-                                                        <h4> Shipping Status  : <b> <%= order.status %></b> </h4>
+                                                                        <h4> Payment Status  : <b> <%= order.PaymentStatus %> </b> </h4>
+                                                                        
+                                                        <h4> Shipping Status  : <b> <%= order.Shipping_status %></b> </h4>
 
 
 
@@ -448,6 +455,7 @@
                                                         <li>
 
                                                             <%= product.productId.discription %>
+
                                                         </li>
 
                                                     </ul>
@@ -473,8 +481,11 @@
                         <% } %>
                             <% }) %>
 
-                                <!--============== *Quick View Section* ==============-->
 
+
+
+
+                        <!--============== *Quick View Section* ==============-->
 
     </main>
 

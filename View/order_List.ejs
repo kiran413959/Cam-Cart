@@ -237,25 +237,25 @@
                     <div>
 
                       <h4> NAME :
-                        <b> order.Name </b>
+                        <b> <%= data.Name %> </b>
                       </h4>
 
                       <h4> PHONE :
-                        <b> order.Phone </b>
+                        <b> <%= data.Phone %> </b>
                       </h4>
 
-                      <h4> ADDRESS :<br>
+                      <h4> ADDRESS :
                         <b>
-                          < order.Address </b>
+                          <%= data.Address %> </b>
                       </h4>
 
                       <h4> PINCODE :
-                        <b> = order.Pincode </b>
+                        <b>  <%= data.Pincode %> </b>
                       </h4>
 
-                      <h4> Payment Type : <b> order.Payment </b> </h4>
+                      <h4> Payment Type : <b> <%= data.Payment %> </b> </h4>
 
-                      <h4> Shipping Status : <b> order.status </b> </h4>
+                      <h4> Shipping Status : <b> <%= data.status %> </b> </h4>
 
 
 
@@ -264,19 +264,19 @@
                     </div>
                   </div>
 
-                  <div class="product_btns">
-                    <button type="button" class="cancel" id="order_cancel" data-product-id=" product.productId._id ">
+                  <!-- <div class="product_btns">
+                    <button type="button" class="cancel" id="order_cancel" data-product-id=" order.productId._id ">
                       <i class="bi"></i> &#160; Cancel
                       Order</button>
 
-                  </div>
+                  </div> -->
 
                   <div class="product_features">
                     <h5>Product Highlights -</h5>
                     <ul class="mt-3">
                       <li>
 
-                        product.productId.discription
+                       <%= order.productId.discription %>
                       </li>
 
                     </ul>

@@ -33,8 +33,8 @@ const{
     Manage_Revivewspost,
     Paymentsget,
     Paymentspost,
-    Stock_Detailsget,
-    Stock_Detailspost,
+    coupons_Detailsget,
+    coupons_Detailspost,
     salesReportget,
     salesReportpost,
 
@@ -111,8 +111,8 @@ router.get('/admin_signup',admin_signupget)
       .get('/Payments',Paymentsget)
       .post('/Payments',Paymentspost)
       
-      .get('/StockDetails',Stock_Detailsget)
-      .post('/StockDetails',Stock_Detailspost)
+      .get('/coupons',coupons_Detailsget)
+      .post('/coupons',coupons_Detailspost)
 
       .get('/salesReport',salesReportget)
       .post('/salesReport',salesReportpost);

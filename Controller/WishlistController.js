@@ -13,6 +13,10 @@ module.exports ={
     Whishlistget: async (req, res) => {
         try {
             if (req.session.email) {
+
+
+                let cart = await Cart.findOne({ userId: req.session.userId })
+
                 let wishLists = await Whishlist.find({ userId: req.session.userId });
                 console.log(wishLists);
                 const userEmail = req.session.email;
@@ -36,7 +40,7 @@ module.exports ={
 
                 //console.log(whishList);
 
-                res.render('whishlist', { wishLists, user, products: products });
+                res.render('whishlist', { wishLists, user, products: products,cart });
             }
             else {
                 res.redirect("/login")

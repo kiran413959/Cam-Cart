@@ -97,7 +97,7 @@
                                     d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                             </svg>
                         </a>
-                        <div class="badge rounded-pill cart_badge">3</div>
+                        <div class="badge rounded-pill cart_badge"> <%= cart.products.length %> </div>
                         <span class="tool_tip">Cart</span>
                     </div>
 
@@ -164,7 +164,7 @@
             </div>
 
             <ul class="mb-0 ps-0 sidebar_list">
-                <li><i class="bi bi-bag-check me-2"></i> <a href='/oderlist'>My Orders</a></li>
+                <li><i class="bi bi-bag-check me-2"></i> <a href='/myOrders'>My Orders</a></li>
                 <li><i class="bi bi-heart me-2"></i> <a href="/whishlist">My Wishlist</a></li>
                 <li><i class="bi bi-person me-2"></i> <a href="/profile">My Account</a></li>
                 <li><i class="bi bi-geo-alt me-2"></i> <a href="/oderstatus">Order Tracking</a></li>
@@ -315,18 +315,32 @@
             </div>
 
             <div class="products_wrapper">
-
                 <div class="products_card">
-                    <figure class="products_img">
-                        <b>Cameras</b>
-                        <img src="/assets/img/products/pro1.png" alt="">
-                    </figure>
-                    <div class="products_info">
-                        <h6>DSLR Cameras</h6>
-                    </div>
+                    <a href="/product/?category=DSLR_Cameras">
+                        <figure class="products_img">
+                            <b>Cameras</b>
+                            <img src="/assets/img/products/pro1.png" alt="">
+                        </figure>
+                        <div class="products_info">
+                            <h6>DSLR Cameras</h6>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="products_card">
+                    <a href="/product/?category=Mirrorless_Cameras">
+                        <figure class="products_img">
+                            <b>Mirrorless</b>
+                            <img src="/images/1708335639537-3.png" alt="">
+                        </figure>
+                        <div class="products_info">
+                            <h6>Mirrorless Cameras</h6>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="products_card">
+                    <a href="/product/?category=Action_Cameras">
                     <figure class="products_img">
                         <b>Action</b>
                         <img src="/assets/img/products/pro2.png">
@@ -334,9 +348,11 @@
                     <div class="products_info">
                         <h6>Action Cameras</h6>
                     </div>
+                </a>
                 </div>
 
                 <div class="products_card">
+                    <a href="/product/?category=Compact_Cameras">
                     <figure class="products_img">
                         <b>Compact</b>
                         <img src="/assets/img/products/pro3.png" alt="">
@@ -344,9 +360,11 @@
                     <div class="products_info">
                         <h6>Compact Cameras</h6>
                     </div>
+                </a>
                 </div>
 
                 <div class="products_card">
+                    <a href="/product/?category=Camcorders">
                     <figure class="products_img">
                         <b>Camcorders</b>
                         <img src="/assets/img/products/pro4.png" alt="">
@@ -354,9 +372,11 @@
                     <div class="products_info">
                         <h6>Camcorders</h6>
                     </div>
+                </a>
                 </div>
 
                 <div class="products_card">
+                    <a href="/product/?category=Lenses">
                     <figure class="products_img">
                         <b>Lenses</b>
                         <img src="/assets/img/products/pro5.png" alt="">
@@ -364,9 +384,11 @@
                     <div class="products_info">
                         <h6>Lenses</h6>
                     </div>
+                </a>
                 </div>
 
                 <div class="products_card">
+                    <a href="/product/?category=Accessories">
                     <figure class="products_img">
                         <b>Accessories</b>
                         <img src="/assets/img/products/pro6.png" alt="">
@@ -374,6 +396,31 @@
                     <div class="products_info">
                         <h6>Accessories</h6>
                     </div>
+                </a>
+                </div>
+
+                <div class="products_card">
+                    <!-- <a href="/product/?category=Accessories">
+                    <figure class="products_img">
+                        <b>Accessories</b>
+                        <img src="/assets/img/products/pro6.png" alt="">
+                    </figure>
+                    <div class="products_info">
+                        <h6>Accessories</h6>
+                    </div>
+                </a> -->
+                </div>
+
+                <div class="products_card">
+                    <!-- <a href="/product/?category=Accessories">
+                    <figure class="products_img">
+                        <b>Accessories</b>
+                        <img src="/assets/img/products/pro6.png" alt="">
+                    </figure>
+                    <div class="products_info">
+                        <h6>Accessories</h6>
+                    </div>
+                </a> -->
                 </div>
 
             </div>
@@ -391,15 +438,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="popular_wrapper">
-                    <% category.forEach(product=> { %>
+                <% category.forEach(product=> { %>
                     <div class="popular_card">
 
-                        <i class="wishlist-button <%= wishlist && wishlist.products.includes(product._id)? 'bi bi-heart-fill' : 'bi bi-heart'  %>"  data-product-id="<%= product._id%>" 
-                            
-                            ></i>
-                                    
+                        <i class="wishlist-button <%= wishlist && wishlist.products.includes(product._id)? 'bi bi-heart-fill' : 'bi bi-heart'  %>"
+                            data-product-id="<%= product._id%>"></i>
+
                         <figure class="popular_img">
 
                             <img src="/images/<%= product.imageurl %>" alt="product">
@@ -413,7 +459,7 @@
                             </h4>
                             <div class="popular_price">
                                 <b>₹ <%= product.price%></b>
-                              
+
 
                             </div>
                         </div>
@@ -422,26 +468,27 @@
                                     class="bi bi-eye"></i>
                                 &#160; Quick
                                 Look</button>
-                            <button type="button" class="popular_cart_btn cart_btn"   data-product-id="<%= product._id%>"  > <i class="bi bi-cart3"></i> &#160;
+                            <button type="button" class="popular_cart_btn cart_btn add_to_cart" data-product-id="<%= product._id%>">
+                                <i class="bi bi-cart3"></i> &#160;
                                 Add
                                 to
                                 Cart</button>
                         </div>
                     </div>
                     <% }) %>
-                    
-                    
-
-                    <!--------------------------------------//browse more//------------------------->
 
 
-                    <div class="d-flex justify-content-center align-items-center popular_card">
-                        <a class="browse_btn btn_arrow sidebar_toggler drop_down_head">Browse <br> More
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
 
-                </div>
+                        <!--------------------------------------//browse more//------------------------->
+
+
+                        <div class="d-flex justify-content-center align-items-center popular_card">
+                            <a class="browse_btn btn_arrow sidebar_toggler drop_down_head">Browse <br> More
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+
+            </div>
         </section>
         <!-- /Popular Section -->
 
@@ -707,9 +754,9 @@
 
     <!--============== Product- ==============-->
     <% category.forEach(product=> { %>
-    <section class="product_modal <%= product._id%>">
-        <div class="modal_centered">
-            <div class="container">
+        <section class="product_modal <%= product._id%>">
+            <div class="modal_centered">
+                <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-xxl-10 col-xl-11 col-12">
 
@@ -741,7 +788,7 @@
                                         <div class="swiper-wrapper">
 
                                             <div class="swiper-slide">
-                                                <img src="  /images/<%= product.imageurl  %>" alt="product-img" >
+                                                <img src="  /images/<%= product.imageurl  %>" alt="product-img">
                                             </div>
                                             <!-- <div class="swiper-slide">
                                                 <img src="<%=   %>" alt="product-img" />
@@ -779,9 +826,7 @@
                                     </div>
 
                                     <div class="product_wishlist">
-                                        <i class="bi bi-heart"  data-product-id="<%= product._id%>"  
-                                        
-                                        ></i>
+                                        <i class="bi bi-heart" data-product-id="<%= product._id%>"></i>
                                         <i class="bi bi-share ms-4"></i>
                                     </div>
 
@@ -794,9 +839,11 @@
                                     </div>
 
                                     <div class="product_btns">
-                                        <button type="button" class="buy_btn" id="buyNow"  data-product-id="<%= product._id%>" > <i class="bi bi-bag"></i> &#160; Buy
+                                        <button type="button" class="buy_btn" id="buyNow"
+                                            data-product-id="<%= product._id%>"> <i class="bi bi-bag"></i> &#160; Buy
                                             Now</button>
-                                        <button type="button" class="me-2 cart_btn"   data-product-id="<%= product._id%>" > <i class="bi bi-cart3"></i> &#160;
+                                        <button type="button" class="me-2 cart_btn  add_to_cart" data-product-id="<%= product._id%>">
+                                            <i class="bi bi-cart3"></i> &#160;
                                             Add
                                             to
                                             Cart</button>
@@ -820,30 +867,30 @@
                             </div>
 
                         </div>
-                        
+
                     </div>
                 </div>
-                
+
             </div>
-            
+
             <div class="close_btn product_close" title="Close">
                 <span></span>
                 <span></span>
             </div>
         </section>
         <% }) %>
-    <!-- /Product -->
+            <!-- /Product -->
 
 
 
 
 
-    <!--============== Javascript Files ==============-->
-    <script src="/assets/js/jquery-3.6.0.min.js"></script>
-    <script src="/assets/swiper/swiper-bundle.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/main.js"></script>
-    <!-- <script src="js/heart.js"></script> -->
+            <!--============== Javascript Files ==============-->
+            <script src="/assets/js/jquery-3.6.0.min.js"></script>
+            <script src="/assets/swiper/swiper-bundle.min.js"></script>
+            <script src="/assets/js/bootstrap.min.js"></script>
+            <script src="/assets/js/main.js"></script>
+            <!-- <script src="js/heart.js"></script> -->
 </body>
 
 </html>

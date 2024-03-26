@@ -264,51 +264,7 @@ main .insights h3 {
   margin: 1rem 0 0.6rem;
 }
 
-main .insights .progress {
-  position: relative;
-  border-radius: 50%;
-  height: 5.75rem;
-  width: 5.75rem;
-}
 
-main .insights svg {
-  height: 7rem;
-  width: 7rem;
-}
-
-main .insights svg circle {
-  fill: none;
-  stroke: var(--color-primary);
-  stroke-width: 14;
-  stroke-linecap: round;
-  transform: translate(6px, 6px);
-}
-
-main .insights .sales svg circle {
-  stroke-dashoffset: -30;
-  stroke-dasharray: 200;
-}
-
-main .insights .expenses svg circle {
-  stroke-dashoffset: 20;
-  stroke-dasharray: 80;
-}
-
-main .insights .income svg circle {
-  stroke-dashoffset: 35;
-  stroke-dasharray: 110;
-}
-
-main .insights .progress .number {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 main .insights small {
   display: block;
@@ -552,4 +508,30 @@ main .recent-orders a {
   }
 
   /* Adjust other styles as needed */
+}
+
+
+.progress{
+  width: 120%;
+  height: 150%;
+  border-radius: 2rem;
+  background-color: gray;
+  opacity: .9;
+  display: block;
+  position: relative;
+  bottom: -50%;
+  right: 10%;
+
+}
+
+
+.progress:hover{
+
+  opacity: 5;
+  position: relative;
+  bottom: 125%;
+    right: 10%;
+
+
+
 }

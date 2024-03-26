@@ -19,9 +19,10 @@ module.exports = {
     Homeget: async (req, res) => {
         if(req.session.email){  
         const user = await User.findById(req.session.userId)
+        let cart = await Cart.findOne({ userId: req.session.userId })
         // console.log(id);
 
-        res.render('userHome', { user });
+        res.render('userHome', { user,cart });
         }else{
             res.redirect('/login')
         }

@@ -75,11 +75,11 @@ module.exports = {
     Paymentspost: (req, res) => {
 
     },
-    Stock_Detailsget: (req, res) => {
-        res.render('stockDetails')
+    coupons_Detailsget: (req, res) => {
+        res.render('coupon')
 
     },
-    Stock_Detailspost: (req, res) => {
+    coupons_Detailspost: (req, res) => {
 
     },
     salesReportget: (req, res) => {

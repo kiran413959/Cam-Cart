@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const { loginValidation, signupValidation } = require('../Middleware/Validation')
+
 // ,
 
 const{
@@ -42,7 +43,9 @@ const {
 const {
   buyNowPost,
   Checkoutget,
-  Checkoutpost,
+  Checkoutpost ,
+  orderpalced_successget
+
 }=require('../Controller/checkOut_Controller')
 
 
@@ -51,6 +54,11 @@ const {
   couponApplypost
 }=require('../Controller/coupon_Controller');
 
+
+const {
+    razopayGet,
+    razopayPost
+ }=require('../Controller/Payment_Controller')
 
 router.get('/signup', signupget)
       .post('/signup', signupValidation, signuppost)
@@ -103,6 +111,8 @@ router.get('/signup', signupget)
       .post('/buynow/:productId',buyNowPost)
       .get( '/checkout' , Checkoutget )
       .post( '/checkout' , Checkoutpost )
+    
+    .get('/Order_Placed_Success', orderpalced_successget  )
 
 
   //my Oders related Route
@@ -117,6 +127,11 @@ router.get('/signup', signupget)
       .post('/couponApply',couponApplypost)
 
 
+
+    //  RAZOPAY Payment  Gateway API Calls
+
+    .get('/razopay', razopayGet)
+    .post('/razorpay-payment-successful',razopayPost)
 
 
   //Error Handling 404 Page Not Found

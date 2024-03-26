@@ -26,8 +26,12 @@ module.exports={
                 return res.status(404).json({ error: "No products found for the specified category" });
             }
             const wishlist = await Whishlist.findOne({ userId: req.session.userId })
+
+            let cart = await Cart.findOne({ userId: req.session.userId })
+
+
             // Render the 'allProducts' template with the retrieved products
-            res.render('allProducts', { category, wishlist: wishlist });
+            res.render('allProducts', { category, wishlist: wishlist,cart });
         } catch (error) {
             // Handle any errors that occur during database query or rendering
             console.error("Error retrieving products:", error);
@@ -61,8 +65,11 @@ module.exports={
     cartget: async(req,res)=>{
         if(req.session.email){
         const user= await  User.findById(req.session.userId)
+
+        let cart = await Cart.findOne({ userId: req.session.userId })
+
         console.log(user)
-        res.render('cart',{user})
+        res.render('cart',{user,cart})
         }else{
             res.redirect('/login')
         }

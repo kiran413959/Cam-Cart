@@ -2,6 +2,7 @@ const express = require('express')
 const { User, Profile, Whishlist } = require('../Model/UserData')
 const { Products, Category } = require('../Model/ProductDatas')
 const { Order } = require('../Model/OrderData')
+
 const {Coupon} = require("../Model/CouponData")
 const { default: mongoose } = require('mongoose')
 const { ObjectId } = require('mongoose').Types;
@@ -24,15 +25,29 @@ module.exports = {
                 const user= await User.findById(userId)
                 // console.log(user)
 
+
+                //cout of items in cart
+                let cart = await Cart.findOne({ userId: req.session.userId })
+
     
                 // Fetch orders and populate products with their details
                 const orders = await Order.find({ userId: userId }).populate('products.productId');
-                // console.log("Orders:", orders);
-    
+                console.log("Orders:", orders);
+                
+                
+
                 // Extract product details from orders
                 const products = orders.flatMap(order => order.products.map(product => product.productId));
-                // console.log("Products:", products);
+                console.log("Products:", products);
     
+
+                // Extaract Payment Details from orders
+
+                const payment = orders.map(order => order.Payment);
+                console.log("payment:", payment);
+
+
+
                 //Fetch Coupon  Details  for each product
                 
                 let coupon = req.body.coupon
@@ -43,7 +58,7 @@ module.exports = {
 
 
                 // Render myOrders view with orders and products
-                res.render('myOrders', { orders, products });
+                res.render('myOrders', { orders, products, payment, cart });
     
                 // Fetch and log total number of orders
                 // const orderCount = await Order.countDocuments();

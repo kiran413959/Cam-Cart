@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cam Cart Customers</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
     <link rel="stylesheet" href="customers-main/css/styles.css" />
     <link rel="stylesheet" href="customers-main/css/responsive.css" />
@@ -100,22 +101,18 @@
                 <!-- ---------- Sales ---------- -->
           <% newprofile.forEach(profile=> { %>
                
-                <div class="sales">
-                    <div class="middle">
-                        <div class="left">
-                            <h3> phone number </h3>
-                            <h1> <%= profile.name%> </h1>
-                        </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36"></circle>
-                            </svg>
-                            <div class="number">
-                                <p>81%</p>
-                            </div>
-                        </div>
+            <div class="sales">
+                <div class="middle">
+                    <div class="left">
+                        <h3> <%= profile.Phone %> </h3>
+                        <h1> <%= profile.name%> </h1>
                     </div>
-                    <small class="text-muted"> <%= profile.email%> </small>
+                    
+                    
+                </div>
+                <small class="text-muted"> <%= profile.email%> </small>
+                <div class="progress">
+            </div>
                 </div>
 
           <% }) %>

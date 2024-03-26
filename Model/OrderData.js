@@ -1,6 +1,18 @@
 
-const { string } = require('joi')
+// const { string } = require('joi')
 const mongoose = require('mongoose')
+
+const paymentSchema = new mongoose.Schema({
+    type: String, //
+
+  PaymentId: {
+      type: String,
+  },
+  Amount: {
+      type: String
+  }
+});
+
 
 const OrderSchema = new mongoose.Schema({
 
@@ -38,9 +50,12 @@ const OrderSchema = new mongoose.Schema({
   },
 
   Payment: {
-    type: String,
-    ref: "Payments"
-
+    type: [paymentSchema],
+    default: []
+  },
+  PaymentStatus:{
+    type:String,
+    enum:['Pending','Successful','Failed']
   },
 
   userId: {
@@ -48,27 +63,18 @@ const OrderSchema = new mongoose.Schema({
     
   },
 
-  status:{
+  Shipping_status:{
     type:String,
     enum:['Pending','Delivered'],
     default:'Pending',
   }
 
-
 })
 
 
-const PaymentSchema = new mongoose.Schema({
-  id: {
-    type: String
-  },
-  method: {
-    type: String
-  }
-})
+
 
 
 module.exports = {
   Order: mongoose.model("Orderdetails", OrderSchema),
-  Payment: mongoose.model("PaymentDetails", PaymentSchema)
 }

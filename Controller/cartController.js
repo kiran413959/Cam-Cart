@@ -47,6 +47,75 @@ module.exports = {
         }
     },
 
+    cartcountpopst: async (req, res) => {
+
+        if(req.session.email){
+            try{
+
+                const productId = req.params.productId;
+                const productId1 = new mongoose.Types.ObjectId(productId);
+
+                console.log("Product ID : " + productId);
+                const userId = req.session.userId;
+                console.log("User Id : "+userId);
+                const cart = await Cart.findOne({ userId: req.session.userId }) 
+                console.log("Cart : ", cart);
+                const product = await Products.findById(productId1).lean()
+
+
+                if (!cart) {
+                    cart = new Cart({
+                    products: [],
+                    userId: userId,
+                    TotalAmount: 0
+                })
+            }      
+
+
+                let productExists = cart.products.find(item => item.productId == productId)
+
+
+                console.log("Does the Product Exists ? ", productExists);
+                
+                if (!productExists) {
+
+                    const product = await Products.findById(productId);
+                    console.log(product);
+                    // If the product doesn't exist, add it to the cart with quantity 1
+                    cart.products.push({
+                        productId: productId1,
+                        quantity: 1,
+                        price: product.price
+                    });
+                    cartCount=  cart.products.length;
+                    res.json({ count: true  });
+
+                }else{
+                res.json({ count: false  });
+
+                }
+                // Calculate total amount and save the cart
+                cart.TotalAmount = cart.products.reduce((total, product) => {
+                    return total + product.price;
+                }, 0)
+
+                await cart.save();
+
+
+                res.status(200).json({ success: true  });
+
+            }catch(err){
+
+                console.log(err);
+            }
+        }else {
+            res.redirect('/login')
+        }
+
+
+
+    },
+
     addToCartPost: async (req, res) => {
         if (req.session.email) {
             // console.log(req.session.userId);
@@ -56,19 +125,24 @@ module.exports = {
                 const userId = req.session.userId;
                 console.log(userId);
                 console.log("hiiiii" + productId);
+                
                 let cart = await Cart.findOne({ userId: userId })
+                
                 const product = await Products.findById(productId1).lean()
+                let cartCount
+                
                 if (!cart) {
-                    cart = new Cart({
+                        cart = new Cart({
                         products: [],
                         userId: userId,
                         TotalAmount: 0
                     })
                 }
-                console.log(cart);
+                // console.log(cart);
 
                 let productExists = cart.products.find(item => item.productId == productId)
 
+                console.log(productExists);
 
                 if (productExists) {
                     // Check if the product exists in the cart
@@ -81,28 +155,35 @@ module.exports = {
                     productExists.price = product.price * productExists.quantity;
 
                     await productExists.save();
+                    
                 }
+                
+                
+                // if (!productExists) {
+                //     const product = await Products.findById(productId);
+                //     console.log(product);
+                //     // If the product doesn't exist, add it to the cart with quantity 1
+                //     cart.products.push({
+                //         productId: productId1,
+                //         quantity: 1,
+                //         price: product.price
+                //     });
 
+                //     cartCount=  cart.products.length;
+                //         //     console.log(cartCount , ":   is the count after");
+                //     // res.json({ count: true });
 
-                if (!productExists) {
-                    const product = await Products.findById(productId);
-                    console.log(product);
-                    // If the product doesn't exist, add it to the cart with quantity 1
-                    cart.products.push({
-                        productId: productId1,
-                        quantity: 1,
-                        price: product.price
-                    });
-                }
+                // }
                 // Calculate total amount and save the cart
                 cart.TotalAmount = cart.products.reduce((total, product) => {
                     return total + product.price;
                 }, 0)
+                
 
                 await cart.save();
 
-                console.log(cart);
-                res.status(200).json({ success: true });
+                // console.log(cart);
+                res.status(200).json({ success: true  });
             } catch (err) {
                 console.log(err)
             }
@@ -132,7 +213,9 @@ module.exports = {
                         cart.products[productIndex].price = product.price * cart.products[productIndex].quantity
                     } else {
                         // If the quantity is already 1, do not decrement further
-                        return res.status(400).json({ success: false, error: "Minimum quantity reached" });
+                        cart.products[productIndex].price = product.price * 1  ;
+
+                        return res.status(200).json({ success: true, error: "Minimum quantity reached" });
                     }
                 } else {
                     return res.status(404).json({ success: false, error: "Product not found in cart" });
@@ -166,8 +249,8 @@ module.exports = {
 
     deletefromcartPost: async (req, res) => {
 
-        try {
-            if (req.session.email) {
+        if (req.session.email) {
+            try {
                 const userId = req.session.userId;
                 const productId = req.params.productId;
                 console.log(productId);
@@ -188,17 +271,15 @@ module.exports = {
                 if (!cart)
                     throw new Error("No such cart exists!");
                 res.status(200).json({ success: true, message: "Deleted from cart!" })
-            } else {
-                res,redirect( '/login' )
-                // return res.status(401).json({ success: false, error: "User is not logged In!" })
+            } catch (err) {
+                console.log(err);
             }
 
 
-
-        } catch (err) {
-            console.log(err);
+        } else {
+                res,redirect( '/login' )
+                // return res.status(401).json({ success: false, error: "User is not logged In!" })
         }
-
 
 
     },

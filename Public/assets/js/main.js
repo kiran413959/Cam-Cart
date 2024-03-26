@@ -15,8 +15,9 @@ Project Name : Cam Cart - Ecommerce Website
 Designed & Coded by : Kiran kumar
 */
 
-// import Swal from 'sweetalert2/dist/sweetalert2.js'
-// import 'sweetalert2/src/sweetalert2.scss'
+
+
+// const Swal = require('sweetalert2')
 
 $(window).on("load", function () {
     $("#preloader").fadeOut(1e3)
@@ -147,10 +148,66 @@ $(window).on("load", function () {
         }),
 
 
+
+
+        $(document).ready(function () {
+            $('.add_to_cart').on('click', function (event) {
+                event.preventDefault();
+
+
+                var productId = $(this).attr('data-product-id');
+
+
+                console.log(productId);
+                let e = $(this);
+
+
+                if (productId) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/cart/count/' + productId,
+                        data: {
+                            productId: productId
+
+
+                        },
+
+
+                        success: function (response) {
+
+                            console.log(response);
+                            console.log(response + "resond");
+                            if (response.count) {
+
+                                const count =$(".cart_badge")
+
+                                console.log(count);
+
+                                count[0].innerText=`${1+ +count[0].innerText}`
+
+
+                              
+
+                            } else {
+                                console.log(`Error: ${response}`);
+                            }
+                        },
+                        error: function (error) {
+                            console.error('Error :', error);
+                        }
+                    });
+                }
+            });
+        });
+
+
+
+
+
             /// <!--============== *Cart Add Section* ==============-->///
 
             $(document).ready(function () {
-                $('.cart_btn').on('click', function (event) {
+                $('.cart_add').on('click', function (event) {
                     event.preventDefault();
 
 
@@ -197,10 +254,16 @@ $(window).on("load", function () {
                                     TotPrice[0].innerText = `${newtotalprice}`
                                     console.log(newtotalprice);
 
+                                    const subtotalAmount = $('#subtotal');
+                                    subtotalAmount[0].innerText = `${+subtotalAmount[0].innerText + +productprice}`
+
+                                    const totalMRPAmount = $('#totalMRP');
+                                    totalMRPAmount[0].innerText = `${+totalMRPAmount[0].innerText + +productprice}`
+
                                     const totalAmount = $('#total');
                                     totalAmount[0].innerText = `${+totalAmount[0].innerText + +productprice}`
 
-                                    const subtotal = parseInt(totalAmount[0].innerText);
+                                    // const subtotal = parseInt(totalAmount[0].innerText);
 
                                     console.log(totalAmount[0].innerText);
 
@@ -229,6 +292,7 @@ $(window).on("load", function () {
             /// <!--============== *Cart Remove Section* ==============-->///
 
             $(document).ready(function () {
+                
                 $('.minus').on('click', function (event) {
                     console.log('calling')
                     event.preventDefault();
@@ -244,43 +308,48 @@ $(window).on("load", function () {
                             },
                             success: function (response) {
                                 console.log(response);
-                                if (response) {
+                                if (response.success) {
                                     const cartId = `#id${productId}`;
                                     const cartQuantity = $(cartId);
-                                    // var quantity = cartQuantity[0].innerText;
-                                    console.log(cartQuantity[0].innerText);
-                                    if (cartQuantity[0].innerText > 0) {
+                                    const realPrice = `#price${productId}`;
+                                    const TotPrice = $(`#totalprice${productId}`);
 
-                                        cartQuantity[0].innerText = `${cartQuantity[0]?.innerText - 1}`  // Decrease quantity by 1
-                                        var quantity = parseInt(cartQuantity[0].innerText)
+                                    if (cartQuantity[0].innerText == 1) {
+
+                                        Swal.fire("Minimum Quantity Reached!");
+
+                                        const productprice = parseInt($(realPrice)[0].innerText);
+                                        TotPrice[0].innerText = `${productprice}`;
+                                    } else if (cartQuantity[0].innerText > 1) {
+                                        var quantity = parseInt(cartQuantity[0].innerText);
+                                        cartQuantity[0].innerText = `${quantity - 1}`;  // Decrease quantity by 1
+                                        const productprice = parseInt($(realPrice)[0].innerText);
+                                        const newtotalprice = productprice * quantity;
+                                        TotPrice[0].innerText = `${newtotalprice}`;
+                                        console.log(newtotalprice);
+
+                                        const subtotal = $('#subtotal');
+                                        const subtotalamount = parseInt($(realPrice)[0].innerText);
+                                        subtotal[0].innerText = `${parseInt(subtotal[0].innerText) - productprice}`;
+                                        console.log(subtotal[0].innerText);
+
+
+                                        const totalMRP = $('#totalMRP');
+                                        const totalMRPamount = parseInt($(realPrice)[0].innerText);
+                                        totalMRP[0].innerText = `${parseInt(totalMRP[0].innerText) - productprice}`;
+                                        console.log(totalMRP[0].innerText);
+
+
+                                        const totalAmount = $('#total');
+                                        const productamount = parseInt($(realPrice)[0].innerText);
+                                        totalAmount[0].innerText = `${parseInt(totalAmount[0].innerText) - productprice}`;
+                                        console.log(totalAmount[0].innerText);
 
 
                                     }
                                 } else {
                                     console.log(`Error: ${response.success}`);
                                 }
-                                console.log(quantity);
-
-                                const realPrice = `#price${productId}`;
-                                const price = $(realPrice)
-                                const productprice = parseInt(price[0].innerText)
-                                console.log(price[0].innerText);
-
-                                const totalprice = `#totalprice${productId}`;
-                                const TotPrice = $(totalprice)
-                                console.log(TotPrice[0].innerText);
-
-                                const newtotalprice = `${parseInt(price[0].innerText) * quantity}`;
-                                TotPrice[0].innerText = `${newtotalprice}`
-
-
-                                const totalAmount = $('#total');
-                                totalAmount[0].innerText = `${+totalAmount[0].innerText - +productprice}`
-
-                                const subtotal = parseInt(totalAmount[0].innerText);
-
-                                console.log(totalAmount[0].innerText);
-
                             },
                             error: function (error) {
                                 console.error('Error:', error);
@@ -289,6 +358,7 @@ $(window).on("load", function () {
                     }
                 });
             });
+
 
 
         /// <!--============== *Cart Remove Section* ==============-->///
@@ -300,11 +370,12 @@ $(window).on("load", function () {
 
 
         $(document).ready(function () {
-            $('#cartDelete').on('click', function (event) {
+            $('.cartDelete').on('click', function (event) {
+                console.log('hoooooooooooooooooooooooooooo')
                 event.preventDefault();
 
-                var productId = $(this).attr('data-product-id');
-
+                const productId = $(this).attr('data-product-id');
+                console.log(productId);
                 if (productId) {
                     $.ajax({
                         type: 'POST',
@@ -377,7 +448,7 @@ $(window).on("load", function () {
 
                                 if (response.update) {
                                     console.log('hello')
-                                    e.attr("class", "+-fill")
+                                    e.attr("class", "bi-heart-fill")
                                 } else {
 
                                     console.log('hiiiiiiiiiiii');
@@ -644,4 +715,111 @@ $(window).on("load", function () {
 
 
 
+
+
+        //     /// <!--============== *Checkout Payment methodes* ==============-->///
+
+
+        $(document).ready(function () {
+            $('#checkout_form').submit(function (event) {
+                event.preventDefault();
+                console.log("hiiiii");
+                const val = $('#checkout_form');
+                const formData = val.serializeArray();
+                const payload = {};
+
+                formData.forEach(field => {
+                    payload[field.name] = field.value
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/checkout',
+                    data: payload,
+
+                    success: function (response) {
+                        // console.log("data:  ", data);
+                        console.log("Response received:", response); // Debugging statement
+                        console.log("Response received:", response.status);
+                        if (response.success) {
+                            window.location.href = "/Order_Placed_Success";
+                        } else {
+                            // console.log(response.CreateOrder.amount); // Debugging statement
+                            var amount = response.CreateOrder.amount;
+                            var Porduct_Order = response.order._id
+                            console.log("Order id  : " + Porduct_Order);
+
+                            var options = {
+                                "key": response.key_id,
+                                "amount": amount * 100,
+                                "currency": "INR",
+                                "name": "Cam Cart",
+                                "description": "Test Transaction",
+                                "image": "https://example.com/your_logo",
+                                "order_id": response.CreateOrder.id,
+                                "handler": function (response) {
+                                    console.log(response);
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/razorpay-payment-successful',
+                                        data: JSON.stringify({
+                                            razorpay_payment_id: response.razorpay_payment_id,
+                                            razorpay_order_id: response.razorpay_order_id,
+                                            orderId: Porduct_Order,
+                                            Paid_Amount: amount * 100
+
+                                        }),
+                                        contentType: "application/json",
+                                        success: function (response) {
+                                            console.log('Payment Success');
+
+                                            window.location.href = '/Order_Placed_Success';
+
+                                        },
+                                        error: function (xhr, status, error) {
+                                            console.log('error');
+                                        }
+                                    });
+
+                                    // alert(response.razorpay_payment_id);
+                                    // alert(response.razorpay_order_id);
+                                    // alert(response.razorpay_signature);
+                                },
+                                "prefill": {
+                                    "name": "Gaurav Kumar",
+                                    "email": "gaurav.kumar@example.com",
+                                    "contact": "9000090000"
+                                },
+                                "notes": {
+                                    "address": "Razorpay Corporate Office"
+                                },
+                                "theme": {
+                                    "color": "#3399cc"
+                                }
+                            };
+                            var rzp1 = new Razorpay(options);
+                            rzp1.on('payment.failed', function (response) {
+                                alert(response.error.code);
+                                alert(response.error.description);
+                                alert(response.error.source);
+                                alert(response.error.step);
+                                alert(response.error.reason);
+                                alert(response.error.metadata.order_id);
+                                alert(response.error.metadata.payment_id);
+                            });
+                            rzp1.open();
+                        }
+                    }
+                });
+            });
+        });
+
+
+        //     /// <!--============== *Checkout Payment methodes* ==============-->///
+
+
+
     });
+
+
+

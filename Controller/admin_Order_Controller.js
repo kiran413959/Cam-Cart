@@ -12,19 +12,24 @@ const nodemailer = require('nodemailer')
 
 
 module.exports={
+
     Ordersget: async (req, res) => {
         const orders = await  Order.find().populate({ path:'products.productId',model:'products'})
-        console.log(orders[0].products);
-            
+        // console.log(orders[0].products);
+      
         
+        if (!orders[0]) return res.status(401).send({ msg: "No data found" });
+        else{  
+
         
-
-
+        console.log(orders,"Orders");
         res.render('order_List',{orders})
+        }
     },
     Orderspost: (req, res) => {
 
     },
+
 
 
 }

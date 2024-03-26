@@ -230,8 +230,9 @@ aside .sidebar a:last-child {
 .close_btn {
   width: 3rem;
   height: 3rem;
-  background-color: blue;
-  border: solid white 2px;
+  /* background-color: blue; */
+  border: solid rgb(255, 255, 255) 3px;
+  border-radius: 50%;
   position: absolute;
   top: 4%;
   right: 5%;
@@ -245,7 +246,7 @@ aside .sidebar a:last-child {
 .close_btn > span {
  width: 80%;
  height: 4px;
- background-color: white;
+ background-color: rgb(255, 255, 255);
  z-index: 9995;
  position: absolute;
  opacity: .5;
@@ -263,17 +264,21 @@ transition: opacity .4s ease
 .close_btn:hover>span:first-child,
 .close_btn:hover>span:last-child {
     opacity: 1;
+ background-color: rgb(0, 0, 0);
+
     animation: rotate .4s cubic-bezier(.175, .885, .32, 1.275)
 }
 
 @keyframes rotate {
     0% {
-        transform: rotate(0)
+        transform: rotate(0);
+ background-color: rgb(0, 0, 0);
+
     }
 }
 
 .containers{
-  background-color: red;
+  background-color: transparent;
   /* width: 100%; */
 /* display: flex;
 justify-content: center;
@@ -281,6 +286,7 @@ align-items: center;
 position: relative; */
 overflow: hidden;
 z-index: 9999;
+padding: 2rem;
 margin-left: auto;
 margin-right: auto;
 }
@@ -291,43 +297,113 @@ margin-right: auto;
 }
 
 .product_lightbox {
-  width: 40%;
+  width: 35%;
   background-color:black;
   /* padding: 1.25rem .625rem 2.5rem; */
   user-select: none
 }
 
 
+/* .product_title{
+
+padding: 1rem;
+} */
+
+
+.product_title>h6 {
+  font-size: 1.2rem;
+  letter-spacing: .4px;
+  color: #bbb
+}
+
+
+.product_title>h4 {
+  font-size: 3rem;
+}
+
+
+
 .product_details {
   width: 60%;
   background-color: white;
-  padding: 1rem;
+  padding: 2rem;
   position: relative
 }
 
+.product_swiper .swiper-slide>img,
+.thumb_swiper .swiper-slide>img {
+    display: block;
+    object-fit: cover;
+    margin: 0 auto
+}
+
+.product_swiper .swiper-slide>img {
+  width: 300px;
+  height: 100%
+}
+
+.thumb_swiper .swiper-slide>img {
+  width: 100px;
+  height: 100%
+}
+
 .product_price {
-  margin: 25px 0 35px
+  margin: 15px 0 15px
 }
 
 .product_price>b {
   font-size: 1.56rem;
-  color: white;
+  color: rgb(19, 19, 19);
 }
 
 .shipping_details{
+  width: 90%;
+  height: 50%;
   background-color: gray;
   color: white;
-  padding: 10px;
-  font-size: .9rem;
+  padding: 15px;
+  font-size: 5rem;
   box-shadow: 0 10px 10px rgba(0, 0, 0, .4);
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);;
-  margin:25px 0 35px ;
-  margin-right: 3.2rem;
+  margin:0px 0 23px ;
+  margin-right: 23rem;
   
 }
 
+.shipping_details div h4{
+  font-size: 2rem;
+  font-weight: 200;
+}
+
+.shipping_details b{
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+
+.shipping_details div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
 .product_features {
-  margin-top: 50px
+  margin-top: 40px
+}
+
+.product_features>h5 {
+  letter-spacing: .8px;
+  font-size: 1.5rem
+}
+
+.product_features>ul {
+  list-style-type: disc
+}
+
+.product_features>ul>li {
+  font-size: 1rem;
+  line-height: 30px;
 }
 
 section{
@@ -335,20 +411,20 @@ section{
 }
 
 .product_swiper {
-  padding-bottom: 50px;
+  padding-bottom: 70px;
 }
 
-.thumb_swiper {
+/* .thumb_swiper {
   margin-top: 2.5rem;
-}
+} */
  
 
 
 
 .product_modal_wrapper{
   display: flex;
-  width: 100% !important;
-  height: 90% !important;
+  width: 90% !important;
+  /* height: 90% !important; */
   justify-content: center;
   flex-wrap: wrap;
 
