@@ -1,54 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cam Cart Products</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="product-main/css/styles.css" />
-    <link rel="stylesheet" href="product-main/css/responsive.css" />
-  </head>
-  <body>
-    <div class="container">
-      <!-- ========== Sidebar ========== -->
 
-      <aside>
-        <div class="top">
-          <div class="logo">
-            <img src="product-main/img/cam-cart-high-resolution-logo-black-transparent.svg" />
-            <h2>Cam<span class="danger">Cart</span></h2>
-          </div>
-          <div class="close" id="close-btn">
-            <span class="material-icons-sharp"> close </span>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cam Cart Products</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
+  <link rel="stylesheet" href="product-main/css/styles.css" />
+  <link rel="stylesheet" href="product-main/css/responsive.css" />
+</head>
+
+<body>
+  <div class="container">
+    <!-- ========== Sidebar ========== -->
+
+    <aside>
+      <div class="top">
+        <div class="logo">
+          <img src="product-main/img/cam-cart-high-resolution-logo-black-transparent.svg" />
+          <h2>Cam<span class="danger">Cart</span></h2>
         </div>
-        <div class="sidebar">
-          <a href="/dashBoard">
-            <span class="material-icons-sharp"> grid_view </span>
-            <h3>Dashboard</h3>
-          </a>
+        <div class="close" id="close-btn">
+          <span class="material-icons-sharp"> close </span>
+        </div>
+      </div>
+      <div class="sidebar">
+        <a href="/dashBoard">
+          <span class="material-icons-sharp"> grid_view </span>
+          <h3>Dashboard</h3>
+        </a>
 
-          <a href="/customers" class="active">
-            <span class="material-icons-sharp"> person_outline </span>
-            <h3>Customers</h3>
-          </a>
-          
-          <a href="/products">
-            <span class="material-icons-sharp"> photo_camera </span>
-            <h3>Products</h3>
-          </a>
+        <a href="/customers" class="active">
+          <span class="material-icons-sharp"> person_outline </span>
+          <h3>Customers</h3>
+        </a>
 
-          <a href="/order_List">
-            <span class="material-icons-sharp"> receipt_long </span>
-            <h3>Orders</h3>
-          </a>
+        <a href="/products">
+          <span class="material-icons-sharp"> photo_camera </span>
+          <h3>Products</h3>
+        </a>
 
-          <a href="/payments">
+        <a href="/order_List">
+          <span class="material-icons-sharp"> receipt_long </span>
+          <h3>Orders</h3>
+        </a>
+
+        <!-- <a href="/payments">
             <span class="material-icons-sharp"> paid </span>
             <h3>Payments</h3>
           </a>
@@ -57,174 +56,252 @@
           <a href="/StockDetails">
             <span class="material-icons-sharp"> inventory_2 </span>
             <h3>Stock Details</h3>
-          </a>
+          </a> -->
 
-          <!-- <a href="#">
+        <!-- <a href="#">
             <span class="material-icons-sharp"> insights </span>
             <h3>Analytics</h3>
           </a> -->
 
 
 
-          <a href="/inbox">
-            <span class="material-icons-sharp"> mail_outline </span>
-            <h3>Messages</h3>
-            <span class="message-count">26</span>
-          </a>
+        <a href="/inbox">
+          <span class="material-icons-sharp"> mail_outline </span>
+          <h3>Messages</h3>
+          <span class="message-count">26</span>
+        </a>
 
 
-          <a href="/salesReport">
-            <span class="material-icons-sharp"> assignment </span>
-            <h3>Sales Reports</h3>
-          </a>
+        <a href="/salesReport">
+          <span class="material-icons-sharp"> assignment </span>
+          <h3>Sales Reports</h3>
+        </a>
 
-          <!-- <a href="#">
+        <!-- <a href="#">
             <span class="material-icons-sharp"> settings </span>
             <h3>Settings</h3>
           </a> -->
 
-          <a href="/addProduct">
-            <span class="material-icons-sharp"> add </span>
-            <h3>Add Product</h3>
-          </a>
+        <a href="/addProduct">
+          <span class="material-icons-sharp"> add </span>
+          <h3>Add Product</h3>
+        </a>
 
-          <a href="#">
-            <span class="material-icons-sharp"> logout </span>
-            <h3>Logout</h3>
-          </a>
-        </div>
-      </aside>
+        <a href="#">
+          <span class="material-icons-sharp"> logout </span>
+          <h3>Logout</h3>
+        </a>
+      </div>
+    </aside>
 
-      <!-- ========== Main section ========== -->
-      <main>
-        <h1>Products  List</h1>
-        
-        <div class="insights">
-          <% Items.forEach(item=> { %>
+    <!-- ========== Main section ========== -->
+    <main>
+      <h1>Products List</h1>
+
+      <div class="insights">
+        <% Items.forEach(item=> { %>
           <div class="sales">
-            
+
             <div class="middle">
               <div class="left">
-                <h3><%= item.name %></h3>
-                <h1><%= item.price%></h1>
+                <h3>
+                  <%= item.name %>
+                </h3>
+                <h1>
+                  <%= item.price%>
+                </h1>
               </div>
               <div class="progress">
-               
+
                 <img src="/images/<%= item.imageurl %>" alt="">
-              
-            <small class="text-muted" > 
-              
-              <button id="delete">
-                <div class="icon">
-                  <img src="/product-main/img/edit_black_24dp.svg" alt="">
 
-                </div>
-              </button>
 
-            </small> 
+              </div>
+              <div class="updations" id="updation">
+                <small class="text-muted">
+
+                  <button class="edit" data-product-id="<%= item.id %>">
+                    <div class="icon">
+                      <span class="material-icons-sharp">
+                        edit
+                      </span>
+
+                    </div>
+                  </button>
+
+                </small>
+
+                <small class="text-muted">
+
+                  <button id="edit">
+                    <div class="icon">
+                      <span class="material-icons-sharp">
+                        delete
+                      </span>
+
+                    </div>
+                  </button>
+
+                </small>
 
 
               </div>
             </div>
-            <small class="text-muted"> <%= item.category %></small> 
+            <small class="text-muted">
+              <%= item.category %>
+            </small>
 
           </div>
+
           <% }) %>
-          
-        </div>
-      </main>
 
-      <!-- ========== Right section ========== -->
-      <div class="right">
-        <!-- ---------- Top ---------- -->
-        <div class="top">
-          <button id="menu-btn">
-            <span class="material-icons-sharp"> menu </span>
-          </button>
-          <div class="theme-toggler">
-            <span class="material-icons-sharp active"> light_mode </span>
-            <span class="material-icons-sharp"> dark_mode </span>
-          </div>
-          <div class="profile">
-            <div class="info">
-              <p>Hey, <b>Daniel</b></p>
-              <small class="text-muted">Admin</small>
+      </div>
+
+      <!-- for product updating div -->
+
+
+      <% Items.forEach(item=> { %>
+
+        <section class="update_view" data-product-id="<%= item.id %>">
+
+          <div class="product_view">
+
+            <button class="product_close">
+
+              <span class="material-icons-sharp">close</span>
+            </button>
+
+            <h3> Update Product </h3>
+
+
+            <div class="product-img">
+
+              <img src="/images/<%= item.imageurl %>" alt="">
             </div>
-            <div class="profile-photo">
-              <img src="product-main/img/profile-1.jpg" alt="Daniel" />
+            
+            <div  class=" product-info">
+              <label for="title">Title</label>
+              <input type=" text" name="name" id="product_name" value="<%= item.name %>">
+
+              <label for="price"> Price</label>
+              <input type="text" name="price" id="product_price" value="<%= item.price%>">
+
+              <label for="category"> Category </label>
+              <input type="text" name="category" id="product_category" value="<%= item.category %>">
             </div>
+
+            <div class="update_button">
+              <button>update</button>
+            </div>
+
+          </div>
+
+        </section>
+
+
+      <% }) %>
+
+
+
+    </main>
+
+
+    <!-- ========== Right section ========== -->
+    <div class="right">
+      <!-- ---------- Top ---------- -->
+      <div class="top">
+        <button id="menu-btn">
+          <span class="material-icons-sharp"> menu </span>
+        </button>
+        <div class="theme-toggler">
+          <span class="material-icons-sharp active"> light_mode </span>
+          <span class="material-icons-sharp"> dark_mode </span>
+        </div>
+        <div class="profile">
+          <div class="info">
+            <p>Hey, <b>Daniel</b></p>
+            <small class="text-muted">Admin</small>
+          </div>
+          <div class="profile-photo">
+            <img src="product-main/img/profile-1.jpg" alt="Daniel" />
           </div>
         </div>
+      </div>
 
 
 
 
 
-<!---------------------------- Categorys ------------------------------->
+      <!---------------------------- Categorys ------------------------------->
 
 
-        <div class="sales-analytics">
-          <h2>Categorys</h2>
+      <div class="sales-analytics">
+        <h2>Categorys</h2>
 
-          <% Type.forEach(types=> { %>
+        <% Type.forEach(types=> { %>
 
           <div class="item online">
             <div class="right">
               <div class="info">
-                <h3> <%=  types.categoryName %> </h3>
+                <h3>
+                  <%= types.categoryName %>
+                </h3>
                 <small class="text-muted"></small>
               </div>
               <h5 class="success"></h5>
               <h3><button id="delete">
-                <div class="icon">
-                  <span class="material-icons-sharp"> delete </span>
-                </div>
-              </button></h3>
+                  <div class="icon">
+                    <span class="material-icons-sharp"> delete </span>
+                  </div>
+                </button></h3>
             </div>
           </div>
           <% }) %>
 
-        </div>
+      </div>
 
 
 
 
 
-        <!---------------------- brands--------------------- -->
+      <!---------------------- brands--------------------- -->
 
-        <div class="sales-analytics">
-          <h2>Brands</h2>
+      <div class="sales-analytics">
+        <h2>Brands</h2>
 
-          <% company.forEach(types=> { %>
+        <% company.forEach(types=> { %>
 
           <div class="item online">
             <div class="right">
               <div class="info">
-                <h3> <%=  types.brandName %> </h3>
+                <h3>
+                  <%= types.brandName %>
+                </h3>
                 <small class="text-muted"></small>
               </div>
               <h5 class="success"></h5>
               <h3><button id="delete">
-                <div class="icon">
-                  <span class="material-icons-sharp"> delete </span>
-                </div>
-              </button></h3>
+                  <div class="icon">
+                    <span class="material-icons-sharp"> delete </span>
+                  </div>
+                </button></h3>
             </div>
           </div>
           <% }) %>
 
-        </div>
+      </div>
 
 
 
 
-       
 
-        <!-- ---------- Sales analytics ---------- -->
-        
+
+      <!-- ---------- Sales analytics ---------- -->
+
     </div>
 
     <script src="product-main/js/orders.js"></script>
     <script src="product-main/js/index.js"></script>
-  </body>
+</body>
+
 </html>

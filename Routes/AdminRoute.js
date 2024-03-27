@@ -21,42 +21,59 @@ const{
     dashBoardget,
     dashBoardpost,
     
+    progress_chartget,
+    progress_chartpost,
+
     customersget,
     customerspost,
 
    
-    Update_Productget,
-    Update_Productpost,
+   
+
     Indboxget,
     Indboxpost,
+
     Manage_Revivewsget,
     Manage_Revivewspost,
+
     Paymentsget,
     Paymentspost,
+
     coupons_Detailsget,
     coupons_Detailspost,
+
     salesReportget,
     salesReportpost,
 
 } = require('../Controller/AdminController')
 
 const{
+
     Ordersget,
     Orderspost,
+    
 }=require('../Controller/admin_Order_Controller')
 
 
 const{
     Product_listget,
     Product_listpost,
+
     Add_Brandget,
     Add_Brandpost,
+
     Add_Categoryget,
     Add_Categorypost,
+
     Add_Couponget,
     Add_Couponpost,
+
     Add_Productget,
     Add_Productpost,
+
+    Show_Productget,
+    Update_Productpost,
+
 }=require('../Controller/admin_Product_controller')
 
 router.get('/admin_signup',admin_signupget)
@@ -73,6 +90,11 @@ router.get('/admin_signup',admin_signupget)
 
       .get('/dashBoard',dashBoardget)
       .post('/dashBoard',dashBoardpost)
+
+
+      .get('/progress_chart',progress_chartget)
+      .post('/progress_chart',progress_chartpost)
+
 
       
      
@@ -99,7 +121,7 @@ router.get('/admin_signup',admin_signupget)
       .get('/addCoupon',Add_Couponget)
       .post('/addCoupon',Add_Couponpost)  
       
-      .get('/Update_Product',Update_Productget)
+      .post('/show_Product/:productId',Show_Productget)
       .post('/Update_Product',Update_Productpost)
 
       .get('/inbox',Indboxget)

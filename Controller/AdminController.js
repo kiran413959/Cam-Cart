@@ -33,10 +33,19 @@ module.exports = {
     dashBoardpost: (req, res) => {
     },
 
+
+    progress_chartget: async (req,res)=>{
+
+    },
+    progress_chartpost: async (req,res)=>{
+        
+
+    },
+
     
     customersget: async (req, res) => {
 
-        newprofile = await User.find()
+      let  newprofile = await User.find()
 
         res.render('customers', { newprofile });
 
@@ -47,12 +56,6 @@ module.exports = {
    
 
     
-    Update_Productget: (req, res) => {
-
-    },
-    Update_Productpost: (req, res) => {
-
-    },
     Indboxget: (req, res) => {
         res.render('inbox')
 

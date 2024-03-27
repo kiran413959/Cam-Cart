@@ -1,3 +1,8 @@
+
+const { Chart } = await import('chart.js');
+
+
+
 const sideMenu = document.querySelector('aside');
 const menuBtn = document.querySelector('#menu-btn');
 const closeBtn = document.querySelector('#close-btn');
@@ -45,3 +50,33 @@ Orders.forEach(order => {
 
 // Date setup
 document.getElementById('date-picker').valueAsDate = new Date();
+
+
+
+
+// let monthSale= document.getElementById("salesChart");
+
+
+// let saleChart=new Chart(monthSale,{
+// type:'bar',
+// data:{
+// labels:['1st Week','2nd Week','3rd Week','4th Week'],
+// datasets:[{
+// label:"Monthly Sale",
+// data:[
+//   5000000,
+//   4000000,
+//   3000000,
+//   2500000,
+
+// ],
+// backgroundColor:'rgba(75,192,192,0.4)',
+// borderColor:['rgb(75,192,192)'],
+// }]},
+// options:{
+
+// }
+// })
+
+
+

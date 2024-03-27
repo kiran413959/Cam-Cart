@@ -157,8 +157,8 @@ aside .sidebar a span {
 }
 
 aside .sidebar a:last-child {
-  position: absolute;
-  bottom: 2rem;
+  position: relative;
+  bottom: 0rem;
   width: 100%;
 }
 
@@ -221,7 +221,7 @@ main .date input[type='date'] {
 main .insights {
   display: grid;
   gap: 1.6rem;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
 }
 
 main .insights > div {

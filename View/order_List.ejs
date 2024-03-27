@@ -49,7 +49,7 @@
           <h3>Orders</h3>
         </a>
 
-        <a href="/payments">
+        <!-- <a href="/payments">
           <span class="material-icons-sharp"> paid </span>
           <h3>Payments</h3>
         </a>
@@ -58,7 +58,7 @@
         <a href="/StockDetails">
           <span class="material-icons-sharp"> inventory_2 </span>
           <h3>Stock Details</h3>
-        </a>
+        </a> -->
 
         <!-- <a href="#">
             <span class="material-icons-sharp"> insights </span>
@@ -142,31 +142,30 @@
                       <h3>
                 </div>
                 <div class="progress">
-                  <button id="eye_btn"  class="eye_btn" data-product-id=" <%= order.productId._id %>" >
+                  <button id="eye_btn" class="eye_btn" data-product-id=" <%= order.productId._id %>">
                     <span class="material-symbols-outlined">
                       visibility
                     </span>
                   </button>
                 </div>
 
-
               </div>
               <small class="text-muted">Status: <%= data.status %></small>
             </div>
 
-            <% })%>
-              <% })%>
+          <% })%>
+        <% })%>
 
 
       </div>
 
-  
+
 
 
       <% orders.forEach((data)=>{ %>
         <% data.products.forEach((order)=>{ %>
 
-          <section class="order_product" data-product-id=" <%= order.productId._id %>" >
+          <section class="order_product" data-product-id=" <%= order.productId._id %>">
             <div class="modal_centered">
               <div class="containers">
                 <!-- <div class="row justify-content-center"> -->
@@ -174,120 +173,131 @@
 
                 <div class="row product_modal_wrapper">
 
-                   <div class="col-lg-7 product_lightbox">
+                  <div class="col-lg-7 product_lightbox">
 
-                      <div class="swiper product_swiper">
-                        <div class="swiper-wrapper">
+                    <div class="swiper product_swiper">
+                      <div class="swiper-wrapper">
 
-                          <div class="swiper-slide">
-                            <img src="/images/<%= order.productId.imageurl %>" alt="product-img" />
-                          </div>
-
-                         </div>
-
-                      </div>
-
-                      <div thumbsSlider="" class="swiper thumb_swiper">
-                        <div class="swiper-wrapper">
-
-                          <div class="swiper-slide">
-                            <img src="/images/<%= order.productId.imageurl %>" alt="product-img">
-                          </div>
-
-
+                        <div class="swiper-slide">
+                          <img src="/images/<%= order.productId.imageurl %>" alt="product-img" />
                         </div>
+
                       </div>
 
                     </div>
 
-                    <div class="col-lg-5 product_details">
+                    <div thumbsSlider="" class="swiper thumb_swiper">
+                      <div class="swiper-wrapper">
 
-                      <div class="product_title">
-                        <h4>
-                          <%= order.productId.name %>
+                        <div class="swiper-slide">
+                          <img src="/images/<%= order.productId.imageurl %>" alt="product-img">
+                        </div>
 
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-lg-5 product_details">
+
+                    <div class="product_title">
+                      <h4>
+                        <%= order.productId.name %>
+
+                      </h4>
+                      <h6>
+                        <%= order.productId.category %>
+
+                      </h6>
+                      <h6>
+
+                        QTY: <%= order.quantity %>
+
+                      </h6>
+                    </div>
+
+                    <div class="product_ratings">
+                      <strong>&#9733;&#9733;&#9733;&#9733;<b class="text-muted">&#9733;</b></strong>
+                      <a href="javascript:void(0);" class="ms-2">400
+                        Ratings & Reviews</a>
+                    </div>
+
+
+                    <div class="product_price">
+                      <b>₹
+                        <%= order.productId.price %>
+
+                          <small>.00</small>
+                      </b>
+                    </div>
+
+                    <div class="shipping_details">
+                      <div>
+
+                        <h4> NAME :
+                          <b>
+                            <%= data.Name %>
+                          </b>
                         </h4>
-                         <h6>
-                          <%= order.productId.category %>
 
-                        </h6>
-                        <h6>
+                        <h4> PHONE :
+                          <b>
+                            <%= data.Phone %>
+                          </b>
+                        </h4>
 
-                          QTY: <%= order.quantity %>
+                        <h4> ADDRESS :
+                          <b>
+                            <%= data.Address %>
+                          </b>
+                        </h4>
 
-                         </h6>
+                        <h4> PINCODE :
+                          <b>
+                            <%= data.Pincode %>
+                          </b>
+                        </h4>
+
+                        <h4> Payment Type : <b>
+                            <%= data.Payment %>
+                          </b> </h4>
+
+                        <h4> Shipping Status : <b>
+                            <%= data.status %>
+                          </b> </h4>
+
+
+
+
+
                       </div>
-
-                        <div class="product_ratings">
-                         <strong>&#9733;&#9733;&#9733;&#9733;<b class="text-muted">&#9733;</b></strong>
-                          <a href="javascript:void(0);" class="ms-2">400
-                          Ratings & Reviews</a>
-                        </div>
-
-
-                  <div class="product_price">
-                    <b>₹
-                      <%= order.productId.price %>
-
-                        <small>.00</small>
-                    </b>
-                  </div>
-
-                  <div class="shipping_details">
-                    <div>
-
-                      <h4> NAME :
-                        <b> <%= data.Name %> </b>
-                      </h4>
-
-                      <h4> PHONE :
-                        <b> <%= data.Phone %> </b>
-                      </h4>
-
-                      <h4> ADDRESS :
-                        <b>
-                          <%= data.Address %> </b>
-                      </h4>
-
-                      <h4> PINCODE :
-                        <b>  <%= data.Pincode %> </b>
-                      </h4>
-
-                      <h4> Payment Type : <b> <%= data.Payment %> </b> </h4>
-
-                      <h4> Shipping Status : <b> <%= data.status %> </b> </h4>
-
-
-
-
-
                     </div>
-                  </div>
 
-                  <!-- <div class="product_btns">
+                    <!-- <div class="product_btns">
                     <button type="button" class="cancel" id="order_cancel" data-product-id=" order.productId._id ">
                       <i class="bi"></i> &#160; Cancel
                       Order</button>
 
                   </div> -->
 
-                  <div class="product_features">
-                    <h5>Product Highlights -</h5>
-                    <ul class="mt-3">
-                      <li>
+                    <div class="product_features">
+                      <h5>Product Highlights -</h5>
+                      <ul class="mt-3">
+                        <li>
 
-                       <%= order.productId.discription %>
-                      </li>
+                          <%= order.productId.discription %>
+                        </li>
 
-                    </ul>
+                      </ul>
+                    </div>
+
                   </div>
 
-                </div>
-
-                <!-- </div> -->
+                  <!-- </div> -->
 
 
-                <!-- </div> -->
+                  <!-- </div> -->
                 </div>
 
               </div>
@@ -298,8 +308,8 @@
               </div>
           </section>
 
-          <% })%>
-            <% })%>
+        <% })%>
+      <% })%>
 
 
     </main>

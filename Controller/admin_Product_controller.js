@@ -145,4 +145,39 @@ module.exports ={
             console.log(e)
         }
     },
+
+    
+    Show_Productget:async (req, res) => {
+        if(req.session.email){
+
+            try{
+                const productId = req.params.productId 
+                
+                const product =await Products.findById(productId)
+
+                if(product==null){
+                   return res.json({success:false,msg:"No such product"})  
+                }else{
+                    res.json({success:true,data:product})
+                }
+            }catch(err){
+                console.log(err);
+            }
+
+
+
+        }else{
+            res.redirect('/admin_login')
+        }
+
+        
+
+
+
+    },
+    Update_Productpost: (req, res) => {
+
+    },
+
+
 }

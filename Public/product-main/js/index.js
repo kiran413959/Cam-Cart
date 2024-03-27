@@ -3,6 +3,43 @@ const menuBtn = document.querySelector('#menu-btn');
 const closeBtn = document.querySelector('#close-btn');
 const themeToggler = document.querySelector('.theme-toggler');
 
+
+
+
+let productId = editButton.getAttribute('data-product-id')
+
+console.log(productId," productId is here");
+
+let show = document.querySelector('.');
+console.log(show, "   is here");
+
+document.addEventListener('DOMContentLoaded', function() {
+  const editButton = document.querySelectorAll(".edit");
+  const closeBtns = document.querySelectorAll(".product_close");
+
+  // Show modal when eye button is clicked
+  editButton.forEach(function(eyeBtn) {
+    eyeBtn.addEventListener('click', function() {
+      const productId = this.getAttribute('data-product-id');
+      const show = document.querySelector(`.update_view[data-product-id="${productId}"]`);
+      if (show) {
+        show.style.display = 'block';
+        console.log("content visible");
+      } else {
+        console.error(`Product modal not found for product ID: ${productId}`);
+      }
+    });
+  });
+})
+
+
+
+
+close.addEventListener('click', () => {
+  show.style.display = 'none';
+})
+
+
 // Show sidebar
 menuBtn.addEventListener('click', () => {
   sideMenu.style.display = 'block';
@@ -21,27 +58,6 @@ themeToggler.addEventListener('click', () => {
   themeToggler.querySelector('span:nth-child(2)').classList.toggle('active');
 });
 
-// Fill orders in table
-Orders.forEach(order => {
-  const tr = document.createElement('tr');
 
-  const trContent = `
-  <td>${order.productName}</td>
-  <td>${order.productNumber}</td>
-  <td>${order.paymentStatus}</td>
-  <td class="${
-    order.shipping === 'Declined'
-      ? 'danger'
-      : order.shipping === 'Pending'
-      ? 'warning'
-      : 'primary'
-  }">${order.shipping}</td>
-  <td class="primary">Details</td>
-  `;
 
-  tr.innerHTML = trContent;
-  document.querySelector('table tbody').appendChild(tr);
-});
 
-// Date setup
-document.getElementById('date-picker').valueAsDate = new Date();
