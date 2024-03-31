@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cam Cart Customers</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
     <link rel="stylesheet" href="customers-main/css/styles.css" />
     <link rel="stylesheet" href="customers-main/css/responsive.css" />
@@ -75,7 +76,7 @@
                 <a href="/salesReport">
                     <span class="material-icons-sharp"> assignment </span>
                     <h3>Sales Reports</h3>
-                  </a>
+                </a>
 
 
 
@@ -99,31 +100,42 @@
             </div>
             <div class="insights">
                 <!-- ---------- Sales ---------- -->
-          <% newprofile.forEach(profile=> { %>
-               
-            <div class="sales">
-                <div class="middle">
-                    <div class="left">
-                        <h3> <%= profile.Phone %> </h3>
-                        <h1> <%= profile.name%> </h1>
+                <% userdata.forEach(profile=> { %>
+
+                    <div class="sales profile_model">
+                        <div class="middle">
+                            <div class="left">
+                                <!-- <h3> <%= profile.phone %> </h3> -->
+                                <h1>
+                                    <%= profile.name%>
+                                </h1>
+                            </div>
+
+
+                            <small class="text-muted">
+                                <%= profile.email%>
+                            </small>
+                        </div>
+                        <div class="progress">
+                            <button class="profile_view" data-profile-id=" <%= profile.id %> ">
+                                <span class="material-icons-sharp">
+                                    visibility
+                                </span>
+                                <h4>view Profile</h4>
+                            </button>
+
+                        </div>
                     </div>
-                    
-                    
-                </div>
-                <small class="text-muted"> <%= profile.email%> </small>
-                <div class="progress">
-            </div>
-                </div>
 
-          <% }) %>
-                
+                    <% }) %>
 
-                
+
+
             </div>
 
-            <!-- ---------- Recent orders ---------- -->
-            
+
         </main>
+
 
         <!-- ========== Right section ========== -->
         <div class="right">
@@ -146,14 +158,155 @@
                     </div>
                 </div>
             </div>
+        </div>
 
             <!-- ---------- Recent updates ---------- -->
-           
+
 
             <!-- ---------- Sales analytics ---------- -->
+
+            <!-- ---------- profile pop-up ---------- -->
+
             
-        </div>
-    </div>
+            
+            <% userdata.forEach(profile=> { %>
+                <% profiledata.forEach(user=> { %>
+                    <% if (profile.id.toString() === user.userId.toString()) { %>
+                    
+                    <section class="coustomers modelprofile" data-profile-id=" <%= profile.id %> " style="display: none;">
+                    <div class="user_view">
+                        <!-- <div class="model_centering"> -->
+                            <div class="user_profile">
+                                
+                                
+                                <div class="profilephoto">
+                                    <div class="profileimage">
+                                        <img src="/images/1708331706479-4K-Batman-Wallpaper-HD-Free-download.jpg" alt="profile_photo">
+                                    </div>
+                                    
+                                </div>
+
+                                
+                                
+                                <h3> <%= user.name %>  </h3>
+                                
+                            
+
+
+
+                               
+
+                                <ul>
+                                    <li>
+                                        Email : <%= profile.email %>
+                                    </li>
+                                    <li>
+                                        phone: <%= user.phone %>
+                                    </li>
+                                    <li>
+                                        Address: <%= user.address %>
+                                    </li>
+                                </ul>
+
+
+                               
+
+
+
+                                
+                                <div class="userOrder">
+                                    order
+
+                                    <% OrdersData.forEach((order)=> { %>
+                                        <% if (profile.id.toString() === order.userId.toString()) { %>
+                                            <% order.products.forEach((product)=> { %>
+
+                                                    <div class="userOrders">
+
+                                                        <div class="productimg">
+
+                                                            <img src="/images/<%= product.productId %>" alt="productimage" />
+
+                                                        </div>
+
+                                                        <div class="orderinfo">
+                                                            <ul>    
+                                                                <li> OrderID : <%= order.id %> </li>
+                                                                <li> ProductID : <%= product.productId %> </li>
+                                                                <li> TotalAmount: <%= order.TotalAmount %> </li>
+                                                                <li> Coupon :  <%= order.coupon %></li>
+                                                                <% order.Payment.forEach(payment=> { %>
+
+                                                                <li>Payment: <%= payment.Payment %> </li>
+                                                                <li>PaymentID:  <%= payment.Payment %> </li> 
+                                                                <li>Paid Amount: <%= payment.Payment %>  </li>
+                                                                
+                                                                <% }); %>
+
+                                                                <li> Payment Status : <%= order.PaymentStatus %>  </li>
+                                                                <li> Shipping status : <%= order.Shipping_status %>  </li>
+
+                                                            </ul>
+
+
+                                                        </div>
+
+                                                        
+                                                       
+                                                        
+                                                    
+                                                    </div>
+
+
+
+                                             <% }); %>
+
+                                        <% } %>
+                                    <% }); %>
+
+                                    
+                                </div>
+                                
+                                
+                               
+                                
+                                <div class="restrict_btns">
+                                    <button class="block"  data-profile-id=" <%= profile.id %>" >
+                                        block
+                                    </button>
+                                    <button class="unblock"  data-profile-id=" <%= profile.id %>"  >
+                                        unblock
+                                    </button>
+                                </div>
+                                
+                                <%= profile.id %>
+                                
+                                
+                            </div>
+
+                        <!-- </div> -->
+
+                        
+                        <button class="profile_close" data-profile-id=" <%= profile.userId %> ">
+                            
+                            <span class="material-icons-sharp">
+                                close
+                            </span>
+                            
+                        </button>
+                        
+                    </div>
+
+                </section>
+
+                <% } %>
+                <% }); %>
+                <% }); %>
+
+
+
+            </div>
+
 
     <script src="customers-main/js/orders.js"></script>
     <script src="customers-main/js/index.js"></script>

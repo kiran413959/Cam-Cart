@@ -73,6 +73,9 @@ const{
 
     Show_Productget,
     Update_Productpost,
+    Delete_Productpost,
+    Delete_Categorypost,
+    Delete_Brandpost,
 
 }=require('../Controller/admin_Product_controller')
 
@@ -122,7 +125,12 @@ router.get('/admin_signup',admin_signupget)
       .post('/addCoupon',Add_Couponpost)  
       
       .post('/show_Product/:productId',Show_Productget)
-      .post('/Update_Product',Update_Productpost)
+      .post('/Update_Product/:productId',Update_Productpost)
+      .post('/delete_Product/:productId',Delete_Productpost)
+      .post('/delete_Category/:categoryId',Delete_Categorypost)
+      .post('/delete_Brand/:brandId',Delete_Brandpost)
+
+      
 
       .get('/inbox',Indboxget)
       .post('/inbox',Indboxpost)

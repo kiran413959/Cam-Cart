@@ -15,7 +15,8 @@ const poductSchema = new mongoose.Schema({
         required: true
     },
     brand:{
-        trpe: mongoose.Types.ObjectId,  //reference to the Brand model
+        type:String
+        // type: mongoose.Types.ObjectId,  //reference to the Brand model
     },
     category:{
         type:String

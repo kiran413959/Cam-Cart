@@ -28,6 +28,8 @@ module.exports = {
         console.log(admin)
 
         res.render('dashBoard', { admin })
+        }else{
+            res.redirect('/admin_login')
         }
     },
     dashBoardpost: (req, res) => {
@@ -44,10 +46,31 @@ module.exports = {
 
     
     customersget: async (req, res) => {
+        if(req.session.email){
+            try{
+                const admin = await Admin.findOne( {employeeId:req.session.employeeId} )
+                console.log(admin)
+                
+                let  userdata = await User.find()
+                
+                console.log(userdata);
 
-      let  newprofile = await User.find()
+                const profiledata= await Profile.find()
+                
+                console.log(profiledata);
 
-        res.render('customers', { newprofile });
+
+                const OrdersData= await  Order.find().populate({ path:'products.productId',model:'products'})
+                console.log(OrdersData);
+                  
+                
+                res.render('customers', { userdata,admin,profiledata,OrdersData });
+            }catch(err){
+                console.log(err);
+            }
+        }else{
+            res.redirect('/admin_login')
+        }
 
     },
     customerspost: (req, res) => {

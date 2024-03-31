@@ -736,7 +736,8 @@ img {
 }
 
 .popular_card {
-    flex: 23%;
+    /* flex: 23%; */
+    width: 310px;
     padding: 20px 0 60px;
     overflow: hidden;
     border: 1px solid var(--text-color);
