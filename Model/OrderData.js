@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 
 const paymentSchema = new mongoose.Schema({
     type: String, //
-
+  
   PaymentId: {
       type: String,
   },
@@ -50,7 +50,9 @@ const OrderSchema = new mongoose.Schema({
   },
 
   Payment: {
-    type: [paymentSchema],
+    type: [
+      paymentSchema
+    ],
     default: []
   },
   PaymentStatus:{

@@ -270,6 +270,15 @@ module.exports = {
 
     orderpalced_successget: (req, res) => {
         res.render('orderPlaced')
+    },
+
+
+
+    review_productget: async (req, res) => {
+        res.render('productReview')
+    },
+
+    review_productpost: async (req, res) => {
     }
 
 }

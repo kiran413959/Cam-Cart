@@ -520,8 +520,8 @@ main .recent-orders a {
 .coustomers {
   width: 100%;
   height: 100%;
-  background-color: rgb(0, 0, 0, .8);
-  opacity: .9;
+  background-color: rgb(0, 0, 0, 0.8);
+
   display: block;
   position: fixed;
   top: 0;
@@ -647,15 +647,12 @@ main .recent-orders a {
 
 .user_profile {
   height: 85%;
-  background-color: #191c26;
+  background-color: #0f0f10;
   display: flex;
   position: fixed;
   flex: 0 0 auto;
   overflow: hidden;
-  /* overflow: auto; */
-  /* overflow-y: visible; */
   overflow-y: auto;
-
   scrollbar-width: none;
   width: 55%;
   padding: 2rem;
@@ -664,6 +661,8 @@ main .recent-orders a {
   align-items: center;
   gap: 50px;
   scroll-behavior: smooth;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.9), inset 10px 10px 60px rgba(0, 0, 0, 0.3), inset -10px -10px 60px rgba(0, 0, 0, 0.3);
+
 }
 
 .profilephoto {
@@ -720,21 +719,53 @@ main .recent-orders a {
 }
 
 .userOrders {
-  width: 80%;
-  height: 350px;
+  width: 90%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
   background-color: crimson;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.9), inset 10px 10px 60px rgba(0, 0, 0, 0.3), inset -10px -10px 60px rgba(0, 0, 0, 0.3);
 }
 
 
 .userOrder {
-  width: 80%;
-  background-color: #c5c5c5;
+  width: 90%;
+  background-color: #c5c5c52e;
   display: flex;
+  padding: 2rem;
   flex-direction: column;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.9), inset 10px 10px 60px rgba(0, 0, 0, 0.3), inset -10px -10px 60px rgba(0, 0, 0, 0.3);
   justify-content: center;
   align-items: center;
   gap: 25px;
 }
+
+.userOrder h3{
+font-size: 15pt;
+}
+
+
+.orderinfo{
+  display: flex;
+  align-items: center;
+}
+
+.orderinfo ul{
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  font-size: 12pt;
+}
+
+.orderinfo li{
+  font-size: 12pt;
+  margin: 0%;
+  padding: 0;
+}
+
+
 .restrict_btns{
   
   width: 50%;
@@ -759,4 +790,21 @@ main .recent-orders a {
   box-shadow: 5px 5px 12px #000000, -5px -5px 12px #000000;
   background-color: green;
   color: white;
+}
+
+.productimg{
+  width: 37% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  max-height: 30vh; /* Maximum height */
+  object-fit: cover; /* Do not stretch images beyond their natural size */
+}
+.productimg img{
+  width: 150px;
+  height: 150px;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.9), inset 10px 10px 60px rgba(0, 0, 0, 0.3), inset -10px -10px 60px rgba(0, 0, 0, 0.3);
+
 }

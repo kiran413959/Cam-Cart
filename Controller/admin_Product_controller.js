@@ -101,6 +101,7 @@ module.exports = {
                 discription,
                 price,
             });
+            
             await newProduct.save();
             console.log(newProduct);
             res.redirect("/addProduct");

@@ -44,7 +44,9 @@ const {
   buyNowPost,
   Checkoutget,
   Checkoutpost ,
-  orderpalced_successget
+  orderpalced_successget,
+  review_productget,
+  review_productpost
 
 }=require('../Controller/checkOut_Controller')
 
@@ -113,6 +115,9 @@ router.get('/signup', signupget)
       .post( '/checkout' , Checkoutpost )
     
     .get('/Order_Placed_Success', orderpalced_successget  )
+  
+  .get('/review_product',review_productget)
+  .post( '/addReview' , review_productget)
 
 
   //my Oders related Route

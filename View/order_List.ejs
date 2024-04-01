@@ -150,7 +150,7 @@
                 </div>
 
               </div>
-              <small class="text-muted">Status: <%= data.status %></small>
+              <small class="text-muted">Status: <%= data.Shipping_status %></small>
             </div>
 
           <% })%>
@@ -260,11 +260,11 @@
                         </h4>
 
                         <h4> Payment Type : <b>
-                            <%= data.Payment %>
+                            <%= data.Payment[0].type %>
                           </b> </h4>
 
                         <h4> Shipping Status : <b>
-                            <%= data.status %>
+                            <%= data.Shipping_status %>
                           </b> </h4>
 
 

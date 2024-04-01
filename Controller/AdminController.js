@@ -51,6 +51,7 @@ module.exports = {
                 const admin = await Admin.findOne( {employeeId:req.session.employeeId} )
                 console.log(admin)
                 
+                
                 let  userdata = await User.find()
                 
                 console.log(userdata);
@@ -61,6 +62,7 @@ module.exports = {
 
 
                 const OrdersData= await  Order.find().populate({ path:'products.productId',model:'products'})
+                  
                 console.log(OrdersData);
                   
                 
@@ -69,6 +71,7 @@ module.exports = {
                 console.log(err);
             }
         }else{
+            
             res.redirect('/admin_login')
         }
 
