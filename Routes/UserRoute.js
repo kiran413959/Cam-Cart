@@ -45,8 +45,7 @@ const {
   Checkoutget,
   Checkoutpost ,
   orderpalced_successget,
-  review_productget,
-  review_productpost
+
 
 }=require('../Controller/checkOut_Controller')
 
@@ -97,6 +96,9 @@ router.get('/signup', signupget)
       .get('/Home', Homeget)
       .post('/Home', Homepost)
 
+
+
+
   // CRUD operation on Category
 
   
@@ -107,6 +109,9 @@ router.get('/signup', signupget)
 
       .post('/Profile', Profilepost)
 
+
+
+
  
   //CheckOut
   
@@ -116,8 +121,7 @@ router.get('/signup', signupget)
     
     .get('/Order_Placed_Success', orderpalced_successget  )
   
-  .get('/review_product',review_productget)
-  .post( '/addReview' , review_productget)
+
 
 
   //my Oders related Route

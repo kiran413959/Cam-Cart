@@ -11,6 +11,8 @@ const{
 
     Oderget,
     Oderpost,
+    review_productget,
+    review_productpost,
 
     OderStatusget,
     OderStatuspost,
@@ -68,5 +70,13 @@ router
 
       .get('/Payment',Paymentget)
       .post('/Payment',Paymentpost)
+
+
+
+      // review product
+
+      .get('/review_product/:productId',review_productget)
+      .post( '/addReview/:productId' , review_productpost)
+
 
 module.exports=router

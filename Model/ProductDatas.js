@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-const { string } = require('joi')
+const { string, ref, date } = require('joi')
 
 
 
@@ -49,8 +49,36 @@ const brandSchema= new mongoose.Schema({
     } ,
 })
 
+
+
+
+const reviewSchema = new mongoose.Schema({
+    productId :{
+        type: mongoose.Types.ObjectId,
+        ref:'product'
+        },
+    
+    userId: {
+        type: mongoose.Types.ObjectId,
+        ref:'usersdetails',
+    },
+    review:{
+        type:String
+    },
+    Created_At:{
+        type:Date
+    }
+
+})
+
+
+
+
+
+
 module.exports={ 
     Products:mongoose.model('products',poductSchema),
     Category:mongoose.model('Category',categorySchema),
-    Brand:mongoose.model('Brand',brandSchema)
+    Brand:mongoose.model('Brand',brandSchema),
+    Review:mongoose.model('Review',reviewSchema)
 }

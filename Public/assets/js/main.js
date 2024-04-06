@@ -204,6 +204,18 @@ $(window).on("load", function () {
 
 
 
+
+        $(".addreview").click(function () {
+            $("#reviewBox").css("display", "block");
+        });
+
+        $("#review_close").click(function () {
+            $("#reviewBox").css("display", "none");
+        });
+        
+
+
+
             /// <!--============== *Cart Add Section* ==============-->///
 
             $(document).ready(function () {
@@ -817,6 +829,52 @@ $(window).on("load", function () {
 
         //     /// <!--============== *Checkout Payment methodes* ==============-->///
 
+
+
+
+
+
+
+
+
+
+
+
+        
+    //     $(document).ready(function () {
+    //         $('.review_form').submit(function (event) {
+    //             console.log("hiiiiiiiii");
+    //             event.preventDefault();
+    //             console.log("hiiiii");
+
+    //             let productId = $(this).attr('data-product-id')
+    //             console.log(productId);
+
+
+                
+              
+
+
+    //             $.ajax({
+    //                 type: 'POST',
+    //                 url: '/addReview/' + productId,
+    //                data:
+
+    //                 success: function (response) {
+    //                     // console.log("data:  ", data);
+    //                     console.log("Response received:", response); // Debugging statement
+    //                     console.log("Response received:", response.status);
+    //                     if (response.success) {
+    //                         window.location.href = "/review_product/"+productId;
+    //                     } else {
+
+
+
+    //                     }
+    //                 }
+    //             });
+    //         });
+    //     });
 
 
     });

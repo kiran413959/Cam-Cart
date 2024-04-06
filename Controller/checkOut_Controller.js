@@ -274,11 +274,5 @@ module.exports = {
 
 
 
-    review_productget: async (req, res) => {
-        res.render('productReview')
-    },
-
-    review_productpost: async (req, res) => {
-    }
 
 }
