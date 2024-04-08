@@ -29,11 +29,6 @@ const{
     BlockUserPost,
     UnblockUserPost,
 
-   
-   
-
-    Indboxget,
-    Indboxpost,
 
     Manage_Revivewsget,
     Manage_Revivewspost,
@@ -46,6 +41,8 @@ const{
 
     salesReportget,
     salesReportpost,
+
+    logoutget
 
 } = require('../Controller/AdminController')
 
@@ -136,9 +133,7 @@ router.get('/admin_signup',admin_signupget)
 
       
 
-      .get('/inbox',Indboxget)
-      .post('/inbox',Indboxpost)
-
+      
       .get('/Manage_Revivews',Manage_Revivewsget)
       .post('/Manage_Revivews',Manage_Revivewspost)
 
@@ -149,6 +144,10 @@ router.get('/admin_signup',admin_signupget)
       .post('/coupons',coupons_Detailspost)
 
       .get('/salesReport',salesReportget)
-      .post('/salesReport',salesReportpost);
+      .post('/salesReport',salesReportpost)
+
+
+    
+    .get('/admin_logout',logoutget)
 
 module.exports = router

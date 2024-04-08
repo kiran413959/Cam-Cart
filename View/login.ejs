@@ -40,7 +40,9 @@
             </div>
 
             <div class="modal_body">
-                <p style="color: red; text-align: center;"><%= errorMessage %></p>
+                <p style="color: red; text-align: center;">
+                    <%= errorMessage %>
+                </p>
                 <form id="loginForm">
                     <div class="input_box">
                         <input id="email" type="email" name="email" required>
@@ -76,19 +78,19 @@
                 formData.append('email', email);
                 formData.append('password', password);
 
-                
-                const response = await axios.post('/login', formData,{
+
+                const response = await axios.post('/login', formData, {
                     headers: {
-                         'Content-Type': 'application/x-www-form-urlencoded'
-                      }
-                })    
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
                 // console.log(response);
-                
-                if (response.status ==200) {
+
+                if (response.status == 200) {
                     const data = response.data;
                     if (data.alert) {
                         window.location.href = "/Home";
-                    }else if(data.error === 'UnAuthorised'){
+                    } else if (data.error === 'UnAuthorised') {
                         window.location.href = "/login?error=Invalid Email or Password";
                     } else {
                         sweet(email);
@@ -99,8 +101,8 @@
             }
         });
 
-    async   function sweet(email) {
-          const result= await  Swal.fire({
+        async function sweet(email) {
+            const result = await Swal.fire({
 
                 title: "Email is not verified",
                 text: "Please verify your Email",
@@ -110,49 +112,50 @@
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Resend Email"
             });
-                if (result.isConfirmed) {
-                    resendEmail()
+            if (result.isConfirmed) {
+                resendEmail()
                 //     Swal.fire({
                 //           title: "Email sent",
                 //           text: "Please check your Email",
                 //           icon: "success"
                 //  });
-                }
-              async  function resendEmail() {
-                try{
+            }
+            async function resendEmail() {
+                try {
                     const email = document.getElementById("email").value;
                     console.log(email);
-                    const response = await axios.post('/resendEmail',{email})
+                    const response = await axios.post('/resendEmail', { email })
                     console.log(response);
-                    if(response.status===200){
-                    
-                    const data = response.data;
-                    
-                    if (data.resend) {
-                        Swal.fire({
-                          title: "Email sent",
-                          text: "Please check your Email",
-                          icon: "success"
-                 });
-                    } else {
-                Swal.fire({
-                    title: "Error",
-                    text: "Failed to resend email",
-                    icon: "error"
-                });
+                    if (response.status === 200) {
+
+                        const data = response.data;
+
+                        if (data.resend) {
+                            Swal.fire({
+                                title: "Email sent",
+                                text: "Please check your Email",
+                                icon: "success"
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Error",
+                                text: "Failed to resend email",
+                                icon: "error"
+                            });
+                        }
+                    }
+                } catch (err) {
+                    console.log("Error:", err);
+                    Swal.fire({
+                        title: "Error",
+                        text: "Failed to resend email",
+                        icon: "error"
+                    });
+                }
             }
+
         }
-    } catch (err) {
-        console.log("Error:", err);
-        Swal.fire({
-            title: "Error",
-            text: "Failed to resend email",
-            icon: "error"
-        });
-    }
-}
-    }
-        
+
     </script>
 
 </body>

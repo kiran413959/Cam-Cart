@@ -157,14 +157,7 @@ module.exports = {
    
 
     
-    Indboxget: (req, res) => {
-        res.render('inbox')
-
-
-    },
-    Indboxpost: (req, res) => {
-
-    },
+ 
     Manage_Revivewsget: (req, res) => {
         res.render('reviwes')
 
@@ -190,5 +183,19 @@ module.exports = {
         res.render("salesReport")
     },
     salesReportpost: (req, res) => {
+    },
+
+
+    logoutget: (req, res) => {
+        res.redirect('/admin_login')
+
+
+
     }
+
+
+
+    
+
+
 }

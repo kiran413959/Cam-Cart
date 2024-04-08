@@ -8,8 +8,15 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
-      rel="stylesheet"
-    />
+      rel="stylesheet"/>
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <!-- Include the tailwind CSS library -->
+      <link href="/tailwind.css" rel="stylesheet" />
+
+  <!-- Include the chartist CSS library -->
+  <link href="/chartist.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="sales-report-main/css/styles.css" />
     <link rel="stylesheet" href="sales-report-main/css/responsive.css" />
   </head>
@@ -66,11 +73,11 @@
 
 
 
-          <a href="/inbox">
+          <!-- <a href="/inbox">
             <span class="material-icons-sharp"> mail_outline </span>
             <h3>Messages</h3>
             <span class="message-count">26</span>
-          </a>
+          </a> -->
 
 
           <a href="/salesReport">
@@ -88,7 +95,7 @@
             <h3>Add Product</h3>
           </a>
 
-          <a href="#">
+          <a href="/admin_logout">
             <span class="material-icons-sharp"> logout </span>
             <h3>Logout</h3>
           </a>
@@ -104,82 +111,44 @@
         <div class="insights">
           <!-- ---------- Sales ---------- -->
           <div class="sales">
-            <span class="material-icons-sharp"> analytics </span>
-            <div class="middle">
-              <div class="left">
-                <h3>Total Sales</h3>
-                <h1>$25,024</h1>
-              </div>
-              <div class="progress">
-                <svg>
-                  <circle cx="38" cy="38" r="36"></circle>
-                </svg>
-                <div class="number">
-                  <p>81%</p>
-                </div>
-              </div>
-            </div>
-            <small class="text-muted">Last 24 Hours</small>
+            <canvas id="salesChart" width="1fr" height=""></canvas>
+            <script>
+              let monthSale = document.getElementById("salesChart");
+  
+  
+              let saleChart = new Chart(monthSale, {
+                type: 'line',
+                data: {
+                  labels: ['JAN', 'FEB', 'MARCH', 'APR','MAY','JUNE','JULY', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+                
+                  datasets: [{
+                    label: "last Year Sale",
+                    data: [
+                      5000000,
+                      4000000,
+                      3000000,
+                      2500000,
+                      5000000,
+                      4000000,
+                      2500000,
+                      3000000,
+                      5000000,
+                      3000000,
+                      2500000,
+                      4000000,
+  
+                    ],
+                    backgroundColor: '#7380ec',
+                    borderColor: ['rgb(75,192,192)'],
+                  }]
+                },
+                options: {
+  
+                }
+              })
+            </script>
           </div>
 
-          <!-- ---------- Expenses ---------- -->
-          <div class="expenses">
-            <span class="material-icons-sharp"> bar_chart </span>
-            <div class="middle">
-              <div class="left">
-                <h3>Total Expenses</h3>
-                <h1>$14,16</h1>
-              </div>
-              <div class="progress">
-                <svg>
-                  <circle cx="38" cy="38" r="36"></circle>
-                </svg>
-                <div class="number">
-                  <p>62%</p>
-                </div>
-              </div>
-            </div>
-            <small class="text-muted">Last 24 Hours</small>
-          </div>
-
-          <!-- ---------- Income ---------- -->
-          <div class="income">
-            <span class="material-icons-sharp"> stacked_line_chart </span>
-            <div class="middle">
-              <div class="left">
-                <h3>Total Income</h3>
-                <h1>$10,864</h1>
-              </div>
-              <div class="progress">
-                <svg>
-                  <circle cx="38" cy="38" r="36"></circle>
-                </svg>
-                <div class="number">
-                  <p>44%</p>
-                </div>
-              </div>
-            </div>
-            <small class="text-muted">Last 24 Hours</small>
-          </div>
-        </div>
-
-        <!-- ---------- Recent orders ---------- -->
-        <div class="recent-orders">
-          <h2>Recent Orders</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Product Name</th>
-                <th>Product Number</th>
-                <th>Payment</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          <a href="#">Show All</a>
-        </div>
       </main>
 
       <!-- ========== Right section ========== -->
@@ -205,94 +174,7 @@
         </div>
 
         <!-- ---------- Recent updates ---------- -->
-        <div class="recent-updates">
-          <h2>Recent Updates</h2>
-          <div class="updates">
-            <div class="update">
-              <div class="profile-photo">
-                <img src="sales-report-main/img/profile-2.jpg" alt="Mike" />
-              </div>
-              <div class="message">
-                <p>
-                  <b>Mike Tyson</b> received his order of Night Lion tech GPS
-                  drone.
-                </p>
-                <small class="text-muted">2 Minutes Ago</small>
-              </div>
-            </div>
-            <div class="update">
-              <div class="profile-photo">
-                <img src="sales-report-main/img/profile-3.jpg" alt="Diana" />
-              </div>
-              <div class="message">
-                <p><b>Diana Ayi</b> declined her order of 2 DJI Air 2S.</p>
-                <small class="text-muted">5 Minutes Ago</small>
-              </div>
-            </div>
-            <div class="update">
-              <div class="profile-photo">
-                <img src="sales-report-main/img/profile-4.jpg" alt="Mandy" />
-              </div>
-              <div class="message">
-                <p>
-                  <b>Mandy Roy</b> received her order of LARVENDER KF102 Drone.
-                </p>
-                <small class="text-muted">6 Minutes Ago</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ---------- Sales analytics ---------- -->
-        <div class="sales-analytics">
-          <h2>Sales Analytics</h2>
-          <div class="item online">
-            <div class="icon">
-              <span class="material-icons-sharp"> shopping_cart </span>
-            </div>
-            <div class="right">
-              <div class="info">
-                <h3>ONLINE ORDERS</h3>
-                <small class="text-muted">Last 24 Hours</small>
-              </div>
-              <h5 class="success">+39%</h5>
-              <h3>3849</h3>
-            </div>
-          </div>
-          <div class="item offline">
-            <div class="icon">
-              <span class="material-icons-sharp"> local_mall </span>
-            </div>
-            <div class="right">
-              <div class="info">
-                <h3>OFFLINE ORDERS</h3>
-                <small class="text-muted">Last 24 Hours</small>
-              </div>
-              <h5 class="danger">-17%</h5>
-              <h3>1100</h3>
-            </div>
-          </div>
-          <div class="item customers">
-            <div class="icon">
-              <span class="material-icons-sharp"> person </span>
-            </div>
-            <div class="right">
-              <div class="info">
-                <h3>NEW CUSTOMERS</h3>
-                <small class="text-muted">Last 24 Hours</small>
-              </div>
-              <h5 class="success">+25%</h5>
-              <h3>849</h3>
-            </div>
-          </div>
-          <div class="item add-product">
-            <div>
-              <span class="material-icons-sharp"> add </span>
-              <h3>Add Product</h3>
-            </div>
-          </div>
-        </div>
-      </div>
+       
     </div>
 
     <script src="sales-report-main/js/orders.js"></script>
