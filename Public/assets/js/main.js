@@ -841,40 +841,43 @@ $(window).on("load", function () {
 
 
         
-    //     $(document).ready(function () {
-    //         $('.review_form').submit(function (event) {
-    //             console.log("hiiiiiiiii");
-    //             event.preventDefault();
-    //             console.log("hiiiii");
+        $(document).ready(function () {
+            $('.order_cancel').on('click',function (event) {
+                console.log("hiiiiiiiii");
+                event.preventDefault();
+                console.log("hiiiii");
 
-    //             let productId = $(this).attr('data-product-id')
-    //             console.log(productId);
+                let productId = $(this).attr('data-product-id')
+                console.log(productId);
 
+                let orderId =$(this).attr('data-order-id');
+                console.log(orderId);
 
-                
-              
+                $.ajax({
+                    type: 'POST',
+                    url: '/order_cancel/'  + orderId,
+                    data:{
+                        orderId:orderId ,
+                        productId:productId ,
 
+                    },
 
-    //             $.ajax({
-    //                 type: 'POST',
-    //                 url: '/addReview/' + productId,
-    //                data:
+                    success: function (response) {
+                        if (response.success) {
 
-    //                 success: function (response) {
-    //                     // console.log("data:  ", data);
-    //                     console.log("Response received:", response); // Debugging statement
-    //                     console.log("Response received:", response.status);
-    //                     if (response.success) {
-    //                         window.location.href = "/review_product/"+productId;
-    //                     } else {
+                            console.log("Response received:", response); // Debugging statement
+                            console.log("Response received:", response.status);
+                            window.location.href = "/myOrders"; 
+                           
+                        }else {
 
-
-
-    //                     }
-    //                 }
-    //             });
-    //         });
-    //     });
+                        console.log(error);
+                        
+                        }
+                    }
+                });
+            });
+        });
 
 
     });

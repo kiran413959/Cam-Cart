@@ -140,7 +140,7 @@ module.exports = {
 
         const user = await User.findOne({ email: email })
         console.log(user);
-        if (user.isVerified === true) {
+        if (user.isVerified === true && user.access=== true) {
 
             // console.log("redirecting to home")
             return res.json({ success: true, alert: true })

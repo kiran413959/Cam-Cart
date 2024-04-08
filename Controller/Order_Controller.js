@@ -74,7 +74,28 @@ module.exports = {
         }
     },
     
-    myOrderspost: async (req, res) => {
+    order_cancelpost: async (req, res) => {
+        if(req.session.email){
+            try {
+                
+                const orderId =req.params.orderId
+
+                const order = await  Order.findByIdAndDelete(orderId);
+
+              console.log(order);
+              res.status(200).json({ success:true , message:"Order Deleted Successfully"});
+
+            } catch (error) {
+                console.log(error);
+                res.status(400).json({success:false ,message:'Error Occured'});
+            }
+
+        }else{
+            res.redirect('/login')
+        }
+
+
+
     }
 };
 

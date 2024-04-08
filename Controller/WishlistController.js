@@ -18,7 +18,7 @@ module.exports ={
                 let cart = await Cart.findOne({ userId: req.session.userId })
 
                 let wishLists = await Whishlist.find({ userId: req.session.userId });
-                console.log(wishLists);
+                console.log("whishlist",wishLists);
                 const userEmail = req.session.email;
                 console.log(userEmail);
                 const user = await User.findOne({ email: userEmail });
@@ -36,9 +36,9 @@ module.exports ={
                     }
                 }
 
-                console.log(products);
+                console.log("products",products);
 
-                //console.log(whishList);
+                // console.log("whishlist",whishList);
 
                 res.render('whishlist', { wishLists, user, products: products,cart });
             }

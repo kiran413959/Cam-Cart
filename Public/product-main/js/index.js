@@ -68,8 +68,16 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       const productId = this.getAttribute("data-product-id");
       console.log(productId);
+
+
+
+
       const response = await fetch("/delete_Product/" + productId, {
+
+        
         method: "POST",
+
+
       });
 
       if (response) {

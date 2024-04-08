@@ -37,7 +37,7 @@ const {
 
 const {
   myOrdersget,
-  myOrderspost,
+  order_cancelpost,
 }=require("../Controller/Order_Controller")
 
 const {
@@ -127,7 +127,7 @@ router.get('/signup', signupget)
   //my Oders related Route
 
       .get('/myOrders', myOrdersget)
-      .post('/myOrders', myOrderspost)
+      .post('/order_cancel/:orderId', order_cancelpost)
 
 
   // Coupon Routes

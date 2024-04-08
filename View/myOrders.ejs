@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Cart - Cam Cart</title>
     <!--===== Designed & Built by : Kiran Kumar =====-->
-
+    
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/icons/fav-icon.png" type="image/x-icon">
-
+    
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
@@ -19,7 +19,7 @@
 
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
+    
     <!-- Main Stylesheets  -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
@@ -229,7 +229,6 @@
 
                     <!-- Cart-content Top -->
 
-
                     <% orders.forEach(order=> { %>
                     <div
                     class="col-12 d-flex justify-content-between align-items-center flex-sm-row flex-column px-md-5 px-sm-4 cart_content_top">
@@ -297,10 +296,10 @@
 
                                 </div>
                                 <% }) %>
-                                    <% } %>
-                                        <% }) %>
-
-
+                                
+                                <% } %>
+                                
+                                <% }) %>
 
                 </div>
 
@@ -436,8 +435,8 @@
                                                 </div>
 
                                                 <div class="product_btns">
-                                                    <button type="button" class="cancel" id="order_cancel"
-                                                        data-product-id=" <%= product.productId._id %>"> <i class="bi"></i> &#160; Cancel
+                                                    <button type="button" class="cancel order_cancel"
+                                                        data-product-id=" <%= product.productId._id %>" data-order-id="<%= order._id %>"> <i class="bi"></i> &#160; Cancel
                                                         Order</button>
                                                     <!-- <button type="button" class="me-2 cart_btn"
                                                         data-product-id=" <%= product.productId._id %> "> <i
@@ -586,6 +585,7 @@
     <script src="assets/swiper/swiper-bundle.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

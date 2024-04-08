@@ -34,7 +34,9 @@ const signupValidation = async (req, res, next) => {
             name: name,
             email: email,
             password: hash_password,
-            isVerified: false
+            isVerified: false,
+            access:true
+
         };
 
         const newUser = new User(userData);
@@ -45,6 +47,7 @@ const signupValidation = async (req, res, next) => {
             name: newUser.name,
             email: newUser.email,
             isVerified: newUser.isVerified,
+            access:newUser.access,
         };
         const token = await jwt.sign(result, process.env.JWT_SECRET, { expiresIn: 86400 })
         // return {user:payload,token:`Bearer ${token}`}
