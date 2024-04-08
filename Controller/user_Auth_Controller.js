@@ -1,6 +1,6 @@
 const { User, Profile, Whishlist } = require('../Model/UserData')
 const jwt = require("jsonwebtoken")
-
+const sendVarificationEmail= require('../utils/sendEmail')
 
 
 

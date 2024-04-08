@@ -11,7 +11,8 @@ const jwt = require("jsonwebtoken")
 const nodemailer = require('nodemailer')
 
 
-const sendVarificationEmail = require('../utils/sendEmail')
+const sendVarificationEmail = require('../utils/sendEmail');
+const { json } = require('body-parser');
 
 
 
@@ -49,21 +50,17 @@ module.exports = {
         if(req.session.email){
             try{
                 const admin = await Admin.findOne( {employeeId:req.session.employeeId} )
-                console.log(admin)
                 
                 
                 let  userdata = await User.find()
                 
-                console.log(userdata);
 
                 const profiledata= await Profile.find()
                 
-                console.log(profiledata);
 
 
                 const OrdersData= await  Order.find().populate({ path:'products.productId',model:'products'})
                   
-                console.log(OrdersData);
                   
                 
                 res.render('customers', { userdata,admin,profiledata,OrdersData });
@@ -79,6 +76,84 @@ module.exports = {
     customerspost: (req, res) => {
 
     },
+
+    BlockUserPost:async (req,res)=>{
+        if(req.session.email){
+
+            try {
+                
+                let userId = req.params.UserId.trim();
+                console.log("userId",userId)
+
+                let user = await User.findById(userId)
+                console.log(user);
+
+                if(user.access==false){
+                    res.status(401).json({ block:true , message:"This account is already blocked"});
+                }else{
+
+                    user.access=false;
+                    await user.save();
+                    res.status(200).json({ success:true,  message:"User has been blocked"});
+                    console.log("user after",user);
+                }
+
+
+            } catch (error) {
+                res.status(500).json({message:"Server Error!"});
+                console.log(error);
+            }
+
+        }else{
+            res.redirect('/admin_login');
+        }
+
+     
+
+
+
+
+    },
+
+    UnblockUserPost:async (req,res)=> {
+
+
+ if(req.session.email){
+
+            try {
+                
+                let userId = req.params.UserId.trim();
+                console.log("userId",userId)
+
+                let user = await User.findById(userId)
+                console.log(user);
+
+                if(user.access==true){
+                    res.status(401).json({ unblock:true , message:"This account is already unblocked"});
+                }else{
+
+                    user.access=true;
+                    await user.save();
+                    res.status(200).json({ success:true,  message:"User has been unblocked"});
+                    console.log("user after",user);
+                }
+
+
+            } catch (error) {
+                res.status(500).json({message:"Server Error!"});
+                console.log(error);
+            }
+
+                
+           
+
+        }else{
+            res.redirect('/admin_login');
+        }
+
+    },
+
+
    
 
     

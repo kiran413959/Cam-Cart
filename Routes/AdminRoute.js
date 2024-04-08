@@ -26,6 +26,8 @@ const{
 
     customersget,
     customerspost,
+    BlockUserPost,
+    UnblockUserPost,
 
    
    
@@ -107,6 +109,8 @@ router.get('/admin_signup',admin_signupget)
 
       .get('/customers',customersget)
       .post('/customers',customerspost)
+      .post('/block_user/:UserId',BlockUserPost)
+      .post('/unblock_user/:UserId',UnblockUserPost)
 
       .get('/order_List',Ordersget)
       .post('/order_List',Orderspost)
