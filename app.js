@@ -28,14 +28,14 @@ mongoose.connect(process.env.DB_LINK).then(()=>{
 env.config();
 
 
-app.use(express.static('public'))
+app.use(express.static('Public'))
 app.use(express.urlencoded({ extended: true }))
 // app.use(express.json())
 
 app.use(bodyParser.json());
 
 app.set("view engine", "ejs")
-app.set("views", path.join(__dirname, "view"))
+app.set("views", path.join(__dirname, "View"))
 
 
 
