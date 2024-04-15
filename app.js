@@ -17,7 +17,7 @@ const adminRouters=require('./Routes/AdminRoute')
 
 
 
-mongoose.connect('mongodb://localhost/CamCart',).then(()=>{
+mongoose.connect(process.env.DB_LINK).then(()=>{
     console.log('DB is running');
 })
 .catch((err)=>{
