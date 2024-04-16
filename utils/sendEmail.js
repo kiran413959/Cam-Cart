@@ -13,10 +13,10 @@ const sendVarificationEmail= async(email,name,token)=>{
             pass:process.env.AUTH_PASS
         },
     });
-    
+
     console.log("email is ready");
 
-    const link=`http://localhost:2003/EmailVerification/${token}`;
+    const link=`http://51.20.18.107:2003/EmailVerification/${token}`;
 
       const info = await transporter.sendMail({
         from: '"CamCart" <camcaart007@gmail.com>',
