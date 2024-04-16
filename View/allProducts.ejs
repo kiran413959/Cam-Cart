@@ -333,7 +333,7 @@
                     <a href="/product/?category=Mirrorless_Cameras">
                         <figure class="products_img">
                             <b>Mirrorless</b>
-                            <img src="/images/1708335639537-3.png" alt="">
+                            <img src="/images/1712746906942-NIKON-Z-50.png" alt="">
                         </figure>
                         <div class="products_info">
                             <h6>Mirrorless Cameras</h6>
@@ -828,7 +828,7 @@
                                     </div>
 
                                     <div class="product_wishlist">
-                                        <i class="bi bi-heart" data-product-id="<%= product._id%>"></i>
+                                        <i class="wishlist-button <%= wishlist && wishlist.products.includes(product._id)? 'bi bi-heart-fill' : 'bi bi-heart'  %>"  data-product-id="<%= product._id%>"></i>
                                         <i class="bi bi-share ms-4"></i>
                                     </div>
 

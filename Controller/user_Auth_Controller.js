@@ -137,7 +137,6 @@ module.exports = {
     },
     loginpost: async (req, res) => {
         const email = req.body.email
-
         const user = await User.findOne({ email: email })
         console.log(user);
         if (user.isVerified === true && user.access=== true) {

@@ -17,12 +17,12 @@ module.exports = {
         if (req.session.email) {
             try {
                 const user = await User.findById(req.session.userId)
-                const cart = await Cart.findOne({ userId: req.session.userId })
+                let cart = await Cart.findOne({ userId: req.session.userId })
                     .populate('products.productId')
                 // console.log(user);
                 console.log(cart);
 
-                console.log(`hiii${cart.products}`);
+                // console.log(`hiii${cart.products}`);
 
                 let totalAmount = 0;
                 if (cart && cart.products) {
@@ -31,9 +31,14 @@ module.exports = {
                             totalAmount += product.productId.price * product.quantity;
                         }
                     }
+                    cart.TotalAmount = totalAmount;
+                }else{
+                    cart = {
+                        products: [],
+                    }
+                    cart.TotalAmount=0
                 }
 
-                cart.TotalAmount = totalAmount;
 
                 console.log(cart.TotalAmount);
 
@@ -58,7 +63,7 @@ module.exports = {
                 console.log("Product ID : " + productId);
                 const userId = req.session.userId;
                 console.log("User Id : "+userId);
-                const cart = await Cart.findOne({ userId: req.session.userId }) 
+                let cart = await Cart.findOne({ userId: req.session.userId }) 
                 console.log("Cart : ", cart);
                 const product = await Products.findById(productId1).lean()
 
