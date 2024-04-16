@@ -23,7 +23,7 @@ const sendVarificationEmail= async(email,name,token)=>{
         to: email, 
         subject: "Hello ✔", // Subject line
         text: "Hello world?", // plain text body
-        html: `<div> <h1>hi ${name} </h1> <br/> <p> click the buttun to verify your email  <a href=${link} >click here </a> </p> </div>`, 
+        html: `<div> <h1>hi ${name} </h1> <br/> <p> click the button to verify your email  <a href=${link} >click here </a> </p> </div>`, 
       });
     
       console.log("Message sent: %s", info.messageId);
